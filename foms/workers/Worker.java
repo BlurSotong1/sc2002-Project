@@ -40,8 +40,6 @@ public abstract class Worker {
         this.age = age;
         this.gender = gender;
         this.loginID = loginID;
-
-
     }
     /**
      * Displays the information of the worker in the following order:

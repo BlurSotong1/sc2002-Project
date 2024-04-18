@@ -1,4 +1,4 @@
 package foms.food;
 
-public class FoodItem {
+public class FoodItem implements Food{
 }
