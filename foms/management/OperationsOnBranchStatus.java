@@ -11,7 +11,7 @@ public class OperationsOnBranchStatus {
 
     /**
      * Constructor for OperationsOnBranchStatus class
-     * @param admin
+     * @param admin is the admin worker performing the changing Branch Status.
      */
     public OperationsOnBranchStatus(AdminWorker admin){
         this.admin = admin;

@@ -10,7 +10,7 @@ public class OperationsOnBranchList {
 
     /**
      * Constructor for OperationsOnBranchList class
-     * @param admin
+     * @param admin is the admin worker performing the operations on Branch List.
      */
     public OperationsOnBranchList(AdminWorker admin){
         this.admin = admin;
