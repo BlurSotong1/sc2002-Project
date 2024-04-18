@@ -4,25 +4,16 @@ import foms.workers.AdminWorker;
 
 public class OperationsOnBranchStatus {
     /**
-     * Operations On Branch Status is performed by Admin Worker.
+     * Operations on branch status is performed by admin worker.
      */
     private AdminWorker admin;
 
-
     /**
      * Constructor for OperationsOnBranchStatus class
-     * @param admin is the admin worker performing the changing Branch Status.
+     * @param admin is the admin worker performing the change of branch status.
      */
     public OperationsOnBranchStatus(AdminWorker admin){
         this.admin = admin;
-    }
-
-    public void openBranch(){
-
-    }
-
-    public void closeBranch(){
-
     }
 
 

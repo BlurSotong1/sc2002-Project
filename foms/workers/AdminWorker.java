@@ -32,7 +32,6 @@ public class AdminWorker extends Worker{
      */
     private OperationsOnPaymentStatus changePaymentStatus;
 
-
     /**
      * Constructor for AdminWorker class.
      * Create an admin worker.
