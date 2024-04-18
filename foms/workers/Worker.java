@@ -29,7 +29,7 @@ public abstract class Worker {
     private String loginPassword = "default";
 
     /**
-     * Constructor for worker class.
+     * Constructor for Worker class.
      * @param name full name of the worker.
      * @param age age of the worker.
      * @param gender gender of the worker.
