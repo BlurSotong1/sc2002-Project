@@ -41,12 +41,14 @@ public abstract class Worker {
         this.gender = gender;
         this.loginID = loginID;
     }
+
+
     /**
      * Displays the information of the worker in the following order:
      * name, loginID, age, gender, role.
      */
     public String toString() {
-        return String.format("%-20s %-15s %-5d %-5c", name, loginID, age, gender);
+        return String.format("%-20s %-15s %-5d %-3c", name, loginID, age, gender);
     }
 
     /**
