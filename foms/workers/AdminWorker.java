@@ -15,12 +15,12 @@ public class AdminWorker extends Worker{
     /**
      * Admin worker perform operations on branch list.
      */
-    private OperationsOnBranchlist jobsOnBranchList;
+    private OperationsOnBranchList jobsOnBranchList;
 
     /**
      * Admin worker perform operations on worker list of one of the branch.
      */
-    private OperationsOnWorkerlist jobsOnWorkerList;
+    private OperationsOnWorkerList jobsOnWorkerList;
 
     /**
      * Admin worker perform change on one of the branch's status.
@@ -44,11 +44,18 @@ public class AdminWorker extends Worker{
     public AdminWorker(String name, int age, char gender, String loginID) {
         super(name, age, gender, loginID);
         this.branchList = BranchList.branchList;
-        this.jobsOnBranchList = new OperationsOnBranchlist(this);
-        this.jobsOnWorkerList = new OperationsOnWorkerlist(this);
+        this.jobsOnBranchList = new OperationsOnBranchList(this);
+        this.jobsOnWorkerList = new OperationsOnWorkerList(this);
         this.changeBranchStatus = new OperationsOnBranchStatus(this);
         this.changePaymentStatus = new OperationsOnPaymentStatus(this);
     }
 
+    /**
+     * Gets the list of branches.
+     * @return list of branches.
+     */
+    public ArrayList<Branch> getBranchList() {
+        return branchList;
+    }
 
 }

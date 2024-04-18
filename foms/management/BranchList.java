@@ -3,9 +3,9 @@ package foms.management;
 import java.util.ArrayList;
 public class BranchList {
 
-    public static ArrayList<Branch> branchList;
+    private static ArrayList<Branch> branchList;
 
-    public ArrayList<Branch> getBranchList (){
+    public static ArrayList<Branch> getBranchList (){
         return branchList;
     }
 
