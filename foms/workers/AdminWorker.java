@@ -42,7 +42,7 @@ public class AdminWorker extends Worker{
      */
     public AdminWorker(String name, int age, char gender, String loginID) {
         super(name, age, gender, loginID);
-        this.branchList = BranchList.branchList;
+        this.branchList = BranchList.getBranchList();
         this.jobsOnBranchList = new OperationsOnBranchList(this);
         this.jobsOnWorkerList = new OperationsOnWorkerList(this);
         this.changeBranchStatus = new OperationsOnBranchStatus(this);
