@@ -1,4 +1,11 @@
 package foms.workers;
 
-public class Worker {
+public abstract class Worker {
+
+    private String name;
+    private int age;
+    private char gender;
+
+
+
 }
