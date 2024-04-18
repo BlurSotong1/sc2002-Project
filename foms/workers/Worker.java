@@ -6,6 +6,6 @@ public abstract class Worker {
     private int age;
     private char gender;
 
-    oehprwpiwpg
+
 
 }
