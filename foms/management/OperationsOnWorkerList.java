@@ -1,12 +1,13 @@
 package foms.management;
 
 import foms.workers.AdminWorker;
+import foms.workers.Worker;
 
 public class OperationsOnWorkerList {
     /**
      * Operations on worker list is performed by admin worker.
      */
-    private AdminWorker admin;
+    private static AdminWorker admin;
 
 
     /**
@@ -15,6 +16,16 @@ public class OperationsOnWorkerList {
      */
     public OperationsOnWorkerList(AdminWorker admin){
         this.admin = admin;
+    }
+
+    public static Worker findWorker(String loginID){
+        for (Branch branch : admin.getBranchList())
+            for(Worker worker : branch.getWorkerList())
+                if (loginID.equals(worker.getLoginID()))
+                    return worker;
+        if (loginID.equals(admin.getLoginID()))
+            return admin;
+        return null;
     }
 
 }

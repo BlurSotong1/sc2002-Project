@@ -10,7 +10,7 @@ public class AdminWorker extends Worker{
     /**
      * list of branches.
      */
-    private ArrayList<Branch> branchList;
+    private static ArrayList<Branch> branchList;
 
     /**
      * Admin worker perform operations on branch list.
@@ -42,11 +42,12 @@ public class AdminWorker extends Worker{
      */
     public AdminWorker(String name, int age, char gender, String loginID) {
         super(name, age, gender, loginID);
-        this.branchList = BranchList.getBranchList();
-        this.jobsOnBranchList = new OperationsOnBranchList(this);
-        this.jobsOnWorkerList = new OperationsOnWorkerList(this);
-        this.changeBranchStatus = new OperationsOnBranchStatus(this);
-        this.changePaymentStatus = new OperationsOnPaymentStatus(this);
+        setRole('A');
+        branchList = new ArrayList<Branch>();
+        jobsOnBranchList = new OperationsOnBranchList(this);
+        jobsOnWorkerList = new OperationsOnWorkerList(this);
+        changeBranchStatus = new OperationsOnBranchStatus(this);
+        changePaymentStatus = new OperationsOnPaymentStatus(this);
     }
 
     /**
@@ -56,6 +57,8 @@ public class AdminWorker extends Worker{
     public ArrayList<Branch> getBranchList() {
         return branchList;
     }
+
+
 
 
 

@@ -24,6 +24,7 @@ public class ManagerWorker extends StaffWorker {
     public ManagerWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID, branch);
         jobsOnMenu = new OperationsOnMenu(this);
+        setRole('M');
     }
 
     @Override
