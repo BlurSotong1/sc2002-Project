@@ -5,8 +5,6 @@ import foms.workers.Worker;
 
 import java.util.ArrayList;
 
-
-
 public class Branch {
     /**
      * name of this branch.

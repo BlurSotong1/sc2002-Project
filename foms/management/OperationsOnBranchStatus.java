@@ -16,6 +16,10 @@ public class OperationsOnBranchStatus {
         this.admin = admin;
     }
 
+    public void openBranch(){
+    }
+
+
 
 
 }
