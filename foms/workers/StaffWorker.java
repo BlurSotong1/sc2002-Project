@@ -22,7 +22,7 @@ public class StaffWorker extends Worker{
      * @param loginID loginID of the worker. Duplicate will be checked in previous function.
      * @param branch is the branch the manager works at.
      */
-    StaffWorker(String name, int age, char gender, String loginID, Branch branch) {
+    public StaffWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID);
         this.branch = branch;
         jobsOnOrderlist = new OperationsOnOrderlist();

@@ -30,7 +30,7 @@ public class OperationsOnBranchStatus {
             Branch branch = OperationsOnBranchList.findBranch(choice-1);
             if (!branch.getStatus())
                 branch.setStatus(true);
-            System.out.println("Branch is opened.");
+            System.out.println(branch.getName()+" branch is opened.");
         }catch(InputMismatchException e){
             System.out.println("input mismatch! enter a valid integer.");
         }
@@ -48,7 +48,7 @@ public class OperationsOnBranchStatus {
             Branch branch = OperationsOnBranchList.findBranch(choice-1);
             if (branch.getStatus())
                 branch.setStatus(false);
-            System.out.println("Branch is closed.");
+            System.out.println(branch.getName()+" branch is closed.");
         }catch(InputMismatchException e){
             System.out.println("input mismatch! enter a valid integer.");
         }
