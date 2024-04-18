@@ -1,11 +1,34 @@
 package foms.workers;
 
-public class StaffWorker {
-    Branch Branch;
-    Branch branchObj = new Branch();
+import foms.management.Branch;
+import foms.management.OperationsOnOrderlist;
+
+public class StaffWorker extends Worker{
+    /**
+     * branch that the staff works at.
+     */
+    private Branch branch;
+    /**
+     * is the class that enables staff to do their job through functions that deals with menu.
+     */
+    private OperationsOnOrderlist jobsOnOrderlist;
+
+    /**
+     * Constructor for manager class.
+     * @param name    full name of the worker.
+     * @param age     age of the worker.
+     * @param gender  gender of the worker.
+     * @param loginID loginID of the worker. Duplicate will be checked in previous function.
+     * @param branch is the branch the manager works at.
+     */
     StaffWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID);
         this.branch = branch;
+        jobsOnOrderlist = new OperationsOnOrderlist();
+    }
 
+    @Override
+    public String toString() {
+        return String.format(super.toString() + "%-15s", branch);
     }
 }

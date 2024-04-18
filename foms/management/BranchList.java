@@ -5,7 +5,8 @@ public class BranchList {
 
     public static ArrayList<Branch> branchList;
 
-    public BranchList (){
-        branchList = new ArrayList<Branch>();
+    public ArrayList<Branch> getBranchList (){
+        return branchList;
     }
+
 }
