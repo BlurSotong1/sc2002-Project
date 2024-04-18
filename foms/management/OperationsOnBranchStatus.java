@@ -18,6 +18,7 @@ public class OperationsOnBranchStatus {
     }
 
     public void openBranch(){
+
     }
 
     public void closeBranch(){
