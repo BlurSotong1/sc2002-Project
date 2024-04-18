@@ -13,22 +13,22 @@ public class AdminWorker extends Worker{
     private ArrayList<Branch> branchList;
 
     /**
-     * operations on branch list.
+     * Admin worker perform operations on branch list.
      */
     private OperationsOnBranchlist jobsOnBranchList;
 
     /**
-     * operations on worker list of one of the branch.
+     * Admin worker perform operations on worker list of one of the branch.
      */
     private OperationsOnWorkerlist jobsOnWorkerList;
 
     /**
-     * change one of the branch's status.
+     * Admin worker perform change on one of the branch's status.
      */
     private OperationsOnBranchStatus changeBranchStatus;
 
     /**
-     * change one of the branch's payment status.
+     * Admin worker perform change on one of the branch's payment status.
      */
     private OperationsOnPaymentStatus changePaymentStatus;
 
