@@ -88,7 +88,7 @@ public abstract class Worker {
      * @return Worker if the loginID exists and matches the password/ null if either one is incorrect.
      */
     public static Worker loginToSystemAsWorker(String loginID, String loginPassword) {
-        for (Worker worker: Admin.getAllWorkersList().getWorkerList()) {
+        for (Worker worker: AdminWorker.getAllWorkersList().getWorkerList()) {
             if (worker.loginID.equals(loginID)){
                 if (worker.loginPassword.equals(loginPassword)) {
                     return worker;
