@@ -58,6 +58,37 @@ public class AdminWorker extends Worker{
         return branchList;
     }
 
+    /**
+     * Use the operations on branch list.
+     * @return operations on branch list.
+     */
+    public OperationsOnBranchList getJobsOnBranchList() {
+        return jobsOnBranchList;
+    }
+
+    /**
+     * Use the operations on worker list.
+     * @return operations on worker list.
+     */
+    public OperationsOnWorkerList getJobsOnWorkerList(){
+        return jobsOnWorkerList;
+    }
+
+    /**
+     * Change the branch status.
+     * @return change branch status.
+     */
+    public OperationsOnBranchStatus getChangeBranchStatus(){
+        return changeBranchStatus;
+    }
+
+    /**
+     * Change the payment status of a branch.
+     * @return change payment status of a branch.
+     */
+    public OperationsOnPaymentStatus getChangePaymentStatus(){
+        return changePaymentStatus;
+    }
 
 
 

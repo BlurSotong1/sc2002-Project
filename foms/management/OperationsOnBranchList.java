@@ -16,7 +16,10 @@ public class OperationsOnBranchList {
         this.admin = admin;
     }
 
-    public static void displayBranch() {
+    /**
+     * Displays all the branch names.
+     */
+    public static void displayBranchNames() {
         int i;
         int length;
 
@@ -26,6 +29,11 @@ public class OperationsOnBranchList {
         }
     }
 
+    /**
+     * Find a branch.
+     * @param index is the index of the branch object in the array of branch objects
+     * @return branch object corresponding to the index.
+     */
     public static Branch findBranch(int index){
         return admin.getBranchList().get(index);
     }

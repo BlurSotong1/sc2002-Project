@@ -18,6 +18,11 @@ public class OperationsOnWorkerList {
         this.admin = admin;
     }
 
+    /**
+     * Find worker.
+     * @param loginID is the unique login ID of the worker
+     * @return admin object corresponding to the login ID or null if no worker is found
+     */
     public static Worker findWorker(String loginID){
         for (Branch branch : admin.getBranchList())
             for(Worker worker : branch.getWorkerList())
