@@ -1,0 +1,64 @@
+package foms.order;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class CheckOutOrder {
+    Order orderToCheckOut;
+    public void updateOrderStatus(Order order){
+        if(cash.processPayment){
+
+        }
+    }
+
+    public void paymentHandling(Order order){
+        Scanner sc= new Scanner(System.in);
+        int userChoice;
+        System.out.println("Select your payment mode:\n" +
+                "(1) Cash\n" +
+                "(2) PayWave\n" +
+                "(3) NETS\n" +
+                "(4) Bank Transfer\n" +
+                "(5) Scan QR code");
+
+        while (true) {
+            try {
+                userChoice = sc.nextInt();
+                if (userChoice < 1 || userChoice > 5) {
+                    System.out.println("Invalid item number. Please enter a valid item number.");
+                } else {
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("input mismatch! enter a valid integer.");
+                sc.next(); // Clear invalid input
+            }
+        }
+        switch(userChoice) {
+            case 1:
+                Payment cash = new Cash();
+                cash.processPayment(order.getAmount());
+                break;
+            case 2:
+                Payment paywave = new PayWave();
+                paywave.processPayment(order.getAmount());
+                break;
+            case 3:
+                Payment nets = new NETS();
+                nets.processPayment(order.getAmount());
+                break;
+            case 4:
+                Payment bankTransfer = new BankTransfer();
+                bankTransfer.processPayment(order.getAmount());
+                break;
+            case 5:
+                Payment qr = new ScanQR();
+                qr.processPayment(order.getAmount());
+                break;
+            default:
+                System.out.println("Returning back to main menu");
+                break;
+        }
+
+    }
+}

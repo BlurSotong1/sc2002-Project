@@ -6,7 +6,7 @@ import foms.order.OrderStatus;
 import foms.workers.StaffWorker;
 
 public class OperationsOnOrderList {
-    public static ArrayList<Order> getOrderList;
+
     private StaffWorker staff;
     private static ArrayList<Order> orderList;
 
@@ -15,10 +15,18 @@ public class OperationsOnOrderList {
         this.orderList = new ArrayList<Order>(); // Initialize the list of orders
     }
 
-    public static void addOrder(Order order){
+    /**
+     *  method to add Order to Order List
+     * @param order order with OrderStatus PREPARING will be added to this OrderList
+     */
+    public static void addOrderToOrderList(Order order){
         orderList.add(order);
     }
 
+    /**
+     * method to display every Order in the OrderList
+     * use for loop and utlise method viewSingleOrderDetails
+     */
     public void displayOrderList() {
         for (Order order : orderList) {
             System.out.println("OrderID = " + order.getOrderID()); // Access orderID using a getter method
@@ -29,6 +37,7 @@ public class OperationsOnOrderList {
     /**
      * multiple single order details to form multiple order details
      * for staffs and managers to view and process order accordingly
+     * once Order is added
      * @param orderID
      */
     public void processOrder(int orderID){

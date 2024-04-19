@@ -11,7 +11,7 @@ public class Order {
     private ArrayList<FoodItem> cart;
     private double amount;
     private OrderStatus orderStatus;
-    public Order(){}
+
     /**
      * customer creates an order with the given orderID
      * FoodItem chosen will be added to cart
@@ -26,6 +26,11 @@ public class Order {
         this.orderStatus = OrderStatus.PENDING; //default
     }
 
+    /**
+     * method to add food into cart
+     * @param menuItem customer will be asked what menuItem they want to add in the main function
+     * check whether the menuItem is valid in the main function
+     */
     public void addToCart(FoodItem menuItem){
         FoodItem cartItem = new FoodItem(menuItem.getName, menuItem.getPrice, menuItem.getDescription);
         cart.add(cartItem);
@@ -33,6 +38,11 @@ public class Order {
         System.out.println(menuItem.getName+" is added into the cart.");
     }
 
+    /**
+     * method to delete food from cart
+     * @param foodToDelete customer will be asked what foodToBeDelete in main function
+     * for loop to check whether it is in the cart
+     */
     public void deleteFromCart(FoodItem foodToDelete){
         for(FoodItem cartItem : cart) {
             if(cartItem.equals(foodToDelete)){
@@ -43,6 +53,13 @@ public class Order {
         System.out.println("Item is not found in the cart.");
     }
 
+    /**
+     * method to editCart
+     * make use of displayCartItems function
+     * retrieves the selected FoodItem from the cart and directly calls its customise() method.
+     * This approach takes advantage of polymorphism,
+     * allowing the correct customise() implementation to be invoked dynamically at runtime based on the actual type of the FoodItem.
+     */
     public void editCart(){
         Scanner scanner = new Scanner (System.in);
         int userChoice;
@@ -64,20 +81,12 @@ public class Order {
         }
 
         FoodItem itemToBeCustomised = cart.get(userChoice-1);
-
-        if(itemToBeCustomised instanceof SetMeal) {
-            ((SetMeal) itemToBeCustomised).customise();
-        }else if(itemToBeCustomised instanceof MainDish) {
-            ((MainDish)itemToBeCustomised).customise();
-        } else if(itemToBeCustomised instanceof Sides) {
-            ((Sides) itemToBeCustomised).customise();
-        } else if(itemToBeCustomised instanceof Drink) {
-            ((Drink) itemToBeCustomised).customise();
-        }
-
-
+        itemToBeCustomised.customise();
     }
 
+    /**
+     * method to display and list all items in cart
+     */
     public void displayCartItems(){
         if(cart.isEmpty()){
             System.out.println("Cart is empty.");
@@ -100,7 +109,7 @@ public class Order {
      * output - includes orderID, food item names, food prices
      */
     public void viewSingleOrderDetails(int inputOrderID) {
-        for(Order order: OperationsOnOrderList.getOrderList){
+        for(Order order: OperationsOnOrderList.getOrderList()){
             if(order.getOrderID()==inputOrderID){
                 StringBuilder details = new StringBuilder();		//create a StringBuilder is more efficient than concatenating strings directly
                 details.append("Order ID: ").append(orderID).append("\n");	//append the orderID to identify the order
