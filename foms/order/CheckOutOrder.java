@@ -3,15 +3,17 @@ package foms.order;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static foms.order.OrderStatus.PREPARING;
+
 public class CheckOutOrder {
     Order orderToCheckOut;
     public void updateOrderStatus(Order order){
-        if(cash.processPayment){
-
+        if(this.paymentHandling(order)){
+            order.setOrderStatus(PREPARING);
         }
     }
 
-    public void paymentHandling(Order order){
+    public boolean paymentHandling(Order order){
         Scanner sc= new Scanner(System.in);
         int userChoice;
         System.out.println("Select your payment mode:\n" +
@@ -37,28 +39,29 @@ public class CheckOutOrder {
         switch(userChoice) {
             case 1:
                 Payment cash = new Cash();
-                cash.processPayment(order.getAmount());
+                if(cash.processPayment(order.getAmount())) return true;
                 break;
             case 2:
                 Payment paywave = new PayWave();
-                paywave.processPayment(order.getAmount());
+                if(paywave.processPayment(order.getAmount())) return true;
                 break;
             case 3:
                 Payment nets = new NETS();
-                nets.processPayment(order.getAmount());
+                if(nets.processPayment(order.getAmount())) return true;
                 break;
             case 4:
                 Payment bankTransfer = new BankTransfer();
-                bankTransfer.processPayment(order.getAmount());
+                if(bankTransfer.processPayment(order.getAmount())) return true;
                 break;
             case 5:
                 Payment qr = new ScanQR();
-                qr.processPayment(order.getAmount());
+                if(qr.processPayment(order.getAmount())) return true;
                 break;
             default:
                 System.out.println("Returning back to main menu");
                 break;
         }
+        return false;
 
     }
 }
