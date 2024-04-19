@@ -5,8 +5,6 @@ import foms.workers.Worker;
 
 import java.util.ArrayList;
 
-
-
 public class Branch {
     /**
      * name of this branch.
@@ -64,7 +62,7 @@ public class Branch {
     private ArrayList<Payment> paymentList;
 
     /**
-     * Class Branch Constructor
+     * Constructor for Branch Class
      * Create a new Branch.
      * @param name is the name of the branch.
      * @param location is the location of the branch.
