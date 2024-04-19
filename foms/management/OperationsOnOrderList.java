@@ -1,19 +1,28 @@
 package foms.management;
 
 import java.util.ArrayList;
+import foms.order.Order;
+import foms.order.OrderStatus;
+import foms.workers.StaffWorker;
+
 public class OperationsOnOrderList {
+    public static ArrayList<Order> getOrderList;
     private StaffWorker staff;
-    private ArrayList<Order> orderList;
+    private static ArrayList<Order> orderList;
 
     public OperationsOnOrderList() {
         // Constructor
         this.orderList = new ArrayList<Order>(); // Initialize the list of orders
     }
 
+    public static void addOrder(Order order){
+        orderList.add(order);
+    }
+
     public void displayOrderList() {
         for (Order order : orderList) {
             System.out.println("OrderID = " + order.getOrderID()); // Access orderID using a getter method
-            order.viewSingleOrderDetails();
+            order.viewSingleOrderDetails(order.getOrderID());
         }
     }
 
@@ -40,12 +49,12 @@ public class OperationsOnOrderList {
     }
 
     // Getter and Setter methods
-    public ArrayList<Order> getOrderList() {
+    public static ArrayList<Order> getOrderList() {
         return orderList;
     }
 
     public void setOrderList(ArrayList<Order> orderList) {
-        this.orderList = orderList;
+        OperationsOnOrderList.orderList = orderList;
     }
 
     public StaffWorker getStaff() {
