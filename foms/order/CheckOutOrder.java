@@ -6,7 +6,6 @@ import java.util.Scanner;
 import static foms.order.OrderStatus.PREPARING;
 
 public class CheckOutOrder {
-    Order orderToCheckOut;
     public void updateOrderStatus(Order order){
         if(this.paymentHandling(order)){
             order.setOrderStatus(PREPARING);
