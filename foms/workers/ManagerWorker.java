@@ -1,9 +1,6 @@
 package foms.workers;
 
-import foms.food.Drink;
-import foms.food.FoodItem;
-import foms.food.MainDish;
-import foms.food.Sides;
+import foms.food.*;
 import foms.management.Branch;
 import foms.management.OperationsOnMenu;
 
@@ -57,7 +54,7 @@ public class ManagerWorker extends StaffWorker {
             return;
         }
 
-        if (jobsOnMenu.haveDuplicateFoodItems(foodName)) { //returns true if have dupe
+        if (jobsOnMenu.whetherExistInMenu(foodName) != null) { //if not null means got dupe
             System.out.println("This food name already exists in system!\nReturning to Main Menu..");
             return;
         }
@@ -125,7 +122,46 @@ public class ManagerWorker extends StaffWorker {
         jobsOnMenu.addCreatedFoodItemToMenu(food);
     }
 
+    /**
+     * finds for object then removes if it exists in system.
+     */
+    public void removeFoodItemToMenu() {
+        Scanner scanner = new Scanner(System.in);
 
+        getBranch().displayMenu();
+
+        int IndexOfFoodItemToRemove;
+        int maxIndexOfMenu = getBranch().getMenu().size();
+
+        System.out.print("Enter the food number to remove (press 0 to exit): ");
+        while (true) {
+            try {
+
+                IndexOfFoodItemToRemove = scanner.nextInt() -1; //-1 because display start from 1.
+                if (IndexOfFoodItemToRemove == -1) {
+                    System.out.println("Exiting to previous page..");
+                    return;
+
+                } else if (IndexOfFoodItemToRemove >= 0 && IndexOfFoodItemToRemove < maxIndexOfMenu) {
+                    break;
+
+                } else {
+                    System.out.println("Enter within the valid range!");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a number!");
+            }
+        }
+
+        jobsOnMenu.removeIndexedFoodItemFromMenu(IndexOfFoodItemToRemove);
+
+
+    }
+
+    /**
+     * @return Stringified details of manager
+     */
     @Override
     public String toString() {
         String manager = "Manager";

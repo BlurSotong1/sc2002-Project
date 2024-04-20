@@ -165,13 +165,15 @@ public class Branch {
         return menu;
     }
 
-    /**
-     * protected because only operationsOnMenu is accessing this in the same package.
-     * @param foodItem is the fooditem you are adding to menu.
-     */
-    protected void addCreatedFoodItemToMenu(FoodItem foodItem) {
-        menu.add(foodItem);
+    public void displayMenu() {
+        int numberOfFoodItems = 0;
+        for (FoodItem foodItem: getMenu()){
+            numberOfFoodItems++;
+            System.out.printf("%d. %s\n", numberOfFoodItems,foodItem.getName());
+        }
     }
+
+
 
     /**
      * Gets the list of payment methods in this branch.
