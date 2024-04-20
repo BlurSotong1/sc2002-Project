@@ -2,7 +2,8 @@ package foms.order;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import foms.food.FoodItem;
+
+import foms.food.*;
 import foms.management.OperationsOnOrderList;
 import foms.order.OrderStatus;
 
@@ -30,13 +31,28 @@ public class Order {
      * method to add food into cart
      * @param menuItem customer will be asked what menuItem they want to add in the main function
      * check whether the menuItem is valid in the main function
+     *                 todo for peixin, dont check menuitem valid in main. check somewhere else/
+     *
      */
     public void addToCart(FoodItem menuItem){
-        FoodItem cartItem = new FoodItem(menuItem.getName, menuItem.getPrice, menuItem.getDescription);
+
+        FoodItem cartItem;
+        switch (menuItem) { //downcasting!!!
+            case MainDish mainDish -> cartItem = new MainDish(menuItem);
+            case Drink drink ->       cartItem = new Drink(menuItem);
+            case Sides sides ->       cartItem = new Sides(menuItem);
+            case null, default -> {
+                System.out.println("something went wrong..");
+                return;  //exception handling of not either 4 cases. go back to start.
+            }
+        }
+
         cart.add(cartItem);
-        amount += menuItem.getPrice;
-        System.out.println(menuItem.getName+" is added into the cart.");
+        amount += menuItem.getPrice();
+        System.out.println(menuItem.getName() + " is added into the cart.");
     }
+
+
 
     /**
      * method to delete food from cart
@@ -47,7 +63,7 @@ public class Order {
         for(FoodItem cartItem : cart) {
             if(cartItem.equals(foodToDelete)){
                 cart.remove(cartItem);
-                System.out.println(foodToDelete.getName+" is removed from the cart.");
+                System.out.println(foodToDelete.getName()+" is removed from the cart.");
             }
         }
         System.out.println("Item is not found in the cart.");
@@ -81,7 +97,8 @@ public class Order {
         }
 
         FoodItem itemToBeCustomised = cart.get(userChoice-1);
-        itemToBeCustomised.customise();
+        //TODO whats this??
+        //itemToBeCustomised.customise();
     }
 
     /**

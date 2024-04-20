@@ -1,6 +1,6 @@
 package foms.management;
 
-import foms.food.Food;
+import foms.food.FoodItem;
 import foms.order.Order;
 import foms.workers.Worker;
 
@@ -55,7 +55,7 @@ public class Branch {
     /**
      * this branch's menu
      */
-    private ArrayList<Food> menu;
+    private ArrayList<FoodItem> menu;
 
     /**
      * list of payment methods in this branch.
@@ -81,7 +81,7 @@ public class Branch {
         this.status = true;
         this.workerList = new ArrayList<Worker>();
         this.orderList = new ArrayList<Order>();
-        this.menu = new ArrayList<Food>();
+        this.menu = new ArrayList<FoodItem>();
         this.paymentList = new ArrayList<Payment>();
     }
 
@@ -161,8 +161,16 @@ public class Branch {
      * Gets this branch's menu.
      * @return this branch's menu.
      */
-    public ArrayList<Food> getMenu(){
+    public ArrayList<FoodItem> getMenu(){
         return menu;
+    }
+
+    /**
+     * protected because only operationsOnMenu is accessing this in the same package.
+     * @param foodItem is the fooditem you are adding to menu.
+     */
+    protected void addCreatedFoodItemToMenu(FoodItem foodItem) {
+        menu.add(foodItem);
     }
 
     /**
@@ -248,13 +256,6 @@ public class Branch {
         this.orderList = orderList;
     }
 
-    /**
-     * Changes the menu this branch.
-     * @param menu is the new menu of this branch.
-     */
-    public void setMenu(ArrayList<Food> menu){
-        this.menu = menu;
-    }
 
     /**
      * Changes the list of payment methods this branch.

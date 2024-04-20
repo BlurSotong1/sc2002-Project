@@ -1,7 +1,7 @@
 package foms.workers;
 
 import foms.management.Branch;
-import foms.management.OperationsOnOrderlist;
+import foms.management.OperationsOnOrderList;
 
 public class StaffWorker extends Worker{
     /**
@@ -12,7 +12,7 @@ public class StaffWorker extends Worker{
     /**
      * is the class that enables staff to do their job through functions that deals with menu.
      */
-    private OperationsOnOrderlist jobsOnOrderlist;
+    private OperationsOnOrderList jobsOnOrderlist;
 
     /**
      * Constructor for manager class.
@@ -25,7 +25,7 @@ public class StaffWorker extends Worker{
     public StaffWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID);
         this.branch = branch;
-        jobsOnOrderlist = new OperationsOnOrderlist();
+        jobsOnOrderlist = new OperationsOnOrderList();
         setRole('S');
     }
 

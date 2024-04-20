@@ -87,29 +87,7 @@ public abstract class Worker {
         }
     }
 
-    /**
-     * TODO check the arraylist for all workers.
-     * @param loginID is the login id of the worker.
-     * @param loginPassword is the login password of the worker.
-     * @return Worker if the loginID exists and matches the password/ null if either one is incorrect.
-     */
 
-    public static Worker loginToSystemAsWorker(String loginID, String loginPassword){
-        return OperationsOnWorkerList.findWorker(loginID); // return worker object if have, return null is do not have
-    }
-
-    /** public static Worker loginToSystemAsWorker(String loginID, String loginPassword) {
-        for (Worker worker: AdminWorker.getAllWorkersList().getWorkerList()) {
-            if (worker.loginID.equals(loginID)){
-                if (worker.loginPassword.equals(loginPassword)) {
-                    return worker;
-                } else { //wrong password so return null.
-                    return null;
-                }
-            }
-        }
-        return null;
-    }*/
 
     /**
      * Gets the name of this worker
