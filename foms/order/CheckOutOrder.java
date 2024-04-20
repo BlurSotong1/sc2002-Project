@@ -30,13 +30,8 @@ public class CheckOutOrder {
         boolean paymentStatus = false;
 
         while (true) {
-            System.out.println("Select your payment mode:\n" +
-                    "(1) Cash\n" +
-                    "(2) PayWave\n" +
-                    "(3) NETS\n" +
-                    "(4) Bank Transfer\n" +
-                    "(5) Scan QR code");
-
+            System.out.println("Select your payment mode:\n");
+            displayPaymentMethods();
             try {
                 userChoice = sc.nextInt();
                 if (userChoice < 1 || userChoice > 5) {
@@ -103,12 +98,9 @@ public class CheckOutOrder {
             System.out.println("Something went wrong.");
             return;
         }
+    }
 
-        private void displayPaymentModes(){
-
-        }
-
-
+    private void displayPaymentModes(){
 
     }
 
