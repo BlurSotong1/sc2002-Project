@@ -1,16 +1,17 @@
 package foms.workers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import foms.management.*;
 
 
-public class AdminWorker extends Worker{
+public class AdminWorker extends Worker implements Serializable {
 
     /**
      * list of branches.
      */
-    private static ArrayList<Branch> branchList;
+    private BranchList branchList;
 
     /**
      * Admin worker perform operations on branch list.
@@ -43,7 +44,7 @@ public class AdminWorker extends Worker{
     public AdminWorker(String name, int age, char gender, String loginID) {
         super(name, age, gender, loginID);
         setRole('A');
-        branchList = new ArrayList<Branch>();
+        branchList = new BranchList();
         jobsOnBranchList = new OperationsOnBranchList(this);
         jobsOnWorkerList = new OperationsOnWorkerList(this);
         jobsOnBranch = new OperationsOnBranchStatus(this);
@@ -54,7 +55,7 @@ public class AdminWorker extends Worker{
      * Gets the list of branches.
      * @return list of branches.
      */
-    public ArrayList<Branch> getBranchList() {
+    public BranchList getBranchList() {
         return branchList;
     }
 
