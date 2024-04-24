@@ -16,7 +16,6 @@ import static foms.order.OrderStatus.COMPLETED;
 public class Customer implements Serializable {
     private Order cart;
     private static Branch branch;
-    private static double amount = 0.0;
 
     public void selectBranch(){
         int branchChoice;
@@ -66,7 +65,6 @@ public class Customer implements Serializable {
                     if(cartItem instanceof SetMeal){
                         SetMeal setMeal = (SetMeal)cartItem;
                         cart.addToCart(setMeal);
-                        amount += setMeal.getPrice();
 
                         System.out.println("What do you want for your sides:");
                         Menu.displayMenu("Sides");
@@ -83,18 +81,17 @@ public class Customer implements Serializable {
                     }else if(cartItem instanceof MainDish){
                         MainDish mainDish = (MainDish)cartItem;
                         cart.addToCart(mainDish);
-                        amount += mainDish.getPrice();
+
                     }else if(cartItem instanceof Drink){
                         Drink drink = (Drink) cartItem;
                         cart.addToCart(drink);
-                        amount += drink.getPrice();
+
                     } else if(cartItem instanceof Sides){
                         Sides sides = (Sides) cartItem;
                         cart.addToCart(sides);
-                        amount += sides.getPrice();
+
                     }
 
-                    System.out.println(cartItem.getName() + " is added into the cart.");
                 }
 
             }catch(InputMismatchException e){
@@ -140,6 +137,7 @@ public class Customer implements Serializable {
     public void editFoodItem(){
         Scanner scanner = new Scanner(System.in);
         int foodChoice;
+        int customiseChoice;
             while(true){
                 try{
                     System.out.println("Select the food item that you want to edit from your cart:");
@@ -147,8 +145,30 @@ public class Customer implements Serializable {
                     foodChoice = scanner.nextInt();
                     if(foodChoice == 0){
                         System.out.println("Going back to main menu.");
+                        break;
+
                     }else if(foodChoice>=1 || foodChoice <= cart.getCart().size()){
-                        cart.editFoodItem(foodChoice);
+                        FoodItem itemToBeEdited = cart.getCart().get(foodChoice-1);
+                        if(itemToBeEdited instanceof SetMeal){
+                            System.out.println("Customising...\n" +
+                                    "(1) Main\n" +
+                                    "(2) Sides\n" +
+                                    "(3) Drink\n" +
+                                    "Press 0 to return.");
+                            customiseChoice=scanner.nextInt();
+
+                            if(customiseChoice==0){
+                                System.out.println("Returning back...");
+                                break;
+                            }else if (customiseChoice==1){
+                                MainDish selectedMainDish = (SetMeal)itemToBeEdited.getMainDish();
+                            }else if (customiseChoice==2){
+                                MainDish selectedSides = (SetMeal)itemToBeEdited.getSides();
+                            }else if (customiseChoice==3){
+                                MainDish selectedDrinks = (SetMeal)itemToBeEdited.getDrink();
+                            }
+                        }
+                        cart.editFoodItem(itemToBeEdited);
                     }
                 }catch(InputMismatchException e){
                     System.out.println("Enter a valid input.");

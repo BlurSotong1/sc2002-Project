@@ -1,15 +1,15 @@
 package foms.order;
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 import foms.food.*;
-import foms.order.OrderStatus;
 
-public class Order {
+public class Order implements Serializable {
     private int orderID;
     private ArrayList<FoodItem> cart;
-    private double amount;
+    private static double amount;
     private OrderStatus orderStatus;
 
     /**
@@ -22,50 +22,33 @@ public class Order {
     public Order(int orderID, ArrayList<FoodItem> cart) {
         this.orderID=orderID;
         this.cart=new ArrayList<>(cart);
-        this.amount = 0;
         this.orderStatus = OrderStatus.PENDING; //default
     }
 
     /**
      * method to add food into cart
-     * @param menuItem customer will be asked what menuItem they want to add in the main function
-     * check whether the menuItem is valid in the main function
-     *                 todo for peixin, dont check menuitem valid in main. check somewhere else/
-     *
+     * @param cartItem customer will be asked what menuItem they want to add in the Customer class
+     * check whether the menuItem is valid (downcasting)
+     * add to cart , amount increase,
      */
-    public void addToCart(FoodItem menuItem){
-
-        FoodItem cartItem;
-        switch (menuItem) { //downcasting!!!
-            case MainDish mainDish -> cartItem = new MainDish(menuItem);
-            case Drink drink ->       cartItem = new Drink(menuItem);
-            case Sides sides ->       cartItem = new Sides(menuItem);
-            case null, default -> {
-                System.out.println("something went wrong..");
-                return;  //exception handling of not either 4 cases. go back to start.
-            }
-        }
-
-        cart.add(cartItem);
-        amount += menuItem.getPrice();
-        System.out.println(menuItem.getName() + " is added into the cart.");
+    public void addToCart(FoodItem foodItem){
+        cart.add(foodItem);
+        amount += foodItem.getPrice();
+        System.out.println(foodItem.getName() + " is added into the cart.");
     }
 
 
 
     /**
      * method to delete food from cart
-     * @param foodToDelete customer will be asked what foodToBeDelete in main function
-     * for loop to check whether it is in the cart
+     * @param foodToDelete customer will be asked what foodToBeDelete in Customer class
+     * checking whether it is in cart has already done in the Customer Class
      */
-    public void deleteFromCart(FoodItem foodToDelete){
-        for(FoodItem cartItem : cart) {
-            if(cartItem.equals(foodToDelete)){
-                cart.remove(cartItem);
-                System.out.println(foodToDelete.getName()+" is removed from the cart.");
-            }
-        }
-        System.out.println("Item is not found in the cart.");
+    public void removeIndexedFoodItem(int indexOfFoodToDelete){
+        FoodItem cartItem = cart.get(indexOfFoodToDelete - 1);
+        cart.remove(cartItem);
+        amount -= cartItem.getPrice();
+        System.out.println(cartItem.getName()+" is removed from the cart.");
     }
 
     /**
@@ -75,35 +58,15 @@ public class Order {
      * This approach takes advantage of polymorphism,
      * allowing the correct customise() implementation to be invoked dynamically at runtime based on the actual type of the FoodItem.
      */
-    public void editCart(){
-        Scanner scanner = new Scanner (System.in);
-        int userChoice;
-        this.displayCartItems();
-        System.out.println("Select the item that you want to customise:\n" );
+    public void editFoodItem(FoodItem itemToBeEdited){
+        itemToBeEdited.customiseFoodItem();
 
-        while (true) {
-            try {
-                userChoice = scanner.nextInt();
-                if (userChoice < 1 || userChoice > cart.size()) {
-                    System.out.println("Invalid item number. Please enter a valid item number.");
-                } else {
-                    break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("input mismatch! enter a valid integer.");
-                scanner.next(); // Clear invalid input
-            }
-        }
-
-        FoodItem itemToBeCustomised = cart.get(userChoice-1);
-        //TODO whats this??
-        //itemToBeCustomised.customise();
     }
 
     /**
      * method to display and list all items in cart
      */
-    public void displayCartItems(){
+    public void displayCart(){
         if(cart.isEmpty()){
             System.out.println("Cart is empty.");
             return;
@@ -165,4 +128,6 @@ public class Order {
     public void setOrderStatus(OrderStatus newOrderStatus){
         this.orderStatus=newOrderStatus;
     }
+
+
 }
