@@ -55,18 +55,50 @@ public class BranchList {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-
-                if (scanner.next().equals("1")) {
+                String choice = scanner.next();
+                if (choice.equals("1")) {
                     branchList.add(branch);
                     System.out.printf("Added %s.\n", branch.getName());
+                    displayBranchNames();
                     return;
-                } else if (scanner.next().equals("2")) {
+                } else if (choice.equals("0")) {
                     System.out.println("Did not add branch.\nReturning to previous page..");
                     return;
                 } else {
                     System.out.println("Enter 1 to add (Enter 0 to exit): ");
                 }
             } catch (Exception e) {
+                System.out.println("Something went wrong.");
+            }
+        }
+    }
+
+    /*
+     * Remove a branch from list of branches.
+     * @param index is the index of the object.
+     */
+    public void removeBranchObject(Branch branch) {
+        System.out.printf("Please confirm that you want to remove %s.\n",branch.getName());
+        System.out.println("Enter 1 to remove (Enter 0 to exit):");
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            try {
+                String choice = scanner.next();
+                if (choice.equals("1")) {
+                    branchList.remove(branch);
+                    System.out.printf("Removed %s.\n", branch.getName());
+                    displayBranchNames();
+                    return;
+                }
+                else if (choice.equals("0")) {
+                    System.out.println("Did not remove branch.\nReturning to previous page..");
+                    return;
+                }
+                else {
+                    System.out.println("Enter 1 to remove (Enter 0 to exit): ");
+                }
+            }
+            catch (Exception e) {
                 System.out.println("Something went wrong.");
             }
         }
