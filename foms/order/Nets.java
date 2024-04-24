@@ -1,7 +1,7 @@
 package foms.order;
 
-public class BankTransfer implements Payment {
-    private String name = "Bank Transfer";
+public class Nets implements Payment {
+    private String name = "Nets";
     private boolean paymentStatus;
 
     @Override
