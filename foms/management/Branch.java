@@ -5,9 +5,10 @@ import foms.order.Order;
 import foms.order.Payment;
 import foms.workers.Worker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Branch {
+public class Branch implements Serializable {
     /**
      * name of this branch.
      */
