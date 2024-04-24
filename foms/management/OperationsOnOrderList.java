@@ -5,12 +5,12 @@ import foms.order.Order;
 import foms.order.OrderStatus;
 import foms.workers.StaffWorker;
 
-public class OperationsOnOrderList {
+public class OrderList {
 
     private StaffWorker staff;
     private static ArrayList<Order> orderList;
 
-    public OperationsOnOrderList() {
+    public OrderList() {
         // Constructor
         this.orderList = new ArrayList<Order>(); // Initialize the list of orders
     }
@@ -62,7 +62,7 @@ public class OperationsOnOrderList {
     }
 
     public void setOrderList(ArrayList<Order> orderList) {
-        OperationsOnOrderList.orderList = orderList;
+        OrderList.orderList = orderList;
     }
 
     public StaffWorker getStaff() {
