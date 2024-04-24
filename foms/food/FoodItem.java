@@ -1,6 +1,6 @@
 package foms.food;
 
-public class FoodItem implements Food {
+public class FoodItem{
     private String name;
     private double price;
     private boolean availability;
