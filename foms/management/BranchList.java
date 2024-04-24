@@ -9,6 +9,10 @@ public class BranchList {
      */
     private static ArrayList<Branch> branchList;
 
+    /**
+     * Constructor for BranchList class.
+     * Create a branch list.
+     */
     public BranchList() {
         this.branchList = new ArrayList<Branch>();
     }
