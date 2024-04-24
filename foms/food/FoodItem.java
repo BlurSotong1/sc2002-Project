@@ -11,15 +11,23 @@ public class FoodItem implements Serializable {
     private String description;
     private String customOrder;
 
+    /**
+     * constructor for fooditem basis. abstract class, so this is only used for polymorphism in menu/cart
+     * @param name of the food
+     * @param price price of the food
+     * @param description brief description of the food
+     */
     public FoodItem(String name, double price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
     }
 
-
+    /**
+     * a customise function used by customers to denote any special request.
+     */
     public void customiseFoodItem() {
-        System.out.printf("Enter ");
+
     }
 
 
