@@ -40,7 +40,7 @@ public class Menu {
     public void addCreatedFoodItemToMenu(FoodItem foodItem) {
 
         System.out.printf("Please confirm that you want to add %s to menu.\n",foodItem.getName());
-        System.out.println("Enter 1 to add, 2 to exit.");
+        System.out.println("Enter 1 to add (Enter 0 to exit): ");
 
 
         Scanner scanner = new Scanner(System.in);
@@ -55,7 +55,7 @@ public class Menu {
                     System.out.println("Did not add item to menu.");
                     return;
                 } else {
-                    System.out.println("Enter 1 or 2!");
+                    System.out.println("Enter 1 to add (Enter 0 to exit): ");
                 }
             } catch (Exception e) {
                 System.out.println("Something went wrong.");

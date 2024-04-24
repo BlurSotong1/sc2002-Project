@@ -1,6 +1,7 @@
 package foms.management;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BranchList {
     /**
@@ -36,6 +37,33 @@ public class BranchList {
         }
         else {
             throw new IndexOutOfBoundsException("Branch not found!");
+        }
+    }
+
+    /*
+     * Add a branch into list of branches.
+     * @param branch is the Branch object.
+     */
+    public static void addCreatedBranch(Branch branch) {
+        System.out.printf("Please confirm that you want to add %s.\n",branch.getName());
+        System.out.println("Enter 1 to add (Enter 0 to exit): ");
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            try {
+
+                if (scanner.next().equals("1")) {
+                    branchList.add(branch);
+                    System.out.printf("Added %s.\n", branch.getName());
+                    return;
+                } else if (scanner.next().equals("2")) {
+                    System.out.println("Did not add branch.");
+                    return;
+                } else {
+                    System.out.println("Enter 1 to add (Enter 0 to exit): ");
+                }
+            } catch (Exception e) {
+                System.out.println("Something went wrong.");
+            }
         }
     }
 
