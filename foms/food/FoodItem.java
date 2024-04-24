@@ -9,7 +9,7 @@ public class FoodItem implements Serializable {
     private double price;
     private boolean availability = true;
     private String description;
-    private String customOrder;
+    private String customRequest;
 
     /**
      * constructor for fooditem basis. abstract class, so this is only used for polymorphism in menu/cart
@@ -27,8 +27,30 @@ public class FoodItem implements Serializable {
      * a customise function used by customers to denote any special request.
      */
     public void customiseFoodItem() {
+        System.out.printf("Customising food item %s...\n", getName());
+        System.out.println("Enter your custom request (press 0 to quit): ");
 
+        Scanner scanner = new Scanner(System.in);
+        String customRequest;
+
+        try {
+
+            customRequest = scanner.nextLine();
+            scanner.nextLine(); //reading in '\n'
+            if (customRequest.equals("0")) {
+                System.out.println("Didnt not input custom request. \nReturning to previous page.");
+                return;
+            }
+
+            setCustomRequest(customRequest);
+            System.out.printf("Custom Request has been set to: %s\n", customRequest);
+            return;
+        } catch (Exception e) {
+            System.out.println("something went wrong");
+        }
     }
+
+
 
 
 
@@ -99,6 +121,9 @@ public class FoodItem implements Serializable {
         return name + ": " + description + " | Price: $" + price + (availability ? " (Available)" : " (Unavailable)");
     }
 
+    public String setCustomRequest(String customRequest) {
+        this.customRequest = customRequest;
+    }
 
     public void setAvailability() {
         Scanner scanner = new Scanner(System.in);

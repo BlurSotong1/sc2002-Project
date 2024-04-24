@@ -3,7 +3,7 @@ package foms.food;
 import java.io.Serializable;
 
 public enum iceLevels implements Serializable {
-    No_ICE,
+    NO_ICE,
     LESS_ICE,
     DEFAULT_ICE,
     MORE_ICE
