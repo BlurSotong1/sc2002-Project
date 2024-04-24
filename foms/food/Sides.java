@@ -1,6 +1,8 @@
 package foms.food;
 
-public class Sides extends FoodItem {
+import java.io.Serializable;
+
+public class Sides extends FoodItem implements Serializable {
 
     /**
      * Constructor

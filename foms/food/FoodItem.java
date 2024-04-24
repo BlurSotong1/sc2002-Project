@@ -1,25 +1,57 @@
 package foms.food;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class FoodItem{
+public class FoodItem implements Serializable {
     private String name;
     private double price;
     private boolean availability = true;
     private String description;
-    private String customOrder;
+    private String customRequest;
 
+    /**
+     * constructor for fooditem basis. abstract class, so this is only used for polymorphism in menu/cart
+     * @param name of the food
+     * @param price price of the food
+     * @param description brief description of the food
+     */
     public FoodItem(String name, double price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
     }
 
-    // Removed abstract keyword
-    public void customise() {
-        // Define customization logic for each type of food item here
+    /**
+     * a customise function used by customers to denote any special request.
+     */
+    public void customiseFoodItem() {
+        System.out.printf("Customising food item %s...\n", getName());
+        System.out.println("Enter your custom request (press 0 to quit): ");
+
+        Scanner scanner = new Scanner(System.in);
+        String customRequest;
+
+        try {
+
+            customRequest = scanner.nextLine();
+            scanner.nextLine(); //reading in '\n'
+            if (customRequest.equals("0")) {
+                System.out.println("Didnt not input custom request. \nReturning to previous page.");
+                return;
+            }
+
+            setCustomRequest(customRequest);
+            System.out.printf("Custom Request has been set to: %s\n", customRequest);
+            return;
+        } catch (Exception e) {
+            System.out.println("something went wrong");
+        }
     }
+
+
+
 
 
     public String getName() {
@@ -62,9 +94,6 @@ public class FoodItem{
         this.availability = availability;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -90,5 +119,29 @@ public class FoodItem{
 
     public String toString() {
         return name + ": " + description + " | Price: $" + price + (availability ? " (Available)" : " (Unavailable)");
+    }
+
+    public String setCustomRequest(String customRequest) {
+        this.customRequest = customRequest;
+    }
+
+    public void setAvailability() {
+        Scanner scanner = new Scanner(System.in);
+
+        String choice;
+        while (true) {
+            System.out.print("Choose 1 to set as Available\n 2 to set as Unavailable.\nChoose 0 to exit.\n" +
+                    "Enter your choice: ");
+            choice = scanner.next();
+            switch (choice) {
+                case "0"-> {System.out.println("going back to previous page..");
+                            return;}
+                case "1" -> {System.out.println("Availability has been set to true.");
+                             availability = true;}
+                case "2" -> {System.out.println("Availability has been set to false.");
+                    availability = false;}
+                }
+            }
+        }
     }
 }
