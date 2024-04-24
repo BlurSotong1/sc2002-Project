@@ -34,8 +34,13 @@ public class OperationsOnBranchList {
      * @param index is the index of the branch object in the array of branch objects
      * @return branch object corresponding to the index.
      */
-    public static Branch findBranch(int index){
-        return admin.getBranchList().get(index);
+    public static Branch findBranch(int index) throws IndexOutOfBoundsException{
+        if (index >= 0 && index < admin.getBranchList().size()) {
+            return admin.getBranchList().get(index);
+        }
+        else {
+            throw new IndexOutOfBoundsException("Branch not found!");
+        }
     }
 
 }

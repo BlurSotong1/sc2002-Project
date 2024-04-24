@@ -22,36 +22,52 @@ public class OperationsOnBranchStatus {
      * Change branch's status to open.
      */
     public void openBranch(){
-        try{
             Scanner sc = new Scanner(System.in);
-            System.out.println("Enter the branch to open: ");
+            System.out.println("Enter the branch index to open: ");
             OperationsOnBranchList.displayBranchNames();
-            int choice = sc.nextInt();
-            Branch branch = OperationsOnBranchList.findBranch(choice-1);
-            if (!branch.getStatus())
-                branch.setStatus(true);
-            System.out.println(branch.getName()+" branch is opened.");
-        }catch(InputMismatchException e){
-            System.out.println("input mismatch! enter a valid integer.");
-        }
+            while (true) {
+                try{
+                    int choice = sc.nextInt();
+                    Branch branch = OperationsOnBranchList.findBranch(choice-1);
+                    if (!branch.getStatus())
+                        branch.setStatus(true);
+                    System.out.println("Branch is opened.");
+                    return;
+                }
+                catch(InputMismatchException e){
+                    System.out.println("Branch not found! Enter a valid branch index:");
+                    sc.next();
+                }
+                catch(Exception e) {
+                    System.out.println(e.getMessage()+ " Enter a valid branch index:");
+                }
+            }
     }
 
     /**
      * Change branch's status to close.
      */
     public void closeBranch(){
-        try{
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter the branch to close: ");
             OperationsOnBranchList.displayBranchNames();
-            int choice = sc.nextInt();
-            Branch branch = OperationsOnBranchList.findBranch(choice-1);
-            if (branch.getStatus())
-                branch.setStatus(false);
-            System.out.println(branch.getName()+" branch is closed.");
-        }catch(InputMismatchException e){
-            System.out.println("input mismatch! enter a valid integer.");
-        }
+            while(true) {
+                try{
+                    int choice = sc.nextInt();
+                    Branch branch = OperationsOnBranchList.findBranch(choice-1);
+                    if (branch.getStatus())
+                        branch.setStatus(false);
+                    System.out.println(branch.getName()+" branch is closed.");
+                    return;
+                }
+                catch(InputMismatchException e){
+                    System.out.println("Branch not found! Enter a valid branch index:");
+                    sc.next();
+                }
+                catch(Exception e) {
+                    System.out.println(e.getMessage()+ " Enter a valid branch index:");
+                }
+            }
     }
 
 }
