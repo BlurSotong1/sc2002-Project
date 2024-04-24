@@ -35,7 +35,7 @@ public class OperationsOnBranchStatus {
                 Branch branch = BranchList.findBranch(choice-1);
                 if (!branch.getStatus())
                     branch.setStatus(true);
-                System.out.println("Branch is opened.");
+                System.out.println(branch.getName()+" branch is opened.");
                 return;
             }
             catch(InputMismatchException e){
