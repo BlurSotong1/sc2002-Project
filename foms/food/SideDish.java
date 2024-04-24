@@ -1,33 +1,31 @@
 package foms.food;
-
 import java.util.Scanner;
 
-
-public class MainDish extends FoodItem {
+public class SideDish extends FoodItem {
     private Scanner sc = new Scanner(System.in);
     private int saltLevel;
     private String baseDescription;
 
-    public MainDish(String name, double price, boolean availability, String category, String description) {
+    public SideDish(String name, double price, boolean availability, String category, String description) {
         super(name, price, availability, category, description);
         this.saltLevel = 2; // Default as normal salt level
         this.baseDescription = description;
     }
 
-    public static MainDish selectMainDish() {
-        System.out.println("Select a main dish:");
-        System.out.println("1. Steak (Juicy grilled steak with herbs)");
-        System.out.println("2. Chicken Rice (Delicious chicken with fragrant rice)");
-        System.out.println("3. Veggie Burger (Juicy grilled veggie burger)");
+    public static SideDish selectSideDish() {
+        System.out.println("Select a side dish:");
+        System.out.println("1. French Fries (Crispy golden French fries)");
+        System.out.println("2. Coleslaw (Crunchy fresh coleslaw)");
+        System.out.println("3. Salad (Fresh green salad)");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
         switch (choice) {
             case 1:
-                return new MainDish("Steak", 10.00, true, "Main Dish", "Juicy grilled steak with herbs");
+                return new SideDish("French Fries", 3.00, true, "Side Dish", "Crispy golden French fries");
             case 2:
-                return new MainDish("Chicken Rice", 5.00, true, "Main Dish", "Delicious chicken with fragrant rice");
+                return new SideDish("Coleslaw", 2.00, true, "Side Dish", "Crunchy fresh coleslaw");
             case 3:
-                return new MainDish("Veggie Burger", 7.00, true, "Main Dish", "Juicy grilled veggie burger");
+                return new SideDish("Salad", 3.50, true, "Side Dish", "Fresh green salad");
             default:
                 System.out.println("Invalid choice.");
                 return null;
@@ -77,4 +75,5 @@ public class MainDish extends FoodItem {
             default -> "Unknown";
         };
     }
+
 }
