@@ -6,15 +6,13 @@ import java.util.Scanner;
 public class FoodItem{
     private String name;
     private double price;
-    private boolean availability;
-    private String category;
+    private boolean availability = true;
     private String description;
+    private String customOrder;
 
-    public FoodItem(String name, double price, boolean availability, String category, String description) {
+    public FoodItem(String name, double price, String description) {
         this.name = name;
         this.price = price;
-        this.availability = availability;
-        this.category = category;
         this.description = description;
     }
 
@@ -23,10 +21,6 @@ public class FoodItem{
         // Define customization logic for each type of food item here
     }
 
-    @Override
-    public void displayFoodInformation() {
-
-    }
 
     public String getName() {
         return name;
@@ -38,10 +32,6 @@ public class FoodItem{
 
     public boolean getAvailability() {
         return availability;
-    }
-
-    public String getCategory() {
-        return category;
     }
 
     public String getDescription() {

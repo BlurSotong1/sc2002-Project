@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 
 public class MainDish extends FoodItem {
-    private Scanner sc = new Scanner(System.in);
-    private int saltLevel;
     private String baseDescription;
 
     public MainDish(String name, double price, String category, String description) {

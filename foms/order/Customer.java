@@ -4,6 +4,7 @@ import foms.food.FoodItem;
 import foms.food.MainDish;
 import foms.food.SetMeal;
 import foms.management.Branch;
+import foms.management.BranchList;
 import foms.management.Menu;
 import foms.management.OperationsOnBranchList;
 
@@ -21,14 +22,15 @@ public class Customer implements Serializable {
         int branchChoice;
         Scanner scanner = new Scanner(System.in);
         while(true) {
-            System.out.println("Select your branch:");
-            BranchList.displayBranchNames();
             try{
+                System.out.println("Select your branch:");
+                BranchList.displayBranchNames();
                 branchChoice = scanner.nextInt();
                 branch = BranchList.findBranch(branchChoice-1);
-
+                break;
             }catch(InputMismatchException e){
                 System.out.println("Please enter a valid integer for branch selection.");
+                scanner.next();
             }
         }
     }
@@ -62,16 +64,18 @@ public class Customer implements Serializable {
         Scanner scanner = new Scanner(System.in);
         int foodChoice;
         while(true) {
-            System.out.println("Select the food item that you want to delete from your cart:");
-            cart.displayCart();
             try{
+                System.out.println("Select the food item that you want to delete from your cart:");
+                cart.displayCart();
                 foodChoice = scanner.nextInt();
-                if(foodChoice<1 || foodChoice > cart.getCart().size()){
-                    FoodItem foodToBeRemoved = cart.getCart().get(foodChoice-1);
-                    return foodToBeRemoved;
+                if(foodChoice>=1 || foodChoice <= cart.getCart().size()){
+                    return cart.getCart().get(foodChoice-1);
+                }else{
+                    System.out.println("Invalid food item index.");
                 }
             }catch(InputMismatchException e){
                 System.out.println("Enter a valid input.");
+                scanner.next();
             }
         }
     }
@@ -83,22 +87,21 @@ public class Customer implements Serializable {
     public FoodItem editFoodItem(){
         Scanner scanner = new Scanner(System.in);
         int foodChoice;
-        while(true){
-            System.out.println("Select food item that you want to edit.");
             while(true){
-                System.out.println("Select the food item that you want to delete from your cart:");
-                cart.displayCart();
                 try{
+                    System.out.println("Select the food item that you want to edit from your cart:");
+                    cart.displayCart();
                     foodChoice = scanner.nextInt();
-                    if(foodChoice<1 || foodChoice > cart.getCart().size()){
+                    if(foodChoice>1 || foodChoice <= cart.getCart().size()){
                         FoodItem foodToBeEdited = cart.getCart().get(foodChoice-1);
                         return foodToBeEdited;
                     }
                 }catch(InputMismatchException e){
                     System.out.println("Enter a valid input.");
+                }catch (Exception e){
+                    System.out.println(e.getMessage()+"Error occurred.");
                 }
             }
-        }
     }
 
     public void collectOrder(int orderID){
