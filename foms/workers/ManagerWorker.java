@@ -122,7 +122,7 @@ public class ManagerWorker extends StaffWorker {
     /**
      * finds for object then removes if it exists in system.
      */
-    public void removeFoodItemToMenu() {
+    public void removeFoodItemFromMenu() {
         Scanner scanner = new Scanner(System.in);
 
         getBranch().displayMenu();
