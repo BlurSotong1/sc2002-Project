@@ -15,13 +15,8 @@ public class Menu {
 
     /**
      * Constructor for Menu class.
-     *
      */
-    public Menu(){
-
-    }
-
-
+    public Menu(){}
 
     /**
      * @param foodName is the foodname that you want to check if duplicate exists.
