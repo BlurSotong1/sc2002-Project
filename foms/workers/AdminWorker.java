@@ -23,14 +23,14 @@ public class AdminWorker extends Worker{
     private OperationsOnWorkerList jobsOnWorkerList;
 
     /**
-     * Admin worker perform change on one of the branch's status.
+     * Admin worker perform operations on a branch..
      */
-    private OperationsOnBranchStatus changeBranchStatus;
+    private OperationsOnBranchStatus jobsOnBranch;
 
     /**
-     * Admin worker perform change on one of the branch's payment status.
+     * Admin worker perform operations on payment list of one of the branch.
      */
-    private OperationsOnPaymentStatus changePaymentStatus;
+    private OperationsOnPaymentList jobsOnPaymentList;
 
     /**
      * Constructor for AdminWorker class.
@@ -46,8 +46,8 @@ public class AdminWorker extends Worker{
         branchList = new ArrayList<Branch>();
         jobsOnBranchList = new OperationsOnBranchList(this);
         jobsOnWorkerList = new OperationsOnWorkerList(this);
-        changeBranchStatus = new OperationsOnBranchStatus(this);
-        changePaymentStatus = new OperationsOnPaymentStatus(this);
+        jobsOnBranch = new OperationsOnBranchStatus(this);
+        jobsOnPaymentList = new OperationsOnPaymentList(this);
     }
 
     /**
@@ -75,19 +75,19 @@ public class AdminWorker extends Worker{
     }
 
     /**
-     * Change the branch status.
+     * Use the operations on branch.
      * @return change branch status.
      */
-    public OperationsOnBranchStatus getChangeBranchStatus(){
-        return changeBranchStatus;
+    public OperationsOnBranchStatus getJobsOnBranch(){
+        return jobsOnBranch;
     }
 
     /**
-     * Change the payment status of a branch.
+     * Use the operations on payment list.
      * @return change payment status of a branch.
      */
-    public OperationsOnPaymentStatus getChangePaymentStatus(){
-        return changePaymentStatus;
+    public OperationsOnPaymentList getJobsOnPaymentList(){
+        return jobsOnPaymentList;
     }
 
 
