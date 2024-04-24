@@ -35,6 +35,8 @@ public class Customer implements Serializable {
             }catch(InputMismatchException e){
                 System.out.println("Please enter a valid integer for branch selection.");
                 scanner.next();
+            }catch(Exception e){
+                System.out.println(e.getMessage()+"Error occurred.");
             }
         }
     }
