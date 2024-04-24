@@ -11,7 +11,6 @@ public class OrderList {
     private static ArrayList<Order> orderList;
 
     public OrderList() {
-        // Constructor
         this.orderList = new ArrayList<Order>(); // Initialize the list of orders
     }
 
@@ -62,7 +61,7 @@ public class OrderList {
     }
 
     public void setOrderList(ArrayList<Order> orderList) {
-        OrderList.orderList = orderList;
+        OperationsOnOrderList.orderList = orderList;
     }
 
     public StaffWorker getStaff() {
