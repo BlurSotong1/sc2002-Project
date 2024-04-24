@@ -21,8 +21,13 @@ public class BranchList {
         int length;
 
         length = branchList.size();
+        System.out.println("List of branches:");
         for (i = 0; i < length; i++) {
-            System.out.println(i+1 + ". " + branchList.get(i).getName());
+            System.out.printf(i+1 + ". " + branchList.get(i).getName());
+            if (branchList.get(i).getStatus()==false)
+                System.out.printf(" (closed)");
+            System.out.println();
+
         }
     }
 
@@ -44,7 +49,7 @@ public class BranchList {
      * Add a branch into list of branches.
      * @param branch is the Branch object.
      */
-    public static void addCreatedBranch(Branch branch) {
+    public void addCreatedBranch(Branch branch) {
         System.out.printf("Please confirm that you want to add %s.\n",branch.getName());
         System.out.println("Enter 1 to add (Enter 0 to exit): ");
         Scanner scanner = new Scanner(System.in);
@@ -56,7 +61,7 @@ public class BranchList {
                     System.out.printf("Added %s.\n", branch.getName());
                     return;
                 } else if (scanner.next().equals("2")) {
-                    System.out.println("Did not add branch.");
+                    System.out.println("Did not add branch.\nReturning to previous page..");
                     return;
                 } else {
                     System.out.println("Enter 1 to add (Enter 0 to exit): ");
@@ -65,6 +70,19 @@ public class BranchList {
                 System.out.println("Something went wrong.");
             }
         }
+    }
+
+    /**
+     * @param branchName is the name of branch that you want to check if duplicate exists.
+     * @return  Branch if there is a duplicate, null if no duplicate.
+     */
+    public Branch isBranchInBranchList(String branchName) {
+        for (Branch branch: branchList) {
+            if (branch.getName().equals(branchName)) { //duplicate exists!
+                return branch;
+            }
+        }
+        return null;
     }
 
     /**

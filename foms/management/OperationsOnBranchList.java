@@ -2,6 +2,8 @@ package foms.management;
 
 import foms.workers.AdminWorker;
 
+import java.util.Scanner;
+
 public class OperationsOnBranchList {
     /**
      * operations On branch list is performed by admin worker.
@@ -16,6 +18,49 @@ public class OperationsOnBranchList {
         this.admin = admin;
     }
 
+    /**
+     * Add Branch.
+     */
+    /**
+     * Add Branch.
+     */
+    public void addBranch() {
+        Scanner scanner = new Scanner(System.in);
 
+        String branchName;
+        try {
+            System.out.print("Enter the new branch name (Enter 0 to exit): ");
+            branchName = scanner.nextLine();
+            if (branchName.equals("0")) {
+                System.out.println("Returning to previous page..");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println("Something went wrong");
+            return;
+        }
+
+
+        if (admin.getBranchList().isBranchInBranchList(branchName)!= null) { //if not null, means there is a duplicate
+            System.out.println("This branch name already exists in system.\nReturning to Main Menu..");
+            return;
+        }
+
+        String location;
+        try {
+            System.out.print("Enter the location of the branch (Enter 0 to exit): ");
+            location = scanner.nextLine();
+            if (location.equals("0")) {
+                System.out.println("Returning to previous page..");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println("Something went wrong");
+            return;
+        }
+
+        admin.getBranchList().addCreatedBranch(new Branch(branchName, location));
+
+    }
 
 }

@@ -22,52 +22,60 @@ public class OperationsOnBranchStatus {
      * Change branch's status to open.
      */
     public void openBranch(){
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter the branch index to open: ");
-            BranchList.displayBranchNames();
-            while (true) {
-                try{
-                    int choice = sc.nextInt();
-                    Branch branch = BranchList.findBranch(choice-1);
-                    if (!branch.getStatus())
-                        branch.setStatus(true);
-                    System.out.println("Branch is opened.");
+        Scanner sc = new Scanner(System.in);
+        BranchList.displayBranchNames();
+        System.out.println("Enter the branch index to open (Enter 0 to exit): ");
+        while (true) {
+            try{
+                int choice = sc.nextInt();
+                if (choice ==0) {
+                    System.out.println("Returning to previous page..");
                     return;
                 }
-                catch(InputMismatchException e){
-                    System.out.println("Branch not found! Enter a valid branch index:");
-                    sc.next();
-                }
-                catch(Exception e) {
-                    System.out.println(e.getMessage()+ " Enter a valid branch index:");
-                }
+                Branch branch = BranchList.findBranch(choice-1);
+                if (!branch.getStatus())
+                    branch.setStatus(true);
+                System.out.println("Branch is opened.");
+                return;
             }
+            catch(InputMismatchException e){
+                System.out.println("Branch not found! Enter a valid branch index (Enter 0 to exit):");
+                sc.next();
+            }
+            catch(Exception e) {
+                System.out.println(e.getMessage()+ " Enter a valid branch index (Enter 0 to exit):");
+            }
+        }
     }
 
     /**
      * Change branch's status to close.
      */
     public void closeBranch(){
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter the branch to close: ");
-            BranchList.displayBranchNames();
-            while(true) {
-                try{
-                    int choice = sc.nextInt();
-                    Branch branch = BranchList.findBranch(choice-1);
-                    if (branch.getStatus())
-                        branch.setStatus(false);
-                    System.out.println(branch.getName()+" branch is closed.");
+        Scanner sc = new Scanner(System.in);
+        BranchList.displayBranchNames();
+        System.out.println("Enter the branch index to close (Enter 0 to exit): ");
+        while(true) {
+            try{
+                int choice = sc.nextInt();
+                if (choice ==0) {
+                    System.out.println("Returning to previous page..");
                     return;
                 }
-                catch(InputMismatchException e){
-                    System.out.println("Branch not found! Enter a valid branch index:");
-                    sc.next();
-                }
-                catch(Exception e) {
-                    System.out.println(e.getMessage()+ " Enter a valid branch index:");
-                }
+                Branch branch = BranchList.findBranch(choice-1);
+                if (branch.getStatus())
+                    branch.setStatus(false);
+                System.out.println(branch.getName()+" branch is closed.");
+                return;
             }
+            catch(InputMismatchException e){
+                System.out.println("Branch not found! Enter a valid branch index (Enter 0 to exit):");
+                sc.next();
+            }
+            catch(Exception e) {
+                System.out.println(e.getMessage()+ " Enter a valid branch index (Enter 0 to exit):");
+            }
+        }
     }
 
 }

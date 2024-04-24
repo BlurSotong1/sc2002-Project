@@ -25,7 +25,7 @@ public class Menu {
     public FoodItem isFoodItemInMenu(String foodName) {
 
         for (FoodItem foodItem: menu) {
-            if (foodItem.getName().equals(foodName)) { //dupe exists!
+            if (foodItem.getName().equals(foodName)) { //duplicate exists
                 return foodItem;
             }
         }
@@ -41,12 +41,12 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-
-                if (scanner.next().equals("1")) {
+                String choice = scanner.next();
+                if (choice.equals("1")) {
                     menu.add(foodItem);
                     System.out.printf("Added %s to menu\n", foodItem.getName());
                     return;
-                } else if (scanner.next().equals("2")) {
+                } else if (choice.equals("0")) {
                     System.out.println("Did not add item to menu.\nReturning to previous page..");
                     return;
                 } else {

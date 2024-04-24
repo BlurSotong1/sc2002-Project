@@ -50,8 +50,8 @@ public class ManagerWorker extends StaffWorker implements Serializable {
             return;
         }
 
-        if (getBranch().getMenu().isFoodItemInMenu(foodName) != null) { //if not null means got dupe
-            System.out.println("This food name already exists in system!\nReturning to Main Menu..");
+        if (getBranch().getMenu().isFoodItemInMenu(foodName) != null) { //if not null, means there is a duplicate
+            System.out.println("This food name already exists in system.\nReturning to Main Menu..");
             return;
         }
 
