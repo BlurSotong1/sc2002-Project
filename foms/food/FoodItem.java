@@ -1,5 +1,8 @@
 package foms.food;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class FoodItem{
     private String name;
     private double price;
@@ -49,8 +52,20 @@ public class FoodItem{
         this.name = name;
     }
 
-    public void updatePrice(double price) {
-        System.out.println("");
+    public void updatePrice() {
+        System.out.print("Enter the new price: ");
+        Scanner scanner = new Scanner(System.in);
+        double newPrice;
+        while (true) {
+            try {
+                newPrice = scanner.nextDouble();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("enter a float!");
+                scanner.next();
+            }
+        }
+        this.price = newPrice;
     }
 
     public void setAvailability(boolean availability) {
@@ -63,6 +78,24 @@ public class FoodItem{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void updateDescription() {
+        System.out.print("Enter the new Description: ");
+        Scanner scanner = new Scanner(System.in);
+        String newDescription;
+        while (true) {
+            try {
+                newDescription = scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("enter a float!");
+                scanner.next();
+            }
+        }
+        this.description = newDescription;
+
+        System.out.printf("Updated the description to: %s\n",description);
     }
 
     public String toString() {

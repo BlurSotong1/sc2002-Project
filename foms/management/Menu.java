@@ -135,13 +135,8 @@ public class Menu {
 
                         switch (scanner.next()) {
 
-                            case "1"-> System.out.println("Enter the updated price:");
-
-
-
-
-
-                            case "2":
+                            case "1"-> foodItem.updatePrice();
+                            case "2" -> foodItem.updateDescription();
                             case "3": return;
                             default -> System.out.println("Enter a valid option!");
                         }

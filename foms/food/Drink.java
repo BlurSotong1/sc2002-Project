@@ -45,7 +45,8 @@ public class Drink extends FoodItem {
             System.out.println("Invalid selection. No changes made.");
         }
     }
-
+    //TODO make ur function names more specific! add in javadoc too
+    /*
     private void updateDescription() {
         String iceDescription = switch (iceLevel) {
             case 1 -> "No Ice";
@@ -55,7 +56,7 @@ public class Drink extends FoodItem {
         };
         setDescription(this.baseDescription + " | Ice Level: " + iceDescription);
     }
-
+*/
     @Override
     public void displayFoodInformation() {
         System.out.println(toString());
