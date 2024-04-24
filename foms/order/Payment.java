@@ -1,9 +1,10 @@
 package foms.order;
 
-public interface Payment {
 
-    public boolean processPayment(double amount);
-    public String getName();
-    public boolean getPaymentStatus();
-    public void setPaymentStatus(boolean availability);
+// Define the Payment interface
+public interface Payment {
+    boolean processPayment(double amount);
+    String getName();
+    boolean getPaymentStatus();
+    void setPaymentStatus(boolean status);
 }
