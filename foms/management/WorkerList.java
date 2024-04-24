@@ -18,4 +18,12 @@ public class WorkerList {
     public WorkerList() {
         this.workerList = new ArrayList<Worker>();
     }
+
+    /**
+     * Gets the list of workers in a branch.
+     * @return list of workers in a branch.
+     */
+    public ArrayList<Worker> getWorkerList() {
+        return workerList;
+    }
 }
