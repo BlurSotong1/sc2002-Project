@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.ArrayList;
 
 
-public class SetMeal implements Food {
+public class SetMeal extends FoodItem{
     private ArrayList<FoodItem> setMeal;
     private static Scanner sc = new Scanner(System.in);
 
