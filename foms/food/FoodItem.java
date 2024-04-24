@@ -17,8 +17,7 @@ public class FoodItem implements Serializable {
         this.description = description;
     }
 
-    // Removed abstract keyword
-    //TODO
+
     public void customiseFoodItem() {
         System.out.printf("Enter ");
     }
