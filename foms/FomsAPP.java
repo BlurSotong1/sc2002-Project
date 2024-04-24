@@ -6,7 +6,7 @@ import java.io.*;
 
 public class FomsAPP implements Serializable {
     public static void main(String[] args) {
-        Branch branch = new Branch("jp","jp", 15);
+        Branch branch = new Branch("jp","jp");
     try {
         FileOutputStream fileOut = new FileOutputStream("BranchInfo.ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);

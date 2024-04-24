@@ -96,6 +96,73 @@ public class Menu {
     }
 
     /**
+     * prints out the menu
+     * TODO add filters
+     */
+    public void displayMenu() {
+        int number = 1;
+        for (FoodItem foodItem:menu) {
+            System.out.printf("%d, %s\n",number,foodItem.toString());
+        }
+
+    }
+
+    /**
+     * updates food information of the indexed food item in menu.
+     * @param index index of the food in the menu.
+     */
+    public void updateIndexedFoodItemFromMenu(int index) {
+
+        FoodItem foodItem;
+        try {
+            foodItem = menu.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Indexed out of range.");
+            return;
+        }
+
+        System.out.printf("Please confirm that you want to upodate %s in the menu.\n",foodItem.getName());
+        System.out.println("Enter 1 to update, 2 to exit.");
+
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            try {
+
+                if (scanner.next().equals("1")) {
+                    System.out.printf("updating %s from menu...\n", foodItem.getName());
+                    while (true) {
+                        System.out.println("Choose ur action: \n1. Update Price\n2.Update Description\n3.Quit");
+
+                        switch (scanner.next()) {
+
+                            case "1"-> System.out.println("Enter the updated price:");
+
+
+
+
+
+                            case "2":
+                            case "3": return;
+                            default -> System.out.println("Enter a valid option!");
+                        }
+                        return;
+                    }
+
+
+
+                } else if (scanner.next().equals("2")) {
+                    System.out.println("Did not update item to menu.");
+                    return;
+                } else {
+                    System.out.println("Enter 1 or 2!");
+                }
+            } catch (Exception e) {
+                System.out.println("Something went wrong.");
+            }
+        }
+
+    }
+    /**
      * for getting menu size
      * @return the size of the menu.
      */

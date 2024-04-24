@@ -4,6 +4,7 @@ import foms.food.*;
 import foms.management.Branch;
 import foms.management.Menu;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ import java.util.Scanner;
  * manager of the branch
  */
 
-public class ManagerWorker extends StaffWorker {
+public class ManagerWorker extends StaffWorker implements Serializable {
 
     /**
      * Constructor for manager class.
@@ -125,7 +126,7 @@ public class ManagerWorker extends StaffWorker {
     public void removeFoodItemFromMenu() {
         Scanner scanner = new Scanner(System.in);
 
-        getBranch().displayMenu();
+        getBranch().getMenu().displayMenu();
 
         int IndexOfFoodItemToRemove;
         int maxIndexOfMenu = getBranch().getMenu().getMenuSize();
@@ -152,6 +153,42 @@ public class ManagerWorker extends StaffWorker {
         }
 
         getBranch().getMenu().removeIndexedFoodItemFromMenu(IndexOfFoodItemToRemove);
+
+    }
+
+    /**
+     * updates the information of food items in the menu
+     */
+    public void updateFoodItemInformation() {
+        Scanner scanner = new Scanner(System.in);
+        int IndexOfFoodItemToUpdate;
+        int maxIndexOfMenu = getBranch().getMenu().getMenuSize();
+
+        System.out.print("Enter the food number to update (press 0 to exit): ");
+        while (true) {
+            try {
+
+                IndexOfFoodItemToUpdate = scanner.nextInt() -1; //-1 because display start from 1.
+                if (IndexOfFoodItemToUpdate == -1) {
+                    System.out.println("Exiting to previous page..");
+                    return;
+
+                } else if (IndexOfFoodItemToUpdate >= 0 && IndexOfFoodItemToUpdate < maxIndexOfMenu) {
+                    break;
+
+                } else {
+                    System.out.println("Enter within the valid range!");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a number!");
+            }
+        }
+
+        getBranch().getMenu().updateIndexedFoodItemFromMenu(IndexOfFoodItemToUpdate);
+
+
+
 
 
     }

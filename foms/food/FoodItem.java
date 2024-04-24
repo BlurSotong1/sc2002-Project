@@ -49,8 +49,8 @@ public class FoodItem{
         this.name = name;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void updatePrice(double price) {
+        System.out.println("");
     }
 
     public void setAvailability(boolean availability) {
