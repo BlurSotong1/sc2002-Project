@@ -1,25 +1,27 @@
 package foms.management;
 
-import foms.food.Food;
 import foms.food.FoodItem;
-import foms.workers.AdminWorker;
 import foms.workers.ManagerWorker;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class OperationsOnMenu {
-    /**
-     * Operations on branch status is performed by manager worker.
-     */
-    private final ManagerWorker manager;
+public class Menu {
 
     /**
-     * Constructor for OperationsOnBranchStatus class
-     * @param manager is the manage worker performing the change of branch status.
+     * this branch's menu
      */
-    public OperationsOnMenu(ManagerWorker manager){
-        this.manager = manager;
+    private ArrayList<FoodItem> menu;
+
+    /**
+     * Constructor for Menu class.
+     *
+     */
+    public Menu(){
+
     }
+
+
 
     /**
      * @param foodName is the foodname that you want to check if duplicate exists.

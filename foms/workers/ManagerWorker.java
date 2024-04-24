@@ -2,7 +2,7 @@ package foms.workers;
 
 import foms.food.*;
 import foms.management.Branch;
-import foms.management.OperationsOnMenu;
+import foms.management.Menu;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class ManagerWorker extends StaffWorker {
     /**
      * is the class that enables manager to do their job through functions that change the menu.
      */
-    OperationsOnMenu jobsOnMenu;
+    Menu jobsOnMenu;
     /**
      * Constructor for manager class.
      * @param name    full name of the worker.
@@ -27,7 +27,7 @@ public class ManagerWorker extends StaffWorker {
      */
     public ManagerWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID, branch);
-        jobsOnMenu = new OperationsOnMenu(this);
+        jobsOnMenu = new Menu(this);
         setRole('M');
     }
     //**********************************************************************************************\\

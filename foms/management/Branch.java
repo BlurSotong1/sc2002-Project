@@ -52,11 +52,10 @@ public class Branch {
      * list of orders in this branch.
      */
     private ArrayList<Order> orderList;
-
     /**
-     * this branch's menu
+     * menu of the branch.
      */
-    private ArrayList<FoodItem> menu;
+    private Menu menu;
 
     /**
      * list of payment methods in this branch.
@@ -82,7 +81,7 @@ public class Branch {
         this.status = true;
         this.workerList = new ArrayList<Worker>();
         this.orderList = new ArrayList<Order>();
-        this.menu = new ArrayList<FoodItem>();
+        this.menu = new Menu();
         this.paymentList = new ArrayList<Payment>();
     }
 
