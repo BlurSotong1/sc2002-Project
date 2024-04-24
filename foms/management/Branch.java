@@ -20,7 +20,7 @@ public class Branch implements Serializable {
     private String location;
 
     /**
-     * maximum number of workers in this branch.
+     * maximum number of staff (excluding manager) that can be in this branch.
      */
     private int quota;
 
@@ -47,12 +47,12 @@ public class Branch implements Serializable {
     /**
      * list of workers in this branch.
      */
-    private ArrayList<Worker> workerList;
+    private WorkerList workerList;
 
     /**
      * list of orders in this branch.
      */
-    private ArrayList<Order> orderList;
+    private OrderList orderList;
     /**
      * menu of the branch.
      */
@@ -61,7 +61,7 @@ public class Branch implements Serializable {
     /**
      * list of payment methods in this branch.
      */
-    private ArrayList<Payment> paymentList;
+    private PaymentList paymentList;
 
     /**
      * Constructor for Branch Class
@@ -72,18 +72,18 @@ public class Branch implements Serializable {
      * There is  0 staff, 0 manager, 0 total number of staff.
      * Create list of workers, list of orders, menu and list of payment methods in the branch.
      */
-    public Branch(String name, String location, int quota) {
+    public Branch(String name, String location) {
         this.name = name;
         this.location = location;
-        this.quota = quota;
+        this.quota = 0;
         this.numStaff = 0;
         this.numManager = 0;
         this.totalNumStaff = 0;
         this.status = true;
-        this.workerList = new ArrayList<Worker>();
-        this.orderList = new ArrayList<Order>();
+        this.workerList = new WorkerList();
+        this.orderList = new OrderList();
         this.menu = new Menu();
-        this.paymentList = new ArrayList<Payment>();
+        this.paymentList = new Payment();
     }
 
     /**
@@ -103,16 +103,16 @@ public class Branch implements Serializable {
     }
 
     /**
-     * Gets the maximum number of staff in this branch.
-     * @return the maximum number of staff in this branch.
+     * Gets the number of staff (excluding manager) that can be in this branch.
+     * @return the number of staff (excluding manager) that can be in this branch.
      */
     public int getQuota() {
         return quota;
     }
 
     /**
-     * Gets the number of staff (excluding manager) in this branch.
-     * @return number of staff (excluding manager) in this branch.
+     * Gets the maximum number of staff (excluding manager) that can be in this branch.
+     * @return maximum number of staff (excluding manager) that can be in this branch.
      */
     public int getNumStaff() {
         return numStaff;
@@ -146,7 +146,7 @@ public class Branch implements Serializable {
      * Gets the list of workers in this branch.
      * @return list of workers in this branch.
      */
-    public ArrayList<Worker> getWorkerList(){
+    public WorkerList getWorkerList(){
         return workerList;
     }
 
@@ -154,7 +154,7 @@ public class Branch implements Serializable {
      * Gets the list of orders in this branch.
      * @return list of orders in this branch.
      */
-    public ArrayList<Order> getOrderList(){
+    public OrderList getOrderList(){
         return orderList;
     }
 
@@ -166,21 +166,11 @@ public class Branch implements Serializable {
         return menu;
     }
 
-    public void displayMenu() {
-        int numberOfFoodItems = 0;
-        for (FoodItem foodItem: getMenu().getMenu()){
-            numberOfFoodItems++;
-            System.out.printf("%d. %s\n", numberOfFoodItems,foodItem.getName());
-        }
-    }
-
-
-
     /**
      * Gets the list of payment methods in this branch.
      * @return list of payment methods in this branch.
      */
-    public ArrayList<Payment> getPaymentList(){
+    public PaymentList getPaymentList(){
         return paymentList;
     }
 
@@ -202,8 +192,8 @@ public class Branch implements Serializable {
     }
 
     /**
-     * Changes the maximum number of staff in this branch.
-     * @param quota is the new maximum number of staff in this branch.
+     * Changes the maximum number of staff (excluding manager) that can be in this branch.
+     * @param quota is the new maximum number of staff (excluding manager) that can be in this branch.
      */
     public void setQuota (int quota) {
         this.quota = quota;
@@ -247,7 +237,7 @@ public class Branch implements Serializable {
      * Changes the list of workers this branch.
      * @param workerList is the new list of workers of this branch.
      */
-    public void setWorkerList(ArrayList<Worker> workerList){
+    public void setWorkerList(WorkerList workerList){
         this.workerList = workerList;
     }
 
@@ -255,7 +245,7 @@ public class Branch implements Serializable {
      * Changes the list of orders this branch.
      * @param orderList is the new list of orders of this branch.
      */
-    public void setOrderList(ArrayList<Order> orderList){
+    public void setOrderList(OrderList orderList){
         this.orderList = orderList;
     }
 
@@ -264,7 +254,7 @@ public class Branch implements Serializable {
      * Changes the list of payment methods this branch.
      * @param paymentList is the new list of payment methods this branch.
      */
-    public void setPaymentList(ArrayList<Payment> paymentList){
+    public void setPaymentList(PaymentList paymentList){
         this.paymentList = paymentList;
     }
 
