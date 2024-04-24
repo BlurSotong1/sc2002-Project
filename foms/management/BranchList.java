@@ -1,7 +1,5 @@
 package foms.management;
 
-import foms.order.Order;
-
 import java.util.ArrayList;
 
 public class BranchList {

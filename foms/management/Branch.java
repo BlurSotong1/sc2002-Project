@@ -1,12 +1,6 @@
 package foms.management;
 
-import foms.food.FoodItem;
-import foms.order.Order;
-import foms.order.Payment;
-import foms.workers.Worker;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Branch implements Serializable {
     /**
@@ -82,7 +76,7 @@ public class Branch implements Serializable {
         this.workerList = new WorkerList();
         this.orderList = new OrderList();
         this.menu = new Menu();
-        this.paymentList = new Payment();
+        this.paymentList = new PaymentList();
     }
 
     /**

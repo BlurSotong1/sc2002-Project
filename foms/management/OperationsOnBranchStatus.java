@@ -24,11 +24,11 @@ public class OperationsOnBranchStatus {
     public void openBranch(){
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter the branch index to open: ");
-            OperationsOnBranchList.displayBranchNames();
+            BranchList.displayBranchNames();
             while (true) {
                 try{
                     int choice = sc.nextInt();
-                    Branch branch = OperationsOnBranchList.findBranch(choice-1);
+                    Branch branch = BranchList.findBranch(choice-1);
                     if (!branch.getStatus())
                         branch.setStatus(true);
                     System.out.println("Branch is opened.");
@@ -50,11 +50,11 @@ public class OperationsOnBranchStatus {
     public void closeBranch(){
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter the branch to close: ");
-            OperationsOnBranchList.displayBranchNames();
+            BranchList.displayBranchNames();
             while(true) {
                 try{
                     int choice = sc.nextInt();
-                    Branch branch = OperationsOnBranchList.findBranch(choice-1);
+                    Branch branch = BranchList.findBranch(choice-1);
                     if (branch.getStatus())
                         branch.setStatus(false);
                     System.out.println(branch.getName()+" branch is closed.");

@@ -91,7 +91,4 @@ public class AdminWorker extends Worker implements Serializable {
         return jobsOnPaymentList;
     }
 
-
-
-
 }
