@@ -22,7 +22,7 @@ public class Menu {
      * @param foodName is the foodname that you want to check if duplicate exists.
      * @return  FoodItem if there is a duplicate, null if no duplicate.
      */
-    public FoodItem whetherFoodItemExistInMenu(String foodName) {
+    public FoodItem isFoodItemInMenu(String foodName) {
 
         for (FoodItem foodItem: menu) {
             if (foodItem.getName().equals(foodName)) { //dupe exists!
@@ -47,7 +47,7 @@ public class Menu {
                     System.out.printf("Added %s to menu\n", foodItem.getName());
                     return;
                 } else if (scanner.next().equals("2")) {
-                    System.out.println("Did not add item to menu.");
+                    System.out.println("Did not add item to menu.\nReturning to previous page..");
                     return;
                 } else {
                     System.out.println("Enter 1 to add (Enter 0 to exit): ");
