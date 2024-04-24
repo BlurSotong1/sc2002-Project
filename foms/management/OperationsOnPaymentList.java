@@ -14,8 +14,10 @@ public class OperationsOnPaymentList {
     }
 
     /**
-     * add new payment to the payment list
-     *
+     * add payment method to the payment list
+     * will go through the Branch list then display Branch
+     * find payment to add in the branch payment list
+     * if it is not found in the branch list yet, can add , otherwise no
      * @param payment new payment method to be added should be done in main function
      */
     public void addToPaymentList(Payment payment) {
@@ -28,11 +30,11 @@ public class OperationsOnPaymentList {
                 branchChoice = scanner.nextInt();
                 Branch branch = OperationsOnBranchList.findBranch(branchChoice);
 
-                if(findPayment(branch,payment)){
+                if(!findPayment(branch,payment)){
                     branch.getPaymentList().add(payment);
                     System.out.println("Payment method added successfully to " + branch.getName());
                 }else{
-                    System.out.println("Payment method is not found in the payment list.");
+                    System.out.println("Payment method is already in the payment list.");
                 }
 
             } catch (InputMismatchException e) {
@@ -43,6 +45,13 @@ public class OperationsOnPaymentList {
         }
     }
 
+    /**
+     * remove payment method to the payment list
+     * will go through the Branch list then display Branch
+     * find payment to remove from the branch payment list
+     * if it is found in the branch list yet, can remove , otherwise no
+     * @param payment new payment method to be removed should be done in main function
+     */
     public void removeFromPaymentList(Payment payment) {
         Scanner scanner = new Scanner(System.in);
         int branchChoice;
@@ -82,15 +91,18 @@ public class OperationsOnPaymentList {
                 Payment paymentMethod = branch.getPaymentList().get(i);
                 System.out.println((i + 1) + ". " + paymentMethod.getName() + " : " + paymentMethod.getPaymentStatus());
             }
+        }else{
+            System.out.println("Invalid branch.");
         }
     }
 
     /**
      * find the payment method from the payment list
-     * this method will be used when admin want to update the payment status in the payment list
+     * this method will be used when admin want to add/remove the payment method in the payment list
      *
-     * @param branch pass in the index of the payment method that we want to find
-     * @return the payment method from the payment list
+     * @param branch pass in the correct branch to access the payment list
+     * @param payment payment method we want to find
+     * @return true if found and false if not found
      */
     public static boolean findPayment(Branch branch, Payment payment) {
         for (Payment availPayment : branch.getPaymentList()) {
