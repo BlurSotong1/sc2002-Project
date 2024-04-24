@@ -18,6 +18,19 @@ public class OperationsOnPaymentList {
      * @param payment new payment method to be added should be done in main function
      */
     public void addToPaymentList(Payment payment){
+        Scanner scanner = new Scanner(System.in);
+        int branchChoice;
+        while(true){
+            try{
+                System.out.println("Select the branch that you want to add your payment method: ");
+                OperationsOnBranchList.displayBranchNames();
+                branchChoice = scanner.nextInt();
+                OperationsOnBranchList.findBranch(branchChoice);
+
+            }
+        }
+
+
         branch.getPaymentList().add(payment);
         System.out.println("Payment method added successfully: " + payment.getName());
         OperationsOnPaymentStatus.updatePaymentStatus();
