@@ -68,7 +68,6 @@ public class Branch implements Serializable {
      * Create a new Branch.
      * @param name is the name of the branch.
      * @param location is the location of the branch.
-     * @param quota is the maximum number of workers in the branch.
      * There is  0 staff, 0 manager, 0 total number of staff.
      * Create list of workers, list of orders, menu and list of payment methods in the branch.
      */
