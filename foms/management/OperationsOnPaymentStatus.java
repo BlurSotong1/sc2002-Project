@@ -22,7 +22,12 @@ public class OperationsOnPaymentStatus {
         this.admin = admin;
     }
 
-    public static boolean updatePaymentStatus(){
+    /**
+     * method for admin to control the payment status
+     * if true, then will display in customers' payment list and can be used
+     * if false, will not be display in customers' payment list
+     */
+    public static void updatePaymentStatus(){
         Scanner scanner = new Scanner(System.in);
         int adminChoice;
         while(true){
@@ -30,10 +35,19 @@ public class OperationsOnPaymentStatus {
                 System.out.println("Select a payment mode to update its status:\n");
                 OperationsOnPaymentList.displayPaymentList();
                 adminChoice=scanner.nextInt();
-                OperationsOnPaymentList.findPayment(adminChoice-1);
+                Payment payment=OperationsOnPaymentList.findPayment(adminChoice-1);
+                if(payment.getPaymentStatus()){
+                    payment.setPaymentStatus(false);
+                } else{
+                    payment.setPaymentStatus(true);
+                }
+
             }catch(InputMismatchException e){
                 System.out.println("Invalid input. Please insert a valid integer.");
+            }catch(Exception e){
+                System.out.println("Invalid payment mode selection. Please try again.");
             }
+
         }
     }
 

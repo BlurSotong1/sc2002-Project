@@ -181,7 +181,7 @@ public class Branch {
      * @return list of payment methods in this branch.
      */
     public ArrayList<Payment> getPaymentList(){
-        return menu;
+        return paymentList;
     }
 
 
