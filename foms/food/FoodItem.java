@@ -1,9 +1,10 @@
 package foms.food;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class FoodItem{
+public class FoodItem implements Serializable {
     private String name;
     private double price;
     private boolean availability = true;
@@ -17,9 +18,11 @@ public class FoodItem{
     }
 
     // Removed abstract keyword
-    public void customise() {
-        // Define customization logic for each type of food item here
+    //TODO
+    public void customiseFoodItem() {
+        System.out.printf("Enter ");
     }
+
 
 
     public String getName() {
@@ -62,9 +65,6 @@ public class FoodItem{
         this.availability = availability;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -90,5 +90,26 @@ public class FoodItem{
 
     public String toString() {
         return name + ": " + description + " | Price: $" + price + (availability ? " (Available)" : " (Unavailable)");
+    }
+
+
+    public void setAvailability() {
+        Scanner scanner = new Scanner(System.in);
+
+        String choice;
+        while (true) {
+            System.out.print("Choose 1 to set as Available\n 2 to set as Unavailable.\nChoose 0 to exit.\n" +
+                    "Enter your choice: ");
+            choice = scanner.next();
+            switch (choice) {
+                case "0"-> {System.out.println("going back to previous page..");
+                            return;}
+                case "1" -> {System.out.println("Availability has been set to true.");
+                             availability = true;}
+                case "2" -> {System.out.println("Availability has been set to false.");
+                    availability = false;}
+                }
+            }
+        }
     }
 }
