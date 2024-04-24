@@ -161,13 +161,13 @@ public class Branch {
      * Gets this branch's menu.
      * @return this branch's menu.
      */
-    public ArrayList<FoodItem> getMenu(){
+    public Menu getMenu(){
         return menu;
     }
 
     public void displayMenu() {
         int numberOfFoodItems = 0;
-        for (FoodItem foodItem: getMenu()){
+        for (FoodItem foodItem: getMenu().getMenu()){
             numberOfFoodItems++;
             System.out.printf("%d. %s\n", numberOfFoodItems,foodItem.getName());
         }

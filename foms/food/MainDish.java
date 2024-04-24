@@ -8,6 +8,12 @@ public class MainDish extends FoodItem {
     private int saltLevel;
     private String baseDescription;
 
+    public MainDish(String name, double price, String category, String description) {
+        super(name, price, availability, category, description);
+        this.saltLevel = 2; // Default as normal salt level
+        this.baseDescription = description;
+    }
+
     public MainDish(String name, double price, boolean availability, String category, String description) {
         super(name, price, availability, category, description);
         this.saltLevel = 2; // Default as normal salt level

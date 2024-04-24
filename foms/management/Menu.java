@@ -27,8 +27,9 @@ public class Menu {
      * @param foodName is the foodname that you want to check if duplicate exists.
      * @return  FoodItem if there is a duplicate, null if no duplicate.
      */
-    public FoodItem whetherExistInMenu(String foodName) {
-        for (FoodItem foodItem: manager.getBranch().getMenu()) {
+    public FoodItem whetherFoodItemExistInMenu(String foodName) {
+
+        for (FoodItem foodItem: menu) {
             if (foodItem.getName().equals(foodName)) { //dupe exists!
                 return foodItem;
             }
@@ -47,7 +48,7 @@ public class Menu {
             try {
 
                 if (scanner.next().equals("1")) {
-                    manager.getBranch().getMenu().add(foodItem);
+                    menu.add(foodItem);
                     System.out.printf("Added %s to menu\n", foodItem.getName());
                     return;
                 } else if (scanner.next().equals("2")) {
@@ -65,7 +66,7 @@ public class Menu {
     public void removeIndexedFoodItemFromMenu(int index) {
         FoodItem foodItem;
         try {
-            foodItem = manager.getBranch().getMenu().get(index);
+            foodItem = menu.get(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Indexed out of range.");
             return;
@@ -79,7 +80,7 @@ public class Menu {
             try {
 
                 if (scanner.next().equals("1")) {
-                    manager.getBranch().getMenu().remove(foodItem);
+                    menu.remove(foodItem);
                     System.out.printf("Removed %s from menu\n", foodItem.getName());
                     return;
                 } else if (scanner.next().equals("2")) {
@@ -92,6 +93,14 @@ public class Menu {
                 System.out.println("Something went wrong.");
             }
         }
+    }
+
+    /**
+     * for getting menu size
+     * @return the size of the menu.
+     */
+    public int getMenuSize() {
+        return menu.size();
     }
 }
 

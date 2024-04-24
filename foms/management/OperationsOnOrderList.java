@@ -53,7 +53,6 @@ public class OperationsOnOrderList {
                     orderList.remove(order);
                 }
             }
-
         }
     }
 

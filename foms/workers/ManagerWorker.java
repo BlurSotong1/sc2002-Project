@@ -14,10 +14,6 @@ import java.util.Scanner;
 public class ManagerWorker extends StaffWorker {
 
     /**
-     * is the class that enables manager to do their job through functions that change the menu.
-     */
-    Menu jobsOnMenu;
-    /**
      * Constructor for manager class.
      * @param name    full name of the worker.
      * @param age     age of the worker.
@@ -27,7 +23,6 @@ public class ManagerWorker extends StaffWorker {
      */
     public ManagerWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID, branch);
-        jobsOnMenu = new Menu(this);
         setRole('M');
     }
     //**********************************************************************************************\\
@@ -54,7 +49,7 @@ public class ManagerWorker extends StaffWorker {
             return;
         }
 
-        if (jobsOnMenu.whetherExistInMenu(foodName) != null) { //if not null means got dupe
+        if (getBranch().getMenu().whetherFoodItemExistInMenu(foodName) != null) { //if not null means got dupe
             System.out.println("This food name already exists in system!\nReturning to Main Menu..");
             return;
         }
@@ -82,6 +77,7 @@ public class ManagerWorker extends StaffWorker {
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Input mismatch! enter a valid integer.");
+                scanner.next();
             } catch (Exception e) {
                 System.out.println("Something went wrong..");
             }
@@ -115,11 +111,12 @@ public class ManagerWorker extends StaffWorker {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Enter a number!");
+                scanner.next();
             }
         } //end of creating fooditem
 
 
-        jobsOnMenu.addCreatedFoodItemToMenu(food);
+        getBranch().getMenu().addCreatedFoodItemToMenu(food);
     }
 
     /**
@@ -131,7 +128,7 @@ public class ManagerWorker extends StaffWorker {
         getBranch().displayMenu();
 
         int IndexOfFoodItemToRemove;
-        int maxIndexOfMenu = getBranch().getMenu().size();
+        int maxIndexOfMenu = getBranch().getMenu().getMenuSize();
 
         System.out.print("Enter the food number to remove (press 0 to exit): ");
         while (true) {
@@ -154,7 +151,7 @@ public class ManagerWorker extends StaffWorker {
             }
         }
 
-        jobsOnMenu.removeIndexedFoodItemFromMenu(IndexOfFoodItemToRemove);
+        getBranch().getMenu().removeIndexedFoodItemFromMenu(IndexOfFoodItemToRemove);
 
 
     }
