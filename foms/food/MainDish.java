@@ -20,6 +20,8 @@ public class MainDish extends FoodItem {
         this.baseDescription = description;
     }
 
+    //TODO not supposed to here
+    /*
     public static MainDish selectMainDish() {
         System.out.println("Select a main dish:");
         System.out.println("1. Steak (Juicy grilled steak with herbs)");
@@ -39,7 +41,7 @@ public class MainDish extends FoodItem {
                 return null;
         }
     }
-
+*/
     @Override
     public void customise() {
         System.out.println("Current Salt Level: " + convertSaltLevelToString());
@@ -65,10 +67,6 @@ public class MainDish extends FoodItem {
         setDescription(this.baseDescription + " | Salt Level: " + saltDescription);
     }
 
-    @Override
-    public void displayFoodInformation() {
-        System.out.println(toString());
-    }
 
     @Override
     public String toString() {
