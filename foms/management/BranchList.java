@@ -67,4 +67,11 @@ public class BranchList {
         }
     }
 
+    /**
+     * Gets the list of branches.
+     * @return list of branches.
+     */
+    public ArrayList<Branch> getBranchList() {
+        return branchList;
+    }
 }
