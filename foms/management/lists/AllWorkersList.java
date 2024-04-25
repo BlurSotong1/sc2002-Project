@@ -1,9 +1,11 @@
 package foms.management.lists;
 
-import java.io.Serializable;
+import java.io.*;
+import java.nio.channels.WritePendingException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import foms.management.branch.Branch;
 import foms.management.filters.workerfilters.*;
 import foms.management.filters.workerfilters.WorkerFilters;
 import foms.workers.AdminWorker;
@@ -14,6 +16,18 @@ public class AllWorkersList implements Serializable {
      * list of all workers in the company.
      */
     private static ArrayList<Worker> allWorkersList;
+
+    public static void serializeALlWorkerList() throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("AllWorkerList.ser"))) {
+            oos.writeObject(allWorkersList);
+        }
+    }
+
+    public static void deserializeAllWorkerList()throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("AllWorkerList.ser"))) {
+            allWorkersList= (ArrayList<Worker>) ois.readObject();
+        }
+    }
 
     /**
      * admin worker in the company.

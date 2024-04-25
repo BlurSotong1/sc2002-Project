@@ -28,22 +28,22 @@ public class AdminWorker extends Worker implements Serializable {
     /**
      * Admin worker perform operations on branch list.
      */
-    private transient OperationsOnBranchList jobsOnBranchList;
+    private  OperationsOnBranchList jobsOnBranchList;
 
     /**
      * Admin worker perform operations on worker list of one of the branch.
      */
-    private transient OperationsOnWorkerList jobsOnWorkerList;
+    private  OperationsOnWorkerList jobsOnWorkerList;
 
     /**
      * Admin worker perform operations on a branch..
      */
-    private transient OperationsOnBranchStatus jobsOnBranch;
+    private  OperationsOnBranchStatus jobsOnBranch;
 
     /**
      * Admin worker perform operations on payment list of one of the branch.
      */
-    private transient OperationsOnPaymentList jobsOnPaymentList;
+    private  OperationsOnPaymentList jobsOnPaymentList;
 
     /**
      * Constructor for AdminWorker class.

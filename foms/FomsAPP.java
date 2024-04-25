@@ -1,6 +1,7 @@
 package foms;
 
 import foms.management.branch.Branch;
+import foms.management.lists.AllWorkersList;
 import foms.management.lists.BranchList;
 import foms.order.Customer;
 import foms.workers.AdminWorker;
@@ -11,10 +12,7 @@ import java.util.Scanner;
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-
-        //saving state
-/*
-       Branch branch = new Branch("jp", "jp",15);
+        Branch branch = new Branch("jp", "jp",15);
         AdminWorker choonggi = new AdminWorker("choonggi",20,'M',"choonggi001");
         choonggi.getJobsOnBranchList().addBranch();
 
@@ -27,8 +25,9 @@ public class FomsAPP implements Serializable {
         } catch (IOException e) {
             System.out.println("we are screwed");
         }
-*/
-      //  BranchList.serializeBranchList();
+
+        BranchList.serializeBranchList();
+        AllWorkersList.serializeALlWorkerList();
 
         //calling state
         AdminWorker admin = null;
@@ -44,8 +43,9 @@ public class FomsAPP implements Serializable {
             throw new RuntimeException(e);
         }
         BranchList.deserializeBranchList();
+        AllWorkersList.deserializeAllWorkerList();
 
-
+/*
         Scanner scanner = new Scanner(System.in);
         System.out.println("**************************************************");
         System.out.println("Welcome to FastFood Operations Management System!");
@@ -53,14 +53,17 @@ public class FomsAPP implements Serializable {
         System.out.println("To login as a Staff Member, enter: 2.");
         System.out.print("Enter your choice: ");
 
-        System.out.printf("%s",admin.toString());
+
 
 
         for (Branch branch2: admin.getBranchList().getBranchList())
             System.out.printf("\n\n%s", branch2.getName());
-        System.out.println();
+       // Customer customer = new Customer();
        // System.out.println("Welcome Customer!");
-        //Customer customer = new Customer();
+        customer.addFoodItemToCart(); */
+
+        admin.getJobsOnWorkerList().addWorker();
+
 
     }
 
@@ -69,7 +72,7 @@ public class FomsAPP implements Serializable {
 
         Customer customer = new Customer();
 
-        customer
+        customer.addFoodItemToCart();
 
         System.out.println("2. Check Existing Order");
 
@@ -79,3 +82,19 @@ public class FomsAPP implements Serializable {
 
 
 }
+/*Branch branch = new Branch("jp", "jp",15);
+        AdminWorker choonggi = new AdminWorker("choonggi",20,'M',"choonggi001");
+        choonggi.getJobsOnBranchList().addBranch();
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream("AdminInfo.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(choonggi);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            System.out.println("we are screwed");
+        }
+
+      BranchList.serializeBranchList();
+        AllWorkersList.serializeALlWorkerList();*/
