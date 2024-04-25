@@ -1,5 +1,9 @@
 package foms;
 
+import foms.food.Drinks;
+import foms.food.FoodItem;
+import foms.food.MainDish;
+import foms.food.Sides;
 import foms.management.branch.Branch;
 import foms.management.lists.AllWorkersList;
 import foms.management.lists.BranchList;
@@ -20,6 +24,27 @@ public class FomsAPP implements Serializable {
         dummy.addCreatedBranch(branch3);
         Branch branch4 = new Branch("HOUGANG", "HOUGANG", 18);
         dummy.addCreatedBranch(branch4);
+
+        FoodItem item1 = new Sides("FRIES",3.20,"yummy and crispy fries");
+        branch1.getMenu().addCreatedFoodItemToMenu(item1);
+        branch2.getMenu().addCreatedFoodItemToMenu(item1);
+        FoodItem item2 = new Sides("FRIES",3.50,"yummy and crispy fries");
+        branch3.getMenu().addCreatedFoodItemToMenu(item2);
+        branch4.getMenu().addCreatedFoodItemToMenu(item2);
+
+        FoodItem item3 = new MainDish("3PC TENDER", 15.30,"Yummy tenders");
+        branch1.getMenu().addCreatedFoodItemToMenu(item3);
+        branch4.getMenu().addCreatedFoodItemToMenu(item3);
+        FoodItem item4 = new MainDish("3PC TENDER", 19.30,"Yummy tenders");
+        branch2.getMenu().addCreatedFoodItemToMenu(item4);
+        branch3.getMenu().addCreatedFoodItemToMenu(item4);
+
+        FoodItem item5 = new Drinks("Pepsi", 2.10,"coke is superior");
+        branch1.getMenu().addCreatedFoodItemToMenu(item5);
+        branch2.getMenu().addCreatedFoodItemToMenu(item5);
+        branch3.getMenu().addCreatedFoodItemToMenu(item5);
+        branch4.getMenu().addCreatedFoodItemToMenu(item5);
+
 
         //calling state
         AdminWorker admin = null;
