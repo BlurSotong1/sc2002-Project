@@ -21,8 +21,6 @@ public class OperationsOnBranchList implements Serializable {
         this.admin = admin;
     }
 
-
-
     /**
      * Add Branch.
      */

@@ -14,6 +14,7 @@ public class RoleFilter implements WorkerFilters, Serializable {
      * @param workerList list of workers
      * @return filtered list of workers
      */
+    @Override
     public ArrayList<Worker> filter(ArrayList<Worker> workerList) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Worker> filteredList= new ArrayList<Worker>();
