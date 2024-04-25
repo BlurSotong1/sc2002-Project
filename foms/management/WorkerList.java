@@ -19,6 +19,14 @@ public class WorkerList {
         this.workerList = new ArrayList<Worker>();
     }
 
+    /*
+     * Add a worker into list of workers.
+     * @param worker is the Worker object.
+     */
+    public void addCreatedWorker(Worker worker) {
+        workerList.add(worker);
+    }
+
     /**
      * Gets the list of workers in a branch.
      * @return list of workers in a branch.
