@@ -1,12 +1,10 @@
 package foms.order;
 import java.io.Serializable;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.logging.Filter;
+import java.util.*;
 
 import foms.food.*;
-import foms.management.filters.menufilters.BaseMenuFilter;
+import foms.management.filters.menufilters.MenuFilters;
+import foms.management.lists.Menu;
 
 /**
  * Represents an order placed by customer
@@ -23,40 +21,65 @@ public class Order implements Serializable {
     /**
      * Sum of the amount of all the cart items
      */
-    private double amount;
+    private double totalAmount = 0.0;
     /**
      * Order status of the order
      */
-    private OrderStatus orderStatus;
+    private OrderStatus orderStatus = OrderStatus.PENDING;;
     /**
      * dine in option of the order
      */
-    private boolean dineInOption;
+    private boolean dineInOption = true;
 
     /**
      * customer creates an order with the given orderID
-     * FoodItem chosen will be added to cart
-     * initial amount set to 0
-     * initialOrderStatus set to PENDING
-     * @param orderID The order's number which customer can refer and collect their food when it is being called
      */
-    public Order(int orderID, ArrayList<FoodItem> cart) {
-        this.orderID=orderID;
-        this.cart=new ArrayList<>(cart);
-        this.amount =0.0;
-        this.orderStatus = OrderStatus.PENDING; //default
+    public Order() {
+        Random random = new Random();
+        orderID = random.nextInt(8999) + 1000; //random orderID between 1000~9999
     }
 
     /**
-     * method to add food into cart
-     * @param foodItem customer will be asked what menuItem they want to add in the Customer class
-     * food item is already craeted in Customer class
-     * add to cart , amount increases
+     * control flow of adding food item to menu.
+     * creates a new object and adds it to the cart, copying object from menu.
+     * @param indexedFoodItem is the index of the food item that i need to retrieve from filtered menu.
+     * @param filterType is the filter
+     * @param menu is the menu object that has the menu list.
      */
-    public void addToCart(FoodItem foodItem){
-        cart.add(foodItem);
-        amount += foodItem.getPrice();
-        System.out.println(foodItem.getName() + " is added into the cart.");
+    public void addToCart(int indexedFoodItem, int filterType, Menu menu){
+
+        //the filter used
+        MenuFilters filter = Menu.findWhichFilter(filterType);
+
+        final FoodItem fromMenu;
+        //the index of the food
+        fromMenu = filter.findIndexedFoodItemInFilteredMenu(indexedFoodItem,menu);
+        if (fromMenu == null) {
+            System.out.println("Error");
+            return;
+        }
+
+        FoodItem addNewItemToCart = switch (fromMenu.getClass().getSimpleName()) {
+
+            case "SetMeal" -> new SetMeal(((SetMeal) fromMenu).getMainDish(), fromMenu.getPrice(), fromMenu.getDescription());
+
+            case "MainDish" -> new MainDish(fromMenu.getName(), fromMenu.getPrice(), fromMenu.getDescription());
+
+            case "Sides" -> new Sides(fromMenu.getName(), fromMenu.getPrice(), fromMenu.getDescription());
+
+            case "Drinks" -> new Drinks(fromMenu.getName(), fromMenu.getPrice(), fromMenu.getDescription());
+
+            default -> {
+                System.out.println("Error!");
+                yield null; // or throw an exception or return a default value
+            }
+        };
+        if (addNewItemToCart == null) return;
+
+        cart.add(addNewItemToCart);
+        totalAmount += addNewItemToCart.getPrice();
+
+
     }
 
     /**
@@ -68,18 +91,18 @@ public class Order implements Serializable {
     public void removeIndexedFoodItem(int indexOfFoodItemToDelete){
         FoodItem cartItem = cart.get(indexOfFoodItemToDelete - 1);
         cart.remove(cartItem);
-        amount -= cartItem.getPrice();
+        totalAmount -= cartItem.getPrice();
         System.out.println(cartItem.getName()+" is removed from the cart.");
     }
 
     /**
      * method to editCart
-     * @param indexOfFood retrieves the selected FoodItem by indexing from the cart and
-     * directly calls its customiseFoodItem() method. control flow.
-     * @param filterType is the type of filter used to
+     * @param index retrieves the selected FoodItem by indexing from the cart and
+     * directly calls its customiseFoodItem() method.
      */
-    public void editFoodItem(int indexOfFood, int filterType){
-        BaseMenuFilter filter =
+    public void editFoodItem(int index){
+
+        getCart().get(index).customiseFoodItem();
     }
 
     /**
@@ -123,7 +146,7 @@ public class Order implements Serializable {
      * @return price of all items in cart
      */
     public double getAmount(){
-        return amount;
+        return totalAmount;
     }
 
     /**

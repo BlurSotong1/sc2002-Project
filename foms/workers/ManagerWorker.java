@@ -102,7 +102,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
                         return;
                     }
                     case 1 -> food = new MainDish(foodName, price, description);
-                    case 2 -> food = new Drink(foodName, price, description);
+                    case 2 -> food = new Drinks(foodName, price, description);
                     case 3 -> food = new Sides(foodName, price, description);
                     default -> System.out.println("Enter valid choice!");
                 };
@@ -141,7 +141,8 @@ public class ManagerWorker extends StaffWorker implements Serializable {
                     System.out.println("Returning to previous page..");
                     return;
 
-                } else if (IndexOfFoodItemToRemove >= 0 && IndexOfFoodItemToRemove < maxIndexOfMenu) {
+                } else if (IndexOfFoodItemToRemove >= 0 && IndexOfFoodItemToRemove <= maxIndexOfMenu) {
+                    getBranch().getMenu().removeIndexedFoodItemFromMenu(IndexOfFoodItemToRemove);
                     break;
 
                 } else {
@@ -154,7 +155,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
             }
         }
 
-        getBranch().getMenu().removeIndexedFoodItemFromMenu(IndexOfFoodItemToRemove);
+
     }
 
     /**

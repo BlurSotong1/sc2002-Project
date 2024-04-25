@@ -24,25 +24,45 @@ public class Customer implements Serializable {
      * Customer's branch.
      */
     private Branch branch;
+    /**
+     * Customer's option to check out.
+     */
 
     /**
-     * Customer choosing a branch.
-     * Customer can only choose those that are open.
+     * constructor for branch.
+     * will call select branch function when creating customer.
      */
-    public void selectBranch(){
+    public Customer() {
+        Order order = new Order();
+        this.branch = selectBranch();
+    }
+
+    /**
+     *  Customer choosing a branch.
+     *      * Customer can only choose those that are open.
+     * @return branch if chose correct one, null if close app.
+     */
+
+    public Branch selectBranch(){
         int branchChoice;
         Scanner scanner = new Scanner(System.in);
         while(true) {
             try{
-                System.out.println("Select your branch:");
+                System.out.print("Select your branch (Enter 0 to exit): ");
                 BranchList.displayBranchNames();
                 branchChoice = scanner.nextInt();
 
-                setBranch(BranchList.findBranch(branchChoice-1));
+                if (branchChoice == 0) {
+                    System.out.println("Exiting... ");
+                    return null;
+                }
+
+                Branch branch = BranchList.findBranch(branchChoice-1);
+
                 if(!branch.getStatus()){
                     System.out.println("The branch is closed. Please select another branch.");
                 } else {
-                    break;
+                    return branch;
                 }
 
             }catch(InputMismatchException e){
@@ -90,7 +110,7 @@ public class Customer implements Serializable {
                     }
 
                     default -> {
-                        order.editFoodItem(input,filterType); // valid index checking is done in fooditems
+                        order.addToCart(input,filterType,getBranch().getMenu()); // valid index checking is done in fooditems
                     }
                 }
 
@@ -102,10 +122,6 @@ public class Customer implements Serializable {
 
         }
 
-
-
-
-
     }
 
     /**
@@ -115,6 +131,7 @@ public class Customer implements Serializable {
     public void removeFoodItem(){
         Scanner scanner = new Scanner(System.in);
         int foodChoice;
+
         while (true) {
             try{
                 System.out.print("Select the food item that you want to delete from your cart:\n " +
@@ -125,7 +142,7 @@ public class Customer implements Serializable {
                 foodChoice = scanner.nextInt();
 
 
-                if(foodChoice ==0){ // go back menu
+                if(foodChoice == 0){ // go back menu
                     System.out.println("Going back to main menu.");
                     return;
                 }
@@ -136,10 +153,10 @@ public class Customer implements Serializable {
                     return;
                 }
 
-            }catch(InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Enter a valid input.");
                 scanner.next();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage()+"Error occurred.");
             }
         }
@@ -230,18 +247,15 @@ public class Customer implements Serializable {
      * once they collected, we will change the order status from READYTOPICKUP to COMPLETED
      * orderList will remove this order once this step is done
      */
+
+
+
     public void collectOrder(int orderID){
         order.setOrderStatus(COMPLETED);
     }
 
 
     public Branch getBranch() { return branch;}
-    public void setBranch(Branch branch){
-        this.branch=branch;
-    }
-    public ArrayList<FoodItem> getCart() {
-        return order.getCart();
-    }
 
     public int displayMenu () {
         return getBranch().getMenu().displayMenu();

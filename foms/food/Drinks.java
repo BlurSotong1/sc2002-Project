@@ -1,10 +1,9 @@
 package foms.food;
 
-import java.awt.*;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class Drink extends FoodItem implements Serializable {
+public class Drinks extends FoodItem implements Serializable {
     /**
      * ice levels of a drink that is customisable.
      */
@@ -16,7 +15,7 @@ public class Drink extends FoodItem implements Serializable {
      * @param price of the drink
      * @param description what is the drink
      */
-    public Drink(String name, double price, String description) {
+    public Drinks(String name, double price, String description) {
         super(name, price, description);
     }
 
@@ -24,7 +23,7 @@ public class Drink extends FoodItem implements Serializable {
      * used to copy a new object over for customers into the cart
      * @param drink is the original menu item.
      */
-    public Drink(FoodItem drink) {
+    public Drinks(FoodItem drink) {
         super(drink.getName(),drink.getPrice(),drink.getDescription());
     }
 

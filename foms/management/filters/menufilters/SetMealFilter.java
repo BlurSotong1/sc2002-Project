@@ -6,7 +6,7 @@ import foms.management.lists.Menu;
 
 import java.util.ArrayList;
 
-public class SetMealFilter extends BaseMenuFilter implements MenuFilters {
+public class SetMealFilter implements MenuFilters {
 
     @Override
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {

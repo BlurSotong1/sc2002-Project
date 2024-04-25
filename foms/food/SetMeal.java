@@ -17,6 +17,10 @@ public class SetMeal extends FoodItem implements Serializable {
         this.mainDish = mainDish;
     }
 
+    public FoodItem getMainDish() {
+        return mainDish;
+    }
+
     public void setMainDish(FoodItem mainDish) {
         this.mainDish = mainDish;
     }

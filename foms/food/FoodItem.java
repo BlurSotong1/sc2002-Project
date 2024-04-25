@@ -121,7 +121,7 @@ public class FoodItem implements Serializable {
         return name + ": " + description + " | Price: $" + price + (availability ? " (Available)" : " (Unavailable)");
     }
 
-    public String setCustomRequest(String customRequest) {
+    public void setCustomRequest(String customRequest) {
         this.customRequest = customRequest;
     }
 

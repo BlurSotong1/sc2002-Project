@@ -6,8 +6,6 @@ import foms.management.filters.menufilters.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.logging.Filter;
 
 public class Menu {
 
@@ -103,7 +101,7 @@ public class Menu {
 
         Scanner scanner = new Scanner(System.in);
 
-        BaseMenuFilter filter = null;
+        MenuFilters filter = null;
         while (true) {
             try {
                 System.out.print("Filter the Menu:\n1.Display All Items\n2.Display Set Meals\n3.Display Main Dish" +
@@ -142,7 +140,7 @@ public class Menu {
 
     public void displayMenu(String filterType) {
 
-        BaseMenuFilter filter;
+        MenuFilters filter;
 
         switch (filterType) {
             case "Sides" -> filter = new SidesFilter();
@@ -218,6 +216,32 @@ public class Menu {
 
     public ArrayList<FoodItem> getMenuArraylist() {
         return menu;
+    }
+
+    public static MenuFilters findWhichFilter(int filterType) {
+        switch (filterType) {
+            case 1 -> {
+                return new BaseMenuFilter();
+            }
+            case 2 -> {
+                return new SetMealFilter();
+            }
+
+            case 3 -> {
+                return new MainDishFilter();
+            }
+
+            case 4 -> {
+                return new SidesFilter();
+            }
+            case 5 -> {
+                return new DrinksFilter();
+            }
+            default -> {
+                System.out.println("Error!");
+                return new BaseMenuFilter();
+            }
+        }
     }
 }
 

@@ -13,7 +13,7 @@ public class Sides extends FoodItem implements Serializable {
      * @param price       This food item's price
      * @param description This food item's description
      */
-    public Sides(String name, float price, String description) {
+    public Sides(String name, double price, String description) {
         super(name, price, description);
     }
 
