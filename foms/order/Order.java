@@ -21,7 +21,7 @@ public class Order implements Serializable {
     /**
      * Sum of the amount of all the cart items
      */
-    private static double amount;
+    private double amount;
     /**
      * Order status of the order
      */
@@ -41,6 +41,7 @@ public class Order implements Serializable {
     public Order(int orderID, ArrayList<FoodItem> cart) {
         this.orderID=orderID;
         this.cart=new ArrayList<>(cart);
+        this.amount =0.0;
         this.orderStatus = OrderStatus.PENDING; //default
     }
 
