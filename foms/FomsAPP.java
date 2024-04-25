@@ -13,28 +13,29 @@ import foms.workers.StaffWorker;
 import foms.workers.Worker;
 
 import java.io.*;
+import java.util.ArrayDeque;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         //Deserialisation
-        AdminWorker admin = null;
-        try {
-            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            admin = (AdminWorker) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException e) {
-            System.out.println("this didnt work");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        BranchList.deserializeBranchList();
-        AllWorkersList.deserializeAllWorkerList();
+//        AdminWorker admin = null;
+//        try {
+//            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
+//            ObjectInputStream in = new ObjectInputStream(fileIn);
+//            admin = (AdminWorker) in.readObject();
+//            in.close();
+//            fileIn.close();
+//        } catch (IOException e) {
+//            System.out.println("this didnt work");
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//        BranchList.deserializeBranchList();
+//        AllWorkersList.deserializeAllWorkerList();
 
-
+        AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
         createTestCases(admin);
 
         //Start of Program
@@ -51,7 +52,7 @@ public class FomsAPP implements Serializable {
                 if (choice == 1) {
                     allCustomerActions();
                     serialisationBeforeQuitting(admin);
-
+                    return;
                 }
                 else if (choice == 2) {
                     Worker worker = loginSystemCtrl.loginToSystemAsWorker();
@@ -62,18 +63,22 @@ public class FomsAPP implements Serializable {
                         System.out.println("Enter your new password:");
                         String newPassword = scanner.nextLine();
                         worker.setLoginPassword(newPassword);
+                        return;
                     }
                     if (worker instanceof ManagerWorker){
                         allManagerActions(worker);
                         serialisationBeforeQuitting(admin);
+                        return;
                     }
                     else if (worker instanceof StaffWorker){
                         allStaffActions(worker);
                         serialisationBeforeQuitting(admin);
+                        return;
                     }
                     else if (worker instanceof AdminWorker){
                         allAdminActions(admin);
                         serialisationBeforeQuitting(admin);
+                        return;
                     }
 
 
@@ -434,7 +439,7 @@ public class FomsAPP implements Serializable {
         branch3.getWorkerList().addCreatedWorker(manager5);
         allWorkersList.addCreatedWorker(manager5);
 
-
+        System.out.println("All Workers has been added");
     }
 
     private static void serialisationBeforeQuitting(AdminWorker admin) throws IOException {

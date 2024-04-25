@@ -18,7 +18,9 @@ public class Menu implements Serializable {
     /**
      * Constructor for Menu class.
      */
-    public Menu(){}
+    public Menu(){
+        menu = new ArrayList<>();
+    }
 
     /**
      * @param foodName is the foodname that you want to check if duplicate exists.
@@ -203,6 +205,7 @@ public class Menu implements Serializable {
                 }
             } catch (Exception e) {
                 System.out.println("Something went wrong.");
+                return;
             }
         }
 

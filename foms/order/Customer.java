@@ -75,6 +75,7 @@ public class Customer implements Serializable {
                     System.out.println("The branch is closed. Please select another branch.");
                 } else {
                     this.branch = branch;
+                    return;
                 }
 
             }catch(InputMismatchException e){
