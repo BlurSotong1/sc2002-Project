@@ -25,13 +25,14 @@ public class StaffWorker extends Worker{
     public StaffWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID);
         this.branch = branch;
-        jobsOnOrderlist = new OperationsOnOrderList();
         setRole('S');
     }
 
     @Override
     public String toString() {
-        return String.format(super.toString() + "%-15s", branch.getName());
+        return String.format("%-15s%-5d%-3c%-15s%-15s%-3c",
+                getName(), getAge(), getGender(), getLoginID(), getBranch(), getRole());
+
     }
 
     /**

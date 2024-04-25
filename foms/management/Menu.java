@@ -1,10 +1,12 @@
 package foms.management;
 
 import foms.food.FoodItem;
-import foms.workers.ManagerWorker;
+import foms.management.filters.menufilters.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.logging.Filter;
 
 public class Menu {
 
@@ -91,16 +93,57 @@ public class Menu {
     }
 
     /**
-     * prints out the menu
-     * TODO add filters
+     * asks the person to choose the menu filter type and prints accordingly.
      */
     public void displayMenu() {
-        int number = 1;
-        for (FoodItem foodItem:menu) {
-            System.out.printf("%d, %s\n",number,foodItem.toString());
+
+        String input;
+
+        Scanner scanner = new Scanner(System.in);
+
+        BaseMenuFilter filter = null;
+        while (filter == null) {
+            System.out.print("Filter the Menu:\n1.Display All Items\n2.Display Set Meals\n3.Display Main Dish" +
+                    "\n4.Display Sides\n5.Display Drinks (Press 0 to quit):");
+            input = scanner.next();
+
+
+            switch (input) {
+                case "0" -> {
+                    System.out.println("returning to previous page..");
+                    return;
+                }
+                case "1" -> filter = new BaseMenuFilter();
+                case "2" -> filter = new SetMealFilter();
+                case "3" -> filter = new MainDishFilter();
+                case "4" -> filter = new SidesFilter();
+                case "5" -> filter = new DrinksFilter();
+                default -> {
+                    System.out.println("Wrong Option!");
+                    continue;
+                }
+            }
         }
 
+        filter.displayFilteredMenu(menu);
     }
+
+
+    public void displayMenu(String filterType) {
+
+        BaseMenuFilter filter;
+
+        switch (filterType) {
+            case "Sides" -> filter = new SidesFilter();
+            case "Drinks" -> filter = new DrinksFilter();
+            default -> {
+                System.out.println("did something wrong");
+                return;
+            }
+        }
+        filter.displayFilteredMenu(menu);
+    }
+
 
     /**
      * updates food information of the indexed food item in menu.

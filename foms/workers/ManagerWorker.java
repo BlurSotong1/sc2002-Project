@@ -82,8 +82,8 @@ public class ManagerWorker extends StaffWorker implements Serializable {
             } catch (Exception e) {
                 System.out.println("Something went wrong..");
             }
-
-
+    public void displayMenu() {
+        getBranch().getMenu().displayMenu();
         }
 
         System.out.print("Enter the description (press 0 to exit): ");
@@ -116,7 +116,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
             }
         } //end of creating fooditem
 
-
+    }
         getBranch().getMenu().addCreatedFoodItemToMenu(food);
     }
 
