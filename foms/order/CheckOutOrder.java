@@ -3,6 +3,7 @@ package foms.order;
 import foms.management.Branch;
 import foms.management.OperationsOnPaymentList;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ import static foms.order.OrderStatus.PREPARING;
  * This is for customer to check out their order
  * We will handle payment processing and payment failure in this class
  */
-public class CheckOutOrder {
+public class CheckOutOrder implements Serializable {
     /**
      * The Customer who is ready to check out their order
      */
@@ -21,11 +22,11 @@ public class CheckOutOrder {
     /**
      * The amount that the customer paid
      */
-    private static double amountPaid=0.0;
+    private double amountPaid=0.0;
 
     /**
      * Creates the order to be checked out
-     * @param orderToCheckOut This Customer want to check out
+     * @param customer This Customer want to check out
      */
     public CheckOutOrder(Customer customer){
         this.customer=customer;
@@ -35,86 +36,113 @@ public class CheckOutOrder {
      * update order status
      * if customer paid, receipt will be printed and order status from PENDING to PREPARING
      * if customer failed to pay, will be brought to handle payment failure site
-     * @param orderToCheckOut customer's order
      */
-    public void updateOrderStatus(Order orderToCheckOut) {
+    public void updateOrderStatus() {
         Scanner scanner = new Scanner(System.in);
-        if (paymentHandling(orderToCheckOut)) {
+        if (paymentHandling()) {
             System.out.println("Thank you for choosing us.\n" +
                     "This is your receipt.");
-            printReceipt(orderToCheckOut);
-            orderToCheckOut.setOrderStatus(PREPARING);
+            printReceipt();
+            customer.getCart().setOrderStatus(PREPARING);
         } else {
-            handlePaymentFailure(orderToCheckOut);
+            handlePaymentFailure();
         }
     }
 
     /**
      * this is handle payment
-     * @param customer This Customer who wants to check out
      * @return true if customer fully paid
      *         false if customer fails to pay
      */
-    public boolean paymentHandling(Customer customer) {
+    public boolean paymentHandling() {
         Branch customerBranch = customer.getBranch();
         Scanner sc = new Scanner(System.in);
-        int userChoice = 0;
-        boolean paymentStatus = false;
+        int userChoice;
+        double remainingAmount = customer.getCart().getAmount();
 
-        while (true) {
-            System.out.println("Select your payment mode:\n");
-            customerBranch.displayPaymentList();
+        while (remainingAmount!=0.00) {
+            System.out.println("The total amount is $"+remainingAmount);
+            System.out.println("Select your payment mode:\n" +
+                    "Press 0 to go back to main menu.");
+            customerBranch.getPaymentList().displayPaymentList();
             try {
                 userChoice = sc.nextInt();
-
-
-                if (OperationsOnPaymentList.findPayment(customerBranch,paymentChosen)) {
-                    System.out.println("Invalid item number. Please enter a valid item number.");
-                } else {
-                    break;
+                if(userChoice==0){
+                    System.out.println("Going back to main menu...");
                 }
+                Payment paymentModeChosen = customerBranch.getPaymentList().getPayment(userChoice-1);
+
+                System.out.println("Please key in the amount that you want to pay.");
+                amountPaid = sc.nextDouble();
+
+                if (amountPaid > 0.00 && amountPaid <= remainingAmount) {
+                    remainingAmount -= amountPaid;
+                    System.out.println("Remaining amount to pay: $" + remainingAmount);
+
+                    if (remainingAmount == 0.00) {
+                        System.out.println("Payment completed successfully.");
+                        return paymentModeChosen.processPayment(amountPaid);
+                    }else {
+                        System.out.println("Please pay the remaining amount.");
+                    }
+                }
+
             } catch (InputMismatchException e) {
-                System.out.println("Input mismatch! Enter a valid integer.");
+                System.out.println("Input mismatch! Enter a valid amount.");
                 sc.next();
+            }catch(Exception e){
+                System.out.println(e.getMessage()+"Error occurred. ");
             }
-            }
-        return false;
-    }
-
-    private void handlePaymentFailure(Order order){
-        try(Scanner scanner = new Scanner(System.in)){
-            int userChoice;
-            System.out.println("Sorry, we did not receive your payment.\n" +
-                    "Please select your choice:\n" +
-                    "(1) Continue paying\n" +
-                    "(2) Cancel Order");
-
-            try {
-                userChoice = scanner.nextInt();
-                if (userChoice == 1){
-                    paymentHandling(order);
-                } else if (userChoice == 2) {
-                    orderToCheckOut.setOrderStatus(CANCELLED);
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Input mismatch! Enter a valid integer.");
-            }
-        }catch(Exception e){
-            System.out.println("Something went wrong.");
         }
     }
 
-    private void displayPaymentModes(){
-        Branch customerBranch = customer.getBranch();
-        OperationsOnPaymentList.displayPaymentList(customerBranch);
+    /**
+     * handle failed payment
+     * ask customer whether to continue paying or cancel their order
+     * if customer want to continue paying, then will be brought to payment handling site
+     * if customer want to cancel order, then order status will be set to cancel and customer will be logged out
+     */
+    private void handlePaymentFailure(){
+        Scanner scanner = new Scanner(System.in);
+        int userChoice;
+        while(true){
+            System.out.println("Sorry, we did not receive your payment.\n" +
+                    "Please select your choice:\n" +
+                    "(0) Returning back to main menu" +
+                    "(1) Continue paying\n" +
+                    "(2) Cancel Order\n");
+
+            try {
+                userChoice = scanner.nextInt();
+                if(userChoice==0){
+                    System.out.println("Going back to main menu...");
+                    return;
+                }
+                else if (userChoice == 1){
+                    paymentHandling();
+                } else if (userChoice == 2) {
+                    customer.getCart().setOrderStatus(CANCELLED);
+                    //log out customer here?
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Input mismatch! Enter a valid integer.");
+            } catch(Exception e) {
+                System.out.println("Something went wrong.");
+            }
+        }
     }
 
-    public void printReceipt(Order orderToCheckOut){
-        System.out.println("OrderID: "+orderToCheckOut.getOrderID());
-        orderToCheckOut.viewSingleOrderDetails(orderToCheckOut.getOrderID())
-        System.out.println("Total amount = "+orderToCheckOut.getAmount());
+
+    /**
+     * receipt printing with orderID
+     * will be printed once customer checkout their order in the update order status function
+     */
+    public void printReceipt(){
+        System.out.println("OrderID: "+customer.getCart().getOrderID());
+        customer.getCart().displayCart();
+        System.out.println("Total amount = "+customer.getCart().getAmount());
         System.out.println("Amount paid = "+amountPaid);
-        System.out.println("Change = "+(amountPaid-orderToCheckOut.getAmount()));
+        System.out.println("Change = "+(amountPaid-customer.getCart().getAmount()));
 
     }
 

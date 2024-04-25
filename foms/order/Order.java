@@ -26,6 +26,10 @@ public class Order implements Serializable {
      * Order status of the order
      */
     private OrderStatus orderStatus;
+    /**
+     * dine in option of the order
+     */
+    private boolean dineInOption;
 
     /**
      * customer creates an order with the given orderID
@@ -42,7 +46,7 @@ public class Order implements Serializable {
 
     /**
      * method to add food into cart
-     * @param cartItem customer will be asked what menuItem they want to add in the Customer class
+     * @param foodItem customer will be asked what menuItem they want to add in the Customer class
      * food item is already craeted in Customer class
      * add to cart , amount increases
      */
@@ -140,4 +144,9 @@ public class Order implements Serializable {
     }
 
 
+    /**
+     * make changes to dine in option for this order
+     * @param dineInOption customer's choice of dine in option
+     */
+    public void setDineInOption(boolean dineInOption) {this.dineInOption=dineInOption;}
 }
