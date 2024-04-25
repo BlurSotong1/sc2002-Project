@@ -5,6 +5,8 @@ import foms.management.branch.Branch;
 import foms.management.lists.BranchList;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,11 +19,11 @@ public class Customer implements Serializable {
     /**
      * Customer's order.
      */
-    private Order cart;
+    private Order order;
     /**
      * Customer's branch.
      */
-    private static Branch branch;
+    private Branch branch;
 
     /**
      * Customer choosing a branch.
@@ -35,12 +37,14 @@ public class Customer implements Serializable {
                 System.out.println("Select your branch:");
                 BranchList.displayBranchNames();
                 branchChoice = scanner.nextInt();
-                branch = BranchList.findBranch(branchChoice-1);
+
+                setBranch(BranchList.findBranch(branchChoice-1));
                 if(!branch.getStatus()){
                     System.out.println("The branch is closed. Please select another branch.");
-                } else{
+                } else {
                     break;
                 }
+
             }catch(InputMismatchException e){
                 System.out.println("Please enter a valid integer for branch selection.");
                 scanner.next();
@@ -57,7 +61,49 @@ public class Customer implements Serializable {
      */
     public void addFoodItemToCart(){
         Scanner scanner = new Scanner(System.in);
-        int foodChoice;
+        int filterType;
+        int input;
+        filterType = displayMenu();
+
+        if (filterType == 0) { //exited display menu, so should exit this as well
+            return;
+        }
+
+        while (true) {
+            try {
+                System.out.print("To view the menu again, press 0.\n" +
+                        "To exit, press -1.\n" +
+                        "To add food item, type in the number: ");
+                input = scanner.nextInt();
+
+                switch (input) {
+                    case -1 -> {
+                        System.out.println("Returning to main menu..");
+                        return;
+                    }
+
+                    case 0 -> {
+                        filterType = displayMenu();
+                        if (filterType == 0) {
+                            return;
+                        }
+                    }
+
+                    default -> {
+                        order.editFoodItem(input,filterType); // valid index checking is done in fooditems
+                    }
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a number!");
+            } catch (Exception e)  {
+                System.out.println("something when wrong");
+            }
+
+        }
+
+
+
 
 
     }
@@ -69,18 +115,27 @@ public class Customer implements Serializable {
     public void removeFoodItem(){
         Scanner scanner = new Scanner(System.in);
         int foodChoice;
-        while(true) {
+        while (true) {
             try{
-                System.out.println("Select the food item that you want to delete from your cart:\n" +
-                        "Press 0 to go back to main menu");
-                cart.displayCart();
+                System.out.print("Select the food item that you want to delete from your cart:\n " +
+                        "(Enter 0 to exit)\n" +
+                        "Enter your choice: ");
+
+                order.displayCart();
                 foodChoice = scanner.nextInt();
-                if(foodChoice ==0){
+
+
+                if(foodChoice ==0){ // go back menu
                     System.out.println("Going back to main menu.");
+                    return;
                 }
-                else if(foodChoice>=1 || foodChoice <= cart.getCart().getSize()) {
-                    cart.removeIndexedFoodItem(foodChoice);
+
+                //valid indexing
+                else if(foodChoice>=1 || foodChoice <= order.getCartSize()) {
+                    order.removeIndexedFoodItem(foodChoice-1);
+                    return;
                 }
+
             }catch(InputMismatchException e){
                 System.out.println("Enter a valid input.");
                 scanner.next();
@@ -96,49 +151,38 @@ public class Customer implements Serializable {
      */
     public void editFoodItem(){
         Scanner scanner = new Scanner(System.in);
-        int foodChoice;
-        int customiseChoice;
-            while(true){
-                try{
-                    System.out.println("Select the food item that you want to edit from your cart:");
-                    cart.displayCart();
-                    foodChoice = scanner.nextInt();
-                    if(foodChoice == 0){
-                        System.out.println("Going back to main menu.");
-                        break;
+        //display order then ask person choose
+        order.displayCart();
 
-                    }else if(foodChoice>=1 || foodChoice <= cart.getCart().size()){
-                        FoodItem itemToBeEdited = cart.getCart().get(foodChoice-1);
+        int choice;
+        int maxCartIndex = order.getCartSize() -1;
+        while (true) {
 
-                        //i feel like this part should be done in the SetMeal.customise method, what do yall think
-                        if(itemToBeEdited instanceof SetMeal){
-                            System.out.println("Customising...\n" +
-                                    "(1) Main\n" +
-                                    "(2) Sides\n" +
-                                    "(3) Drink\n" +
-                                    "Press 0 to return.");
-                            customiseChoice=scanner.nextInt();
-
-                            if(customiseChoice==0){
-                                System.out.println("Returning back...");
-                                break;
-                            }else if (customiseChoice==1){
-                                MainDish selectedMainDish = (SetMeal)itemToBeEdited.customiseFoodItem();
-                            }else if (customiseChoice==2){
-                                Sides selectedSides = (SetMeal)itemToBeEdited.customiseFoodItem();
-                            }else if (customiseChoice==3){
-                                Drink selectedDrinks = (SetMeal)itemToBeEdited.customiseFoodItem();
-                            }
-                        }else {
-                            cart.editFoodItem(itemToBeEdited);
-                        }
-                    }
-                }catch(InputMismatchException e){
-                    System.out.println("Enter a valid input.");
-                }catch (Exception e){
-                    System.out.println(e.getMessage()+"Error occurred.");
-                }
+            System.out.print("Enter the food item you wish to edit:" +
+                    "\nPress 0 to exit.\n" +
+                    "Enter your choice: ");
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a number!");
+                scanner.next();
+                continue;
             }
+
+            if (choice == 0) { //terminate
+                System.out.println("exiting..");
+                return;
+
+            } else if (choice >= 0 && choice <= maxCartIndex) { //valid range
+                order.editFoodItem(choice);
+
+            } else {
+                System.out.println("Enter a valid range!");
+            }
+
+        }
+
+
     }
 
     /**
@@ -164,7 +208,7 @@ public class Customer implements Serializable {
                             "0. Dine in\n" +
                             "1. Take Away");
                     dineInOption=scanner.nextBoolean();
-                    cart.setDineInOption(dineInOption);
+                    order.setDineInOption(dineInOption);
 
                     CheckOutOrder customerCheckOut = new CheckOutOrder(this);
                     customerCheckOut.updateOrderStatus(this);
@@ -187,12 +231,20 @@ public class Customer implements Serializable {
      * orderList will remove this order once this step is done
      */
     public void collectOrder(int orderID){
-        cart.setOrderStatus(COMPLETED);
+        order.setOrderStatus(COMPLETED);
     }
 
 
     public Branch getBranch() { return branch;}
-    public void setBranch(){this.branch=branch;}
-    public Order getCart(){return cart;}
+    public void setBranch(Branch branch){
+        this.branch=branch;
+    }
+    public ArrayList<FoodItem> getCart() {
+        return order.getCart();
+    }
+
+    public int displayMenu () {
+        return getBranch().getMenu().displayMenu();
+    }
 
 }

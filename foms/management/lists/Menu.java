@@ -4,6 +4,7 @@ import foms.food.FoodItem;
 import foms.management.filters.menufilters.*;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Filter;
@@ -94,38 +95,48 @@ public class Menu {
 
     /**
      * asks the person to choose the menu filter type and prints accordingly.
+     * @return input on the latest chosen filter, if needed.
      */
-    public void displayMenu() {
+    public int displayMenu() {
 
-        String input;
+        int input;
 
         Scanner scanner = new Scanner(System.in);
 
         BaseMenuFilter filter = null;
-        while (filter == null) {
-            System.out.print("Filter the Menu:\n1.Display All Items\n2.Display Set Meals\n3.Display Main Dish" +
-                    "\n4.Display Sides\n5.Display Drinks (Press 0 to quit):");
-            input = scanner.next();
+        while (true) {
+            try {
+                System.out.print("Filter the Menu:\n1.Display All Items\n2.Display Set Meals\n3.Display Main Dish" +
+                        "\n4.Display Sides\n5.Display Drinks (Press 0 to quit):");
+                input = scanner.nextInt();
 
 
-            switch (input) {
-                case "0" -> {
-                    System.out.println("returning to previous page..");
-                    return;
+                switch (input) {
+                    case 0 -> {
+                        System.out.println("returning to previous page..");
+                        return 0;
+                    }
+                    case 1 -> filter = new BaseMenuFilter();
+                    case 2 -> filter = new SetMealFilter();
+                    case 3 -> filter = new MainDishFilter();
+                    case 4 -> filter = new SidesFilter();
+                    case 5 -> filter = new DrinksFilter();
+                    default -> {
+                        System.out.println("Wrong Option!");
+                        continue;
+                    }
                 }
-                case "1" -> filter = new BaseMenuFilter();
-                case "2" -> filter = new SetMealFilter();
-                case "3" -> filter = new MainDishFilter();
-                case "4" -> filter = new SidesFilter();
-                case "5" -> filter = new DrinksFilter();
-                default -> {
-                    System.out.println("Wrong Option!");
-                    continue;
-                }
+
+                    filter.displayFilteredMenu(menu);
+                    return input;
+
+
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a number!");
             }
         }
 
-        filter.displayFilteredMenu(menu);
+
     }
 
 
@@ -175,7 +186,9 @@ public class Menu {
 
                             case "1"-> foodItem.updatePrice();
                             case "2" -> foodItem.updateDescription();
-                            case "3" -> return;
+                            case "3" -> {
+                                return;
+                            }
                             default -> System.out.println("Enter a valid option!");
                         }
                         return;

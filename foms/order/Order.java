@@ -3,8 +3,10 @@ import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.logging.Filter;
 
 import foms.food.*;
+import foms.management.filters.menufilters.BaseMenuFilter;
 
 /**
  * Represents an order placed by customer
@@ -13,7 +15,7 @@ public class Order implements Serializable {
     /**
      * The orderID of an order
      */
-    private int orderID;
+    private final int orderID;
     /**
      * ArrayList of cart items
      */
@@ -57,16 +59,14 @@ public class Order implements Serializable {
         System.out.println(foodItem.getName() + " is added into the cart.");
     }
 
-
-
     /**
      * method to delete food from cart
-     * @param indexOfFoodToDelete customer will be asked what food to be deleted in Customer class
+     * @param indexOfFoodItemToDelete customer will be asked what food to be deleted in Customer class
      *                            and the index of the food will be passed
      * checking whether it is in cart has already done in the Customer Class
      */
-    public void removeIndexedFoodItem(int indexOfFoodToDelete){
-        FoodItem cartItem = cart.get(indexOfFoodToDelete - 1);
+    public void removeIndexedFoodItem(int indexOfFoodItemToDelete){
+        FoodItem cartItem = cart.get(indexOfFoodItemToDelete - 1);
         cart.remove(cartItem);
         amount -= cartItem.getPrice();
         System.out.println(cartItem.getName()+" is removed from the cart.");
@@ -74,29 +74,31 @@ public class Order implements Serializable {
 
     /**
      * method to editCart
-     * @param itemToBeEdited retrieves the selected FoodItem from the cart and
-     *                       directly calls its customiseFoodItem() method.
+     * @param indexOfFood retrieves the selected FoodItem by indexing from the cart and
+     * directly calls its customiseFoodItem() method. control flow.
+     * @param filterType is the type of filter used to
      */
-    public void editFoodItem(FoodItem itemToBeEdited){
-        itemToBeEdited.customiseFoodItem();
+    public void editFoodItem(int indexOfFood, int filterType){
+        BaseMenuFilter filter =
     }
 
     /**
      * method to display and list all items in cart
      */
     public void displayCart(){
+
         if(cart.isEmpty()){
             System.out.println("Cart is empty.");
             return;
         }
-        if(orderStatus==OrderStatus.PENDING) {
+        else if (orderStatus==OrderStatus.PENDING) {
+
             System.out.println("Order ID: "+ getOrderID());
-            System.out.println();
+
             for(int i=0; i<cart.size(); i++){
                 System.out.println((i+1)+". "+ cart.get(i) + " - " + cart.get(i).getPrice());
             }
         }
-        System.out.println();
 
     }
 
@@ -151,7 +153,7 @@ public class Order implements Serializable {
      */
     public void setDineInOption(boolean dineInOption) {this.dineInOption=dineInOption;}
 
-    public int getSize () {
+    public int getCartSize () {
         return cart.size();
     }
 }

@@ -62,7 +62,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
 
 
         //exception handling for input mismatch
-        FoodItem food = null;
+
         while (true) {
             try {
                 System.out.print("Enter the food type (Enter 0 to exit): \n1: Main Dish \n2: Drinks \n3: Sides");
@@ -82,42 +82,41 @@ public class ManagerWorker extends StaffWorker implements Serializable {
             } catch (Exception e) {
                 System.out.println("Something went wrong..");
             }
-            public void displayMenu () {
-                getBranch().getMenu().displayMenu();
-            }
 
-            System.out.print("Enter the description (press 0 to exit): ");
-            String description = scanner.nextLine();
-
-            if (description.equals("0")) {
-                System.out.println("Exiting to previous page..");
-                return;
-            }
-
-            while (food == null) {
-                try {
-                    switch (foodType) {
-                        case 0 -> {
-                            System.out.println("Exiting to previous page...");
-                            return;
-                        }
-                        case 1 -> food = new MainDish(foodName, price, description);
-                        case 2 -> food = new Drink(foodName, price, description);
-                        case 3 -> food = new Sides(foodName, price, description);
-                        default -> System.out.println("Enter valid choice!");
-                    }
-                    ;
-                    if (food == null) {
-                        System.out.print("Invalid! try again: \n1: Main Dish \n2: Drinks \n3: Sides\n");
-                        foodType = scanner.nextInt();
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Enter a number!");
-                    scanner.next();
-                }
-            } //end of creating fooditem
 
         }
+
+        System.out.print("Enter the description (press 0 to exit): ");
+        String description = scanner.nextLine();
+
+        if (description.equals("0")) {
+            System.out.println("Exiting to previous page..");
+            return;
+        }
+        FoodItem food = null;
+        while (food == null) {
+            try {
+                switch (foodType) {
+                    case 0 -> {
+                        System.out.println("Exiting to previous page...");
+                        return;
+                    }
+                    case 1 -> food = new MainDish(foodName, price, description);
+                    case 2 -> food = new Drink(foodName, price, description);
+                    case 3 -> food = new Sides(foodName, price, description);
+                    default -> System.out.println("Enter valid choice!");
+                };
+                if (food == null) {
+                    System.out.print("Invalid! try again: \n1: Main Dish \n2: Drinks \n3: Sides\n");
+                    foodType = scanner.nextInt();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a number!");
+                scanner.next();
+            }
+        } //end of creating fooditem
+
+
         getBranch().getMenu().addCreatedFoodItemToMenu(food);
     }
 
