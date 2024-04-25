@@ -53,7 +53,7 @@ public class AllWorkersList {
         while(true) {
             String choice = sc.nextLine();
             if (choice.equals("Y")) {
-                filterWorkerListInBranch(allWorkersList);
+                filterWorkerListInSystem(allWorkersList);
                 return;
             }
             else if (choice.equals("N")) {
@@ -141,7 +141,7 @@ public class AllWorkersList {
         while(true) {
             String choice = sc.nextLine();
             if (choice.equals("Y")) {
-                filterWorkerListInBranch(filteredList);
+                filterWorkerListInSystem(filteredList);
                 return;
             }
             else if (choice.equals("N")) {
