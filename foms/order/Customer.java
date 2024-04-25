@@ -123,14 +123,15 @@ public class Customer implements Serializable {
                     }
 
                     default -> {
+                        System.out.println("here");
+
                         order.addToCart(input,filterType,getBranch().getMenu()); // valid index checking is done in fooditems
+                        System.out.println("here2");
                     }
                 }
 
             } catch (InputMismatchException e) {
                 System.out.println("Enter a number!");
-            } catch (Exception e)  {
-                System.out.println("something when wrong");
             }
 
         }
