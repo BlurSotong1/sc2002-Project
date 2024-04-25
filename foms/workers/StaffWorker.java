@@ -1,6 +1,6 @@
 package foms.workers;
 
-import foms.management.Branch;
+import foms.management.branch.Branch;
 import foms.order.Order;
 
 public class StaffWorker extends Worker{
@@ -25,7 +25,6 @@ public class StaffWorker extends Worker{
     public StaffWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID);
         this.branch = branch;
-        jobsOnOrderlist = new OperationsOnOrderList();
         setRole('S');
     }
 

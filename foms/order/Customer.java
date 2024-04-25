@@ -59,58 +59,7 @@ public class Customer implements Serializable {
         Scanner scanner = new Scanner(System.in);
         int foodChoice;
 
-        while(true) {
-            try{
-                System.out.println("Select food item to add into your cart:\n" +
-                        "Press 0 to go back to main menu");
-                branch.getMenu().displayMenu();
-                foodChoice=scanner.nextInt();
 
-                if(foodChoice ==0){
-                    System.out.println("Going back to main menu.");
-                    break;
-                }
-                else if(foodChoice>=1 || foodChoice <= branch.getMenu().getMenuSize()) {
-                    FoodItem cartItem = branch.getMenu().get(foodChoice-1);
-
-                    if(cartItem instanceof SetMeal){
-                        SetMeal setMeal = (SetMeal)cartItem;
-                        cart.addToCart(setMeal);
-
-                        System.out.println("What do you want for your sides:");
-                        branch.getMenu().displayMenu("Sides");
-                        int sidesChoice = scanner.nextInt();
-                        Sides selectedSides = setMeal.getSides(sidesChoice-1);
-                        setMeal.setSides(selectedSides);
-
-                        System.out.println("What do you want for your drinks:");
-                        branch.getMenu().displayMenu("Drink");
-                        int drinkChoice = scanner.nextInt();
-                        Drink selectedDrink = setMeal.getDrink(drinkChoice-1);
-                        setMeal.setSides(selectedDrink);
-
-                    }else if(cartItem instanceof MainDish){
-                        MainDish mainDish = (MainDish)cartItem;
-                        cart.addToCart(mainDish);
-
-                    }else if(cartItem instanceof Drink){
-                        Drink drink = (Drink) cartItem;
-                        cart.addToCart(drink);
-
-                    } else if(cartItem instanceof Sides){
-                        Sides sides = (Sides) cartItem;
-                        cart.addToCart(sides);
-
-                    }
-
-                }
-
-            }catch(InputMismatchException e){
-                System.out.println("Enter a valid integer.");
-            }catch(Exception e){
-                System.out.println(e.getMessage()+"Error occurred.");
-            }
-        }
     }
 
     /**
@@ -129,7 +78,7 @@ public class Customer implements Serializable {
                 if(foodChoice ==0){
                     System.out.println("Going back to main menu.");
                 }
-                else if(foodChoice>=1 || foodChoice <= cart.getCart().size()) {
+                else if(foodChoice>=1 || foodChoice <= cart.getCart().getSize()) {
                     cart.removeIndexedFoodItem(foodChoice);
                 }
             }catch(InputMismatchException e){

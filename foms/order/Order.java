@@ -150,4 +150,8 @@ public class Order implements Serializable {
      * @param dineInOption customer's choice of dine in option
      */
     public void setDineInOption(boolean dineInOption) {this.dineInOption=dineInOption;}
+
+    public int getSize () {
+        return cart.size();
+    }
 }
