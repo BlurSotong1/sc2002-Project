@@ -1,6 +1,6 @@
 package foms.order;
 
-public class Paywave implements Payment{
+public class PayWave implements Payment{
 
         private String name = "Paywave";
         private boolean paymentStatus;
