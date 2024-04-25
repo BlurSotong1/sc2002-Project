@@ -84,10 +84,10 @@ public class Branch implements Serializable {
         this.paymentList = new PaymentList();
     }
     /**
-     * Checks the quota ratio for the branch.
-     * @return true if quota ratio is correct, false if quota ratio is wrong.
+     * Checks the manpower ratio for the branch.
+     * @return true if manpower ratio is correct, false if manpower ratio is wrong.
      */
-    public boolean checkQuotaRatio() {
+    public boolean checkRatio() {
         if (numStaff>=1 && numStaff<=4 && numManager==1)
             return true;
         else if (numStaff>=5 && numStaff<=8 && numManager==2)
@@ -96,6 +96,35 @@ public class Branch implements Serializable {
             return true;
         else
             return false;
+    }
+
+    /**
+     * Check whether the total number of staff exceed the quota.
+     * @return true if does not exceed, false if exceed.
+     */
+    public boolean checkQuota() {
+        if (totalNumStaff<=quota)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Check whether a manager can be assigned base on the quota ratio.
+     * @return true if can assign, false if cannot assign.
+     */
+    public boolean checkCanAddManager() {
+        if (numStaff==0)
+            return false;
+        else if (numStaff>=1 && numStaff<=4 && numManager<1)
+            return true;
+        else if (numStaff>=5 && numStaff<=8 && numManager<2)
+            return true;
+        else if (numStaff>=9 && numStaff<=15 && numManager<3)
+            return true;
+        else
+            return false;
+
     }
 
     /**
