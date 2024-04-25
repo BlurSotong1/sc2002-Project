@@ -17,7 +17,7 @@ public class AllWorkersList {
     /**
      * admin worker in the company.
      */
-    private static AdminWorker admin;
+    private AdminWorker admin;
 
     /**
      * Constructor for AllWorkerList class.
@@ -36,6 +36,14 @@ public class AllWorkersList {
      */
     public void addCreatedWorker(Worker worker) {
         allWorkersList.add(worker);
+    }
+
+    /**
+     * Remove worker from list of workers.
+     * @param worker is the Worker object.
+     */
+    public void removeWorkerObject(Worker worker) {
+        allWorkersList.remove(worker);
     }
 
     /**
@@ -154,6 +162,20 @@ public class AllWorkersList {
             }
         }
 
+    }
+
+    /**
+     * Find a worker.
+     * @param index is the index of the worker object in the array of worker objects
+     * @return worker object corresponding to the index.
+     */
+    public static Worker findWorker(int index) throws IndexOutOfBoundsException{
+        if (index >= 0 && index < allWorkersList.size()) {
+            return allWorkersList.get(index);
+        }
+        else {
+            throw new IndexOutOfBoundsException("Worker not found!");
+        }
     }
 
     /**

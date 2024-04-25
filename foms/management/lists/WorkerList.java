@@ -33,6 +33,14 @@ public class WorkerList {
     }
 
     /**
+     * Remove worker from list of workers.
+     * @param worker is the Worker object.
+     */
+    public void removeWorkerObject(Worker worker) {
+        workerList.remove(worker);
+    }
+
+    /**
      * Display worker list
      */
     public void displayWorkerListInBranch() {

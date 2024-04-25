@@ -13,7 +13,7 @@ public class OperationsOnWorkerList {
     /**
      * Operations on worker list is performed by admin worker.
      */
-    private static AdminWorker admin;
+    private AdminWorker admin;
 
 
     /**
@@ -226,10 +226,77 @@ public class OperationsOnWorkerList {
     }
 
     /**
+     * remove worker.
+     */
+    public void removeWorker() {
+        Scanner scanner = new Scanner(System.in);
+        int i=0;
+        System.out.println("List of workers:");
+        for(Worker worker : admin.getAllWorkersList().getWorkerList()) {
+            System.out.printf("%d: %s\n", i+1, worker.toString());
+            i++;
+        }
+
+        System.out.println("Enter the worker index to remove (Enter 0 to exit): ");
+        while (true) {
+            try {
+                int choice = scanner.nextInt()-1;
+                if (choice==-1) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                Worker worker = admin.getAllWorkersList().findWorker(choice);
+                System.out.printf("Please confirm that you want to remove %s.\n",worker.getName());
+                System.out.println("Enter 1 to remove (Enter 0 to exit): ");
+                while (true) {
+                    String choice2 = scanner.next();
+                    if (choice2.equals("1")) {
+                        admin.getAllWorkersList().removeWorkerObject(worker);
+                        if (worker.getRole()=='S') {
+                            ((StaffWorker)worker).getBranch().setNumStaff(((StaffWorker)worker).getBranch().getNumStaff()-1);
+                            ((StaffWorker)worker).getBranch().getWorkerList().removeWorkerObject(worker);
+                        }
+                        if (worker.getRole()=='M') {
+                            ((ManagerWorker)worker).getBranch().setNumManager(((ManagerWorker)worker).getBranch().getNumManager()-1);
+                            ((ManagerWorker)worker).getBranch().getWorkerList().removeWorkerObject(worker);
+                        }
+                        System.out.printf("Removed %s.\n", worker.getName());
+                        System.out.println("List of workers:");
+                        for(Worker worker1 : admin.getAllWorkersList().getWorkerList()) {
+                            System.out.printf("%d: %s\n", i+1, worker1.toString());
+                            i++;
+                        }
+                        return;
+                    }
+                    else if (choice2.equals("0")) {
+                        System.out.println("Did not remove worker.\nReturning to previous page..");
+                        return;
+                    }
+                    else {
+                        System.out.println("Enter 1 to remove (Enter 0 to exit): ");
+                    }
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Enter a valid branch index.");
+                scanner.next();
+                continue;
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage()+" Enter a valid worker index.");
+                continue;
+            }
+        }
+
+    }
+
+    /**
      * display list of workers in the company.
      */
     public void displayWorkerList() {
         admin.getAllWorkersList().displayWorkerListInSystem();
 
     }
+
 }
+

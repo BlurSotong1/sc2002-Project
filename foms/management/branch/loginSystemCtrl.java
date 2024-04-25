@@ -1,9 +1,10 @@
 package foms.management.branch;
 
-import foms.management.lists.OperationsOnWorkerList;
 import foms.workers.Worker;
 
 import java.util.Scanner;
+
+import foms.management.lists.AllWorkersList;
 
 public class loginSystemCtrl {
     /**
@@ -34,7 +35,7 @@ public class loginSystemCtrl {
 
                 Worker loggingInWorker;
 
-                loggingInWorker = OperationsOnWorkerList.findWorker(loginID);
+               loggingInWorker = AllWorkersList.isWorkerInSystem(loginID);
 
 
                 if (loggingInWorker != null) {
