@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import foms.workers.AdminWorker;
 import foms.workers.Worker;
+import foms.workerfilters.*;
 
 public class AllWorkersList {
     /**
@@ -33,6 +34,14 @@ public class AllWorkersList {
      */
     public void addCreatedWorker(Worker worker) {
         allWorkersList.add(worker);
+    }
+
+    /*
+     * Display list of workers in the coompany.
+     * @param filter is the filter selected to display worker list.
+     */
+    public void displayWorkerListInSystem(WorkerFilters filter) {
+        filter.display(allWorkersList);
     }
 
     /**

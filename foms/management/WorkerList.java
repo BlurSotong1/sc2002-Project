@@ -2,6 +2,7 @@ package foms.management;
 
 import java.util.ArrayList;
 
+import foms.workerfilters.*;
 import foms.workers.Worker;
 
 public class WorkerList {
@@ -25,6 +26,14 @@ public class WorkerList {
      */
     public void addCreatedWorker(Worker worker) {
         workerList.add(worker);
+    }
+
+    /*
+     * Display worker list
+     * @param filter is the filter selected to display worker list.
+     */
+    public void displayWorkerListInBranch(WorkerFilters filter) {
+        filter.display(workerList);
     }
 
     /**
