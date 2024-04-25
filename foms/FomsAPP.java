@@ -8,14 +8,24 @@ import java.util.Scanner;
 
 public class FomsAPP implements Serializable {
     public static void main(String[] args) {
-
-
+/*
+        AdminWorker choonggi = new AdminWorker("choonggi",20,'M',"choonggi001");
+        try {
+            FileOutputStream fileOut = new FileOutputStream("AdminInfo.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(choonggi);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            System.out.println("we are screwed");
+        }
+*/
         // intro
-        AdminWorker adminWorker = null;
+        AdminWorker admin;
         try {
             FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            adminWorker = (AdminWorker) in.readObject();
+            AdminWorker adminWorker = (AdminWorker) in.readObject();
             in.close();
             fileIn.close();
         } catch (IOException e) {
@@ -23,8 +33,6 @@ public class FomsAPP implements Serializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        System.out.printf("%s\n\n", adminWorker.toString());
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("**************************************************");
