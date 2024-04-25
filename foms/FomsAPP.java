@@ -50,26 +50,30 @@ public class FomsAPP implements Serializable {
                 int choice = scanner.nextInt();
                 if (choice == 1) {
                     allCustomerActions();
-
+                    serialisationBeforeQuitting(admin);
 
                 }
                 else if (choice == 2) {
                     Worker worker = loginSystemCtrl.loginToSystemAsWorker();
                     System.out.println("Login successful.");
+
                     //check if user is first login
-                    if (worker.getLoginPassword().equals("password")) {
+                    if (worker.getLoginPassword().equals("default")) {
                         System.out.println("Enter your new password:");
                         String newPassword = scanner.nextLine();
                         worker.setLoginPassword(newPassword);
                     }
                     if (worker instanceof ManagerWorker){
                         allManagerActions(worker);
+                        serialisationBeforeQuitting(admin);
                     }
                     else if (worker instanceof StaffWorker){
-
+                        allStaffActions(worker);
+                        serialisationBeforeQuitting(admin);
                     }
                     else if (worker instanceof AdminWorker){
-
+                        allAdminActions(admin);
+                        serialisationBeforeQuitting(admin);
                     }
 
 
@@ -118,11 +122,10 @@ public class FomsAPP implements Serializable {
                         placeNewOrder(customer);
                     }
                     case "2" -> {
-
+                        customer.getCollectOrder().checkOrder();
                     }
-
                     case "3" -> {
-                        customer.getCollectOrder();
+                        customer.getCollectOrder().collectOrder();
                     }
                     case "4" -> {
                         customer.selectBranch();
@@ -434,6 +437,20 @@ public class FomsAPP implements Serializable {
 
     }
 
+    private static void serialisationBeforeQuitting(AdminWorker admin) throws IOException {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("AdminInfo.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(admin);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            System.out.println("we are screwed");
+        }
+
+        BranchList.serializeBranchList();
+        AllWorkersList.serializeALlWorkerList();
+    }
 }
 
 /*Branch branch = new Branch("jp", "jp",15);
