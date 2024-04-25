@@ -208,6 +208,23 @@ public class FomsAPP implements Serializable {
     private static void allStaffActions(StaffWorker staff){
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome "+staff.getName());
+        System.out.println();
+        while (true){
+            try{
+                System.out.println("1. Display orders");
+                System.out.println("2. Process order");
+
+                String choice = sc.nextLine();
+                if (choice.equals("1"))
+                    staff.displayOrders();
+                else if (choice.equals("2"))
+                    staff.processOrder();
+            }
+            catch (Exception e) {
+                System.out.println("Something went wrong.");
+            }
+        }
+
     }
 
     private static void allAdminActions(AdminWorker admin){

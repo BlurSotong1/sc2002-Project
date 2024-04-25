@@ -76,6 +76,8 @@ public class OrderList implements Serializable {
                 if (order.getOrderStatus() == OrderStatus.PREPARING) {
                     order.setOrderStatus(OrderStatus.READYTOPICKUP);
                     System.out.println("The order is ready to pick up now.");
+                    System.out.println("OrderID: "+order.getOrderID());
+                    System.out.println("Status: "+order.getOrderStatus());
                 } else if (order.getOrderStatus() == OrderStatus.READYTOPICKUP) {
                     order.setOrderStatus(OrderStatus.COMPLETED);
                     System.out.println("The order has completed now.");
