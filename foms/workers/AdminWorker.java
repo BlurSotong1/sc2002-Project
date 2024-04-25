@@ -58,6 +58,15 @@ public class AdminWorker extends Worker implements Serializable {
     }
 
     /**
+     * @return Stringified details of admin
+     */
+    @Override
+    public String toString() {
+        String manager = "Admin";
+        return String.format(super.toString()+"%-20s", "Admin");
+    }
+
+    /**
      * Gets the list of branches.
      * @return list of branches.
      */

@@ -154,7 +154,6 @@ public class ManagerWorker extends StaffWorker implements Serializable {
         }
 
         getBranch().getMenu().removeIndexedFoodItemFromMenu(IndexOfFoodItemToRemove);
-
     }
 
     /**
@@ -187,11 +186,13 @@ public class ManagerWorker extends StaffWorker implements Serializable {
         }
 
         getBranch().getMenu().updateIndexedFoodItemFromMenu(IndexOfFoodItemToUpdate);
+    }
 
-
-
-
-
+    /**
+     * Displays workers in the branch.
+     */
+    public void displayBranchWorkers(){
+        getBranch().getWorkerList().displayWorkerListInBranch();
     }
 
     /**

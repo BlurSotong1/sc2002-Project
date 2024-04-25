@@ -30,7 +30,7 @@ public class StaffWorker extends Worker{
 
     @Override
     public String toString() {
-        return String.format(super.toString() + "%-15s", branch);
+        return String.format(super.toString() + "%-15s", branch.getName());
     }
 
     /**
