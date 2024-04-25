@@ -1,7 +1,7 @@
 package foms.management.lists;
 
 import foms.management.branch.Branch;
-import foms.order.payment.Payment;
+import foms.order.payment.*;
 import foms.workers.AdminWorker;
 
 import java.io.Serializable;
@@ -27,93 +27,159 @@ public class OperationsOnPaymentList implements Serializable {
 
     /**
      * add payment method to the payment list
-     * will go through the Branch list then display Branch
-     * display Branch's payment list
-     * admin will be prompt to add payment method
-     * find payment to add in the branch payment list
-     * if it is not found in the branch list yet, can add, otherwise no
      */
     public void addPayment() {
         Scanner scanner = new Scanner(System.in);
-        int branchChoice;
-        int paymentMethod;
-        Branch branch = null;
-        Payment newPayment;
-        while (true) {
-            System.out.println("Select the branch that you want to add your payment method: ");
-            BranchList.displayBranchNames();
+        Branch branch;
+        BranchList.displayBranchNames();
+        System.out.println("Enter the branch that you want to add payment method (Enter 0 to exit): ");
+        while(true) {
             try {
-                branchChoice = scanner.nextInt();
-                branch = BranchList.findBranch(branchChoice - 1);
-
-                System.out.println("Payment methods:");
-                branch.getPaymentList().displayAllPayments();
-
-                System.out.println("Enter the new payment method (Enter 0 to exit):");
-                paymentMethod = scanner.nextInt();
-                if(paymentMethod==0){
-                    System.out.println("Returning to previous page.");
+                int choice = scanner.nextInt()-1;
+                if (choice==-1) {
+                    System.out.println("Returning to previous page..");
                     return;
                 }
-
-                newPayment = branch.getPaymentList().getPayment(paymentMethod-1);
-
-                if(!newPayment.getPaymentStatus()){
-                    branch.getPaymentList().addCreatedPayment(newPayment);
-                    newPayment.setPaymentStatus(true);
-                    System.out.println("Payment method "+newPayment.getName()+" added successfully.");
-                    branch.getPaymentList().displayAllPayments();
-                }else {
-                    System.out.println("Payment method already exists.");
-                }
-
-            } catch (InputMismatchException e) {
-                System.out.println("Enter a valid input.");
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Enter a valid index.");
-            } catch (Exception e) {
-                System.out.println(e.getMessage() + "Error. Please try again.");
+                branch = BranchList.findBranch(choice);
+                break;
             }
+            catch (InputMismatchException e) {
+                System.out.println("Enter a valid branch index.");
+                scanner.next();
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage()+" Enter a valid branch index.");
+            }
+        }
 
+        System.out.println("Payment Methods:");
+        branch.getPaymentList().displayAllPayments();
+        System.out.printf("Enter the payment method you want to add to %s (Enter 0 to exit):\n", branch.getName());
+        while (true) {
+            try {
+                int choice2 = scanner.nextInt();
+                if (choice2==0) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                else if (choice2 == 1) {
+                    Payment payment = new NETS();
+                    if (branch.getPaymentList().checkPayment(payment)) {
+                        branch.getPaymentList().addCreatedPayment(payment);
+                        System.out.printf("NETS is added to list of payment methods in %s.\n", branch.getName());
+                        return;
+                    }
+                    else {
+                        System.out.printf("NETS is already a payment method in %s.\n",branch.getName());
+                        System.out.println("Returning to previous page..");
+                        return;
+                    }
+                }
+                else if (choice2==3) {
+                    Payment payment = new PayWave();
+                    if (branch.getPaymentList().checkPayment(payment)) {
+                        branch.getPaymentList().addCreatedPayment(payment);
+                        System.out.printf("PayWave is added to list of payment methods in %s.\n", branch.getName());
+                        return;
+                    }
+                    else {
+                        System.out.printf("PayWave is already a payment method in %s.\n",branch.getName());
+                        System.out.println("Returning to previous page..");
+                        return;
+                    }
+                }
+                else if (choice2==2) {
+                    Payment payment = new Paypal();
+                    if (branch.getPaymentList().checkPayment(payment)) {
+                        branch.getPaymentList().addCreatedPayment(payment);
+                        System.out.printf("Paypal is added to list of payment methods in %s.\n", branch.getName());
+                        return;
+                    }
+                    else {
+                        System.out.printf("Paypal is already a payment method in %s.\n",branch.getName());
+                        System.out.println("Returning to previous page..");
+                        return;
+                    }
+                }
+                else if (choice2==4) {
+                    Payment payment = new ShopeePay();
+                    if (branch.getPaymentList().checkPayment(payment)) {
+                        branch.getPaymentList().addCreatedPayment(payment);
+                        System.out.printf("ShopeePay is added to list of payment methods in %s.\n", branch.getName());
+                        return;
+                    }
+                    else {
+                        System.out.printf("ShopeePay is already a payment method in %s.\n",branch.getName());
+                        System.out.println("Returning to previous page..");
+                        return;
+                    }
+                }
+                else {
+                    System.out.println("Enter a valid payment method (number).");
+                    continue;
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Enter a valid payment method (number).");
+                scanner.next();
+                continue;
+            }
         }
     }
 
     /**
-     * remove payment method to the payment list
-     * will go through the Branch list then display Branch
-     * display Branch's payment list
-     * find payment to remove from the branch payment list
-     * if it is found in the branch list yet, can remove , otherwise no
+     * remove payment method from the payment list
      */
     public void removeFromPaymentList() {
         Scanner scanner = new Scanner(System.in);
-        int branchChoice;
-        int paymentToRemoveChoice;
-        Branch branch=null;
-        Payment paymentToBeDeleted;
-        while (true) {
-            System.out.println("Select the branch that you want to remove your payment method: ");
-            BranchList.displayBranchNames();
+        Branch branch;
+        BranchList.displayBranchNames();
+        System.out.println("Enter the branch that you want to remove payment method (Enter 0 to exit): ");
+        while(true) {
             try {
-                branchChoice = scanner.nextInt();
-                branch = BranchList.findBranch(branchChoice-1);
-
-                System.out.println("These are the current payment methods:");
-                branch.getPaymentList().displayAllPayments();
-                paymentToRemoveChoice=scanner.nextInt();
-                branch.getPaymentList().removeIndexedPayment(paymentToRemoveChoice-1);
-
-                Payment paymentToRemove = branch.getPaymentList().getPayment(paymentToRemoveChoice-1);
-                System.out.println("Payment method "+ paymentToRemove.getName() + " deleted successfully.");
-
-            } catch (InputMismatchException e) {
-                System.out.println("Enter a valid input.");
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Enter a valid index.");
-            } catch (Exception e) {
-                System.out.println(e.getMessage() + "Error. Please try again.");
+                int choice = scanner.nextInt()-1;
+                if (choice==-1) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                branch = BranchList.findBranch(choice);
+                break;
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Enter a valid branch index.");
+                scanner.next();
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage()+" Enter a valid branch index.");
             }
         }
+
+        System.out.println("Payment methods available in the branch:");
+        branch.getPaymentList().displayAvailablePayments();
+        System.out.printf("Enter the payment method you want to remove from %s (Enter 0 to exit):\n", branch.getName());
+        while (true) {
+            try {
+                int choice2 = scanner.nextInt()-1;
+                if (choice2==-1) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                branch.getPaymentList().removeIndexedPayment(choice2);
+                System.out.println("payment removed.");
+                return;
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Enter a valid payment method (number).");
+                scanner.next();
+                continue;
+            }
+            catch (Exception e) {
+                System.out.println("Enter a valid payment method (number).");
+                scanner.next();
+                continue;
+            }
+        }
+
     }
 
 }

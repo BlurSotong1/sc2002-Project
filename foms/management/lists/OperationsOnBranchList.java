@@ -119,6 +119,9 @@ public class OperationsOnBranchList implements Serializable {
     /**
      * transfer a staff worker from current branch to another branch.
      */
+    /**
+     * transfer a staff worker from current branch to another branch.
+     */
     public void transferStaff() {
         Scanner scanner = new Scanner(System.in);
         int i=0;
@@ -132,6 +135,7 @@ public class OperationsOnBranchList implements Serializable {
 
         System.out.println("Enter the staff worker to transfer branch (Enter 0 to exit): ");
         int choice;
+        StaffWorker worker;
         while (true) {
             try {
                 choice = scanner.nextInt();
@@ -139,6 +143,7 @@ public class OperationsOnBranchList implements Serializable {
                     System.out.println("Returning to previous page..");
                     return;
                 }
+                worker = (StaffWorker) admin.getAllWorkersList().findWorker(choice);
                 break;
             }
             catch (InputMismatchException e) {
@@ -152,7 +157,7 @@ public class OperationsOnBranchList implements Serializable {
             }
         }
 
-        StaffWorker worker = (StaffWorker) admin.getAllWorkersList().findWorker(choice);
+
         BranchList.displayBranchNames();
         System.out.printf("Currently, %s works at %s.\n", worker.getName(),worker.getBranch().getName());
         System.out.println("Enter the branch index to transfer to (Enter 0 to exit): ");
