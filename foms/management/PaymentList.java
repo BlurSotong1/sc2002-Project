@@ -14,7 +14,7 @@ public class PaymentList implements Serializable {
         this.paymentList = new ArrayList<>();
     }
 
-    public void addCreatedPayment(Payment payment) {
+    public void addCreatedPayment(String payment) {
         paymentList.add(payment);
     }
 

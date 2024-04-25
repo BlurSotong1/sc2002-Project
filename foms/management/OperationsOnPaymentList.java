@@ -3,10 +3,11 @@ package foms.management;
 import foms.order.Payment;
 import foms.workers.AdminWorker;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class OperationsOnPaymentList {
+public class OperationsOnPaymentList implements Serializable {
     private static AdminWorker admin;
 
     public OperationsOnPaymentList(AdminWorker admin) {
@@ -18,30 +19,46 @@ public class OperationsOnPaymentList {
      * will go through the Branch list then display Branch
      * find payment to add in the branch payment list
      * if it is not found in the branch list yet, can add , otherwise no
-     * @param payment new payment method to be added should be done in main function
      */
-    public void addToPaymentList(Payment payment) {
+    public void addPayment() {
         Scanner scanner = new Scanner(System.in);
         int branchChoice;
+        String paymentMethod;
+        Branch branch = null;
         while (true) {
+            System.out.println("Select the branch that you want to add your payment method: ");
+            BranchList.displayBranchNames();
             try {
-                System.out.println("Select the branch that you want to add your payment method: ");
-                OperationsOnBranchList.displayBranchNames();
                 branchChoice = scanner.nextInt();
-                Branch branch = OperationsOnBranchList.findBranch(branchChoice);
+                branch = BranchList.findBranch(branchChoice - 1);
 
-                if(!findPayment(branch,payment)){
-                    branch.getPaymentList().add(payment);
-                    System.out.println("Payment method added successfully to " + branch.getName());
-                }else{
-                    System.out.println("Payment method is already in the payment list.");
+                System.out.println("These are the current payment methods:");
+                branch.getPaymentList().displayPaymentList();
+
+                System.out.println("Enter the new payment method (Enter 0 to exit):");
+                paymentMethod = scanner.next();
+
+                if (paymentMethod.equals("0")) {
+                    System.out.println("Returning to previous page...");
+                    return;
                 }
 
+                if (!isPaymentInPaymentList(branch, paymentMethod)){
+                    branch.getPaymentList().addCreatedPayment(paymentMethod);
+                    System.out.println("Payment method "+paymentMethod+" added successfully.");
+                    branch.getPaymentList().displayPaymentList();
+                }else {
+                    System.out.println("Payment method already exists.");
+                }
+
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Branch not found. Enter a valid branch index.");
+            } catch (Exception e) {
+                System.out.println(e.getMessage() + "Error. Please try again.");
             } catch (InputMismatchException e) {
-                System.out.println("Please enter a valid integer.");
-            }catch(Exception e){
-                System.out.println("Error. Please try again.");
+                System.out.println("Enter a valid input.");
             }
+
         }
     }
 
@@ -50,63 +67,33 @@ public class OperationsOnPaymentList {
      * will go through the Branch list then display Branch
      * find payment to remove from the branch payment list
      * if it is found in the branch list yet, can remove , otherwise no
+     *
      * @param payment new payment method to be removed should be done in main function
      */
     public void removeFromPaymentList(Payment payment) {
         Scanner scanner = new Scanner(System.in);
         int branchChoice;
+        Branch branch;
         while (true) {
+            System.out.println("Select the branch that you want to remove your payment method: ");
+            BranchList.displayBranchNames();
             try {
-                System.out.println("Select the branch that you want to remove your payment method: ");
-                OperationsOnBranchList.displayBranchNames();
                 branchChoice = scanner.nextInt();
-                Branch branch = OperationsOnBranchList.findBranch(branchChoice);
-                if(findPayment(branch,payment)){
-                    boolean remove = branch.getPaymentList().remove(payment);
-                    if (remove) {
-                        System.out.println("Payment method removed successfully to " + branch.getName());
-                    } else {
-                        System.out.println("Payment method is not in the payment list.");
-                    }
-                }else {
-                    System.out.println("Payment method not found.");
-                }
+                branch =BranchList.findBranch(branchChoice-1);
+
+
 
             } catch (InputMismatchException e) {
-                System.out.println("Please enter a valid integer.");
-            } catch(Exception e){
-                System.out.println("Error. Please try again.");
+                System.out.println("Branch not found. Enter a valid branch index.");
+            } catch (Exception e) {
+                System.out.println(e.getMessage() + "Error. Please try again.");
             }
-        }
-
-    }
-
-    /**
-     * display all payment methods for admin
-     */
-    public static void displayPaymentList(Branch branch) {
-        if (branch != null) {
-            System.out.println("Payment Methods:");
-            for (int i = 0; i < branch.getPaymentList().size(); i++) {
-                Payment paymentMethod = branch.getPaymentList().get(i);
-                System.out.println((i + 1) + ". " + paymentMethod.getName() + " : " + paymentMethod.getPaymentStatus());
-            }
-        }else{
-            System.out.println("Invalid branch.");
         }
     }
 
-    /**
-     * find the payment method from the payment list
-     * this method will be used when admin want to add/remove the payment method in the payment list
-     *
-     * @param branch pass in the correct branch to access the payment list
-     * @param payment payment method we want to find
-     * @return true if found and false if not found
-     */
-    public static boolean findPayment(Branch branch, Payment payment) {
-        for (Payment availPayment : branch.getPaymentList()) {
-            if (availPayment.getName().equals(payment.getName())) {
+    public boolean isPaymentInPaymentList(Branch branch, String paymentMethod) {
+        for (Payment paymentInPaymentList : branch.getPaymentList().getAvailablePayments()) {
+            if (paymentMethod.equals(paymentInPaymentList.getName())) {
                 return true;
             }
         }
