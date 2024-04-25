@@ -1,16 +1,10 @@
 package foms;
 
 import foms.food.*;
-import foms.management.branch.Branch;
-import foms.management.branch.loginSystemCtrl;
-import foms.management.lists.AllWorkersList;
-import foms.management.lists.BranchList;
-import foms.management.lists.WorkerList;
+import foms.management.branch.*;
+import foms.management.lists.*;
 import foms.order.Customer;
-import foms.workers.AdminWorker;
-import foms.workers.ManagerWorker;
-import foms.workers.StaffWorker;
-import foms.workers.Worker;
+import foms.workers.*;
 
 import java.io.*;
 import java.util.InputMismatchException;
@@ -61,13 +55,13 @@ public class FomsAPP implements Serializable {
                         worker.setLoginPassword(newPassword);
                     }
                     if (worker instanceof ManagerWorker){
-                        allManagerActions(worker);
+                        allManagerActions((ManagerWorker)worker);
                     }
                     else if (worker instanceof StaffWorker){
-
+                        allStaffActions((StaffWorker) worker);
                     }
                     else if (worker instanceof AdminWorker){
-
+                        allAdminActions((AdminWorker) worker);
                     }
 
 
@@ -95,7 +89,7 @@ public class FomsAPP implements Serializable {
        // System.out.println("Welcome Customer!");
         customer.addFoodItemToCart(); */
 
-        admin.getJobsOnWorkerList().addWorker();
+        //admin.getJobsOnWorkerList().addWorker();
 
 
     }
@@ -110,13 +104,73 @@ public class FomsAPP implements Serializable {
         System.out.println("2. Check Existing Order");
     }
 
-    public static void allManagerActions(Worker manager){
+    public static void allManagerActions(ManagerWorker manager){
 
     }
 
-    public static void allStaffActions(Worker staff){}
+    public static void allStaffActions(StaffWorker staff){}
 
-    public static void allAdminActions(Worker admin){}
+    public static void allAdminActions(AdminWorker admin){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome "+admin.getName());
+        System.out.println();
+
+        while (true) {
+            try {
+                System.out.println("------------------ Staff Account Settings------------------");
+                System.out.println("1. Add staff account");
+                System.out.println("2. Remove staff account");
+                System.out.println("3. Display staff list");
+                System.out.println("4. Promote a staff");
+                System.out.println("5. Transfer a staff");
+                System.out.println();
+                System.out.println("------------------ Branch Settings------------------");
+                System.out.println("6. Add a branch");
+                System.out.println("7. Remove a branch");
+                System.out.println("8. Open a branch");
+                System.out.println("9. Close a branch");
+                System.out.println("10. Add payment method in a branch");
+                System.out.println("11. Remove payment method in a branch");
+                System.out.println();
+                System.out.println("0. Exit");
+                System.out.println("What would you like to do?");
+
+                String choice = sc.nextLine();
+                if (choice.equals("1"))
+                    admin.getJobsOnWorkerList().addWorker();
+                else if (choice.equals("2"))
+                    admin.getJobsOnWorkerList().removeWorker();
+                else if (choice.equals("3"))
+                    admin.getJobsOnWorkerList().displayWorkerList();
+                else if (choice.equals("4"))
+                    admin.getJobsOnWorkerList().promoteToManager();
+                else if (choice.equals("5"))
+                    admin.getJobsOnBranchList().transferStaff();
+                else if (choice.equals("6"))
+                    admin.getJobsOnBranchList().addBranch();
+                else if (choice.equals("7"))
+                    admin.getJobsOnBranchList().removeBranch();
+                else if (choice.equals("8"))
+                    admin.getJobsOnBranch().openBranch();
+                else if (choice.equals("9"))
+                    admin.getJobsOnBranch().closeBranch();
+                else if (choice.equals("10"))
+                    admin.getJobsOnPaymentList().addPayment();
+                else if (choice.equals("11"))
+                    admin.getJobsOnPaymentList().removeFromPaymentList();
+                else if (choice.equals("0")) {
+                    System.out.println("Signing out account..");
+                    return;
+                }
+                else {
+                    System.out.println("Invalid. Please enter again:");
+                    continue;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Something went wrong.");
+            }
+    }
 
 
     public static void createTestCases(AdminWorker admin) {
