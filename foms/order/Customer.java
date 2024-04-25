@@ -241,4 +241,8 @@ public class Customer implements Serializable {
     public CheckOutProcess getCheckOutProcess() {
         return checkOutProcess;
     }
+
+    public CollectOrder getCollectOrder() {
+        return getCollectOrder();
+    }
 }

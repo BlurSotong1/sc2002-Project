@@ -49,7 +49,7 @@ public class FomsAPP implements Serializable {
             try {
                 int choice = scanner.nextInt();
                 if (choice == 1) {
-                    Customer customer = new Customer();
+                    allCustomerActions();
 
 
                 }
@@ -89,6 +89,56 @@ public class FomsAPP implements Serializable {
 
 
     }
+
+    private static void allCustomerActions() {
+        Customer customer = new Customer();
+
+        String input;
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            try {
+                System.out.print("What do you want to do?" +
+                        "\n1. Place new Order" +
+                        "\n2. Check for Order Status" +
+                        "\n3. Collect your Order" +
+                        "\n4. Select a different Branch" +
+                        "\n0. Exit to Previous Screen" +
+                        "\nEnter Your Choice: ");
+
+
+                input = scanner.next();
+
+                switch (input) {
+                    case "0" -> {
+                        System.out.println("Quitting the Application...");
+                        return;
+                    }
+                    case "1" -> {
+                        placeNewOrder(customer);
+                    }
+                    case "2" -> {
+
+                    }
+
+                    case "3" -> {
+                        customer.getCollectOrder();
+                    }
+                    case "4" -> {
+                        customer.selectBranch();
+                    }
+                    default -> System.out.println("Invalid input. Please enter a valid option.");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a valid number!");
+            } catch (Exception e) {
+                System.out.println("Error occurred");
+                scanner.next();
+            }
+        }
+    }
+
 
     private static void placeNewOrder(Customer customer) {
 
@@ -143,13 +193,14 @@ public class FomsAPP implements Serializable {
         }
     }
 
-    public static void allManagerActions(Worker manager){
+    private static void allManagerActions(Worker manager){
+
 
     }
 
-    public static void allStaffActions(Worker staff){}
+    private static void allStaffActions(Worker staff){}
 
-    public static void allAdminActions(AdminWorker admin){
+    private static void allAdminActions(AdminWorker admin){
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome "+admin.getName());
         System.out.println();
@@ -213,7 +264,7 @@ public class FomsAPP implements Serializable {
     }
 
 
-    public static void createTestCases(AdminWorker admin) {
+    private static void createTestCases(AdminWorker admin) {
         BranchList dummy = new BranchList(); //quota is staff+manager
         Branch branch1 = new Branch("NTU", "NTU", 5); //2 manager demo transfer manager to branch 2
         dummy.addCreatedBranch(branch1);
