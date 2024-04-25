@@ -17,8 +17,6 @@ public class FomsAPP implements Serializable {
         System.out.println("we are screwed");
     }
 
-
-
         try {
             FileInputStream fileIn = new FileInputStream("foms/management/BranchInfo.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);

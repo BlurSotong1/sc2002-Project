@@ -1,7 +1,6 @@
 package foms.management.filters.menufilters;
 
 import foms.food.FoodItem;
-import foms.food.SetMeal;
 import foms.food.Sides;
 import foms.management.Menu;
 
