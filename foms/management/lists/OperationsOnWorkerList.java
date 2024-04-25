@@ -113,6 +113,7 @@ public class OperationsOnWorkerList {
                                 }
                                 else {
                                     branch = BranchList.findBranch(choice2);
+                                    System.out.println(branch.getName());
                                 }
                             }
                             catch (InputMismatchException e){
@@ -142,12 +143,23 @@ public class OperationsOnWorkerList {
                                                 Worker manager = new ManagerWorker(workerName, workerAge, workerGender, workerLoginID, branch);
                                                 branch.getWorkerList().addCreatedWorker(manager);
                                                 admin.getAllWorkersList().addCreatedWorker(manager);
+                                                branch.setNumManager(branch.getNumManager()+1);
                                                 System.out.printf("Added %s.\n", workerName);
-                                                return;
+
+                                                if (branch.checkQuotaRatio()==false){
+                                                    System.out.println("Note that quota is not met.");
+                                                    System.out.printf("Number of staff (excluding Manager) in %s: %d\n",branch.getName(), branch.getNumStaff());
+                                                    System.out.printf("Number of manager in %s: %d\n", branch.getName(),branch.getNumManager());
+                                                    return;
+                                                }
+                                                else {
+                                                    System.out.println("Quota is met.");
+                                                    return;
+                                                }
                                             }
                                             else if (choice4.equals("2")) {
                                                 System.out.println("Returning to previous page..");
-                                                break;
+                                                return;
                                             }
                                             else if (choice4.equals("0")){
                                                 return;
@@ -167,12 +179,24 @@ public class OperationsOnWorkerList {
                                                 Worker staff = new StaffWorker(workerName, workerAge, workerGender, workerLoginID, branch);
                                                 branch.getWorkerList().addCreatedWorker(staff);
                                                 admin.getAllWorkersList().addCreatedWorker(staff);
+                                                branch.setNumStaff(branch.getNumStaff()+1);
                                                 System.out.printf("Added %s.\n", workerName);
-                                                return;
+
+                                                if (branch.checkQuotaRatio()==false){
+                                                    System.out.println("Note that quota is met.");
+                                                    System.out.printf("Number of staff (excluding Manager) in %s: %d\n",branch.getName(), branch.getNumStaff());
+                                                    System.out.printf("Number of manager in %s: %d\n", branch.getName(),branch.getNumManager());
+                                                    return;
+                                                }
+                                                else {
+                                                    System.out.println("Quota is not met.");
+                                                    return;
+                                                }
+
                                             }
                                             else if (choice4.equals("2")) {
                                                 System.out.println("Returning to previous page..");
-                                                break;
+                                                return;
                                             }
                                             else if (choice4.equals("0")){
                                                 return;

@@ -83,6 +83,20 @@ public class Branch implements Serializable {
         this.menu = new Menu();
         this.paymentList = new PaymentList();
     }
+    /**
+     * Checks the quota ratio for the branch.
+     * @return true if quota ratio is correct, false if quota ratio is wrong.
+     */
+    public boolean checkQuotaRatio() {
+        if (numStaff>=1 && numStaff<=4 && numManager==1)
+            return true;
+        else if (numStaff>=5 && numStaff<=8 && numManager==2)
+            return true;
+        else if (numStaff>=9 && numStaff<=15 && numManager==3)
+            return true;
+        else
+            return false;
+    }
 
     /**
     * Gets the name of this branch.
