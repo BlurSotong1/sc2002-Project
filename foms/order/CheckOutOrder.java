@@ -36,27 +36,25 @@ public class CheckOutOrder implements Serializable {
      * update order status
      * if customer paid, receipt will be printed and order status from PENDING to PREPARING
      * if customer failed to pay, will be brought to handle payment failure site
-     * @param customer Make changes on Customer's order
      */
-    public void updateOrderStatus(Customer customer) {
+    public void updateOrderStatus() {
         Scanner scanner = new Scanner(System.in);
-        if (paymentHandling(customer)) {
+        if (paymentHandling()) {
             System.out.println("Thank you for choosing us.\n" +
                     "This is your receipt.");
             printReceipt();
             customer.getCart().setOrderStatus(PREPARING);
         } else {
-            handlePaymentFailure(customer);
+            handlePaymentFailure();
         }
     }
 
     /**
      * this is handle payment
-     * @param customer This Customer who wants to check out
      * @return true if customer fully paid
      *         false if customer fails to pay
      */
-    public boolean paymentHandling(Customer customer) {
+    public boolean paymentHandling() {
         Branch customerBranch = customer.getBranch();
         Scanner sc = new Scanner(System.in);
         int userChoice;
@@ -103,9 +101,8 @@ public class CheckOutOrder implements Serializable {
      * ask customer whether to continue paying or cancel their order
      * if customer want to continue paying, then will be brought to payment handling site
      * if customer want to cancel order, then order status will be set to cancel and customer will be logged out
-     * @param customer handle this customer who failed to pay
      */
-    private void handlePaymentFailure(Customer customer){
+    private void handlePaymentFailure(){
         Scanner scanner = new Scanner(System.in);
         int userChoice;
         while(true){
@@ -122,7 +119,7 @@ public class CheckOutOrder implements Serializable {
                     return;
                 }
                 else if (userChoice == 1){
-                    paymentHandling(customer);
+                    paymentHandling();
                 } else if (userChoice == 2) {
                     customer.getCart().setOrderStatus(CANCELLED);
                     //log out customer here?
