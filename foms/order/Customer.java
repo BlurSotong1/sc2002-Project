@@ -196,6 +196,44 @@ public class Customer implements Serializable {
     }
 
     /**
+     * check out order method
+     * customer will be brought to check our order and they will selecting dine in option here
+     */
+    public void checkOutOrder(){
+        Scanner scanner = new Scanner(System.in);
+        boolean dineInOption;
+        int checkOutChoice;
+        while(true) {
+            System.out.println("Do you want to check out your order now?\n" +
+                    "0. Continue browsing\n" +
+                    "1. Check Out now");
+            try {
+                checkOutChoice = scanner.nextInt();
+                if(checkOutChoice==0){
+                    System.out.println("Going back to main menu...");
+                    break;
+                }
+                else if(checkOutChoice==1){
+                    System.out.println("Select your dine in option:\n" +
+                            "0. Dine in\n" +
+                            "1. Take Away");
+                    dineInOption=scanner.nextBoolean();
+                    cart.setDineInOption(dineInOption);
+
+                    CheckOutOrder customerCheckOut = new CheckOutOrder(this);
+                    customerCheckOut.updateOrderStatus();
+                }
+
+            }catch(InputMismatchException e){
+                System.out.println("Enter a valid integer.");
+            }catch(Exception e){
+                System.out.println(e.getMessage()+"Error occurred.");
+             }
+        }
+
+    }
+
+    /**
      * method for customer to collect their order.
      * @param orderID use orderID to identify their orders
      * once they collected, we will change the order status from READYTOPICKUP to COMPLETED
