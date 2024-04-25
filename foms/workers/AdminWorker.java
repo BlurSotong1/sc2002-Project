@@ -5,7 +5,7 @@ import java.io.Serializable;
 import foms.management.lists.OperationsOnBranchList;
 import foms.management.lists.OperationsOnPaymentList;
 import foms.management.branch.OperationsOnBranchStatus;
-import foms.management.filters.OperationsOnWorkerList;
+import foms.management.lists.OperationsOnWorkerList;
 import foms.management.lists.AllWorkersList;
 import foms.management.lists.BranchList;
 

@@ -1,4 +1,4 @@
-package foms.management.filters;
+package foms.management.lists;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

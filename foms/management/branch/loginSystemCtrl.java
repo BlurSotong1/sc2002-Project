@@ -1,6 +1,6 @@
 package foms.management.branch;
 
-import foms.management.filters.OperationsOnWorkerList;
+import foms.management.lists.OperationsOnWorkerList;
 import foms.workers.Worker;
 
 import java.util.Scanner;
