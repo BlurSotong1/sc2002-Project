@@ -1,8 +1,9 @@
 package foms.management.lists;
 
 import foms.management.branch.Branch;
+import foms.workers.AdminWorker;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +12,21 @@ public class BranchList implements Serializable {
     * list of branches.
      */
     private static ArrayList<Branch> branchList;
+
+    public static void serializeBranchList() throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BranchList.ser"))) {
+            oos.writeObject(branchList);
+        }
+    }
+
+    public static void deserializeBranchList()throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("BranchList.ser"))) {
+            branchList= (ArrayList<Branch>) ois.readObject();
+        }
+    }
+
+
+
 
     /**
      * Constructor for BranchList class.

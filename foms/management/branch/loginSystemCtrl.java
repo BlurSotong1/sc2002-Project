@@ -2,11 +2,12 @@ package foms.management.branch;
 
 import foms.workers.Worker;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import foms.management.lists.AllWorkersList;
 
-public class loginSystemCtrl {
+public class loginSystemCtrl implements Serializable {
     /**
      * TODO check the arraylist for all workers.
      * @return Worker if the loginID exists and matches the password/ null if either one is incorrect.

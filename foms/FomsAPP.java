@@ -1,6 +1,7 @@
 package foms;
 
 import foms.management.branch.Branch;
+import foms.management.lists.BranchList;
 import foms.order.Customer;
 import foms.workers.AdminWorker;
 
@@ -8,9 +9,15 @@ import java.io.*;
 import java.util.Scanner;
 
 public class FomsAPP implements Serializable {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+
+        //saving state
 /*
+       Branch branch = new Branch("jp", "jp",15);
         AdminWorker choonggi = new AdminWorker("choonggi",20,'M',"choonggi001");
+        choonggi.getJobsOnBranchList().addBranch();
+
         try {
             FileOutputStream fileOut = new FileOutputStream("AdminInfo.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -21,13 +28,14 @@ public class FomsAPP implements Serializable {
             System.out.println("we are screwed");
         }
 */
-        // intro
-        AdminWorker adminWorker = new AdminWorker("choonggi",20,'M',"choonggi001");
-        Branch branch = new Branch("jp", "jp",15);
+      //  BranchList.serializeBranchList();
+
+        //calling state
+        AdminWorker admin = null;
         try {
             FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            adminWorker = (AdminWorker) in.readObject();
+            admin = (AdminWorker) in.readObject();
             in.close();
             fileIn.close();
         } catch (IOException e) {
@@ -35,7 +43,8 @@ public class FomsAPP implements Serializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        adminWorker.getBranchList().addCreatedBranch(branch);
+        BranchList.deserializeBranchList();
+
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("**************************************************");
@@ -44,8 +53,14 @@ public class FomsAPP implements Serializable {
         System.out.println("To login as a Staff Member, enter: 2.");
         System.out.print("Enter your choice: ");
 
-        System.out.println("Welcome Customer!");
-        Customer customer = new Customer();
+        System.out.printf("%s",admin.toString());
+
+
+        for (Branch branch2: admin.getBranchList().getBranchList())
+            System.out.printf("\n\n%s", branch2.getName());
+        System.out.println();
+       // System.out.println("Welcome Customer!");
+        //Customer customer = new Customer();
 
     }
 
@@ -54,11 +69,13 @@ public class FomsAPP implements Serializable {
 
         Customer customer = new Customer();
 
-
+        customer
 
         System.out.println("2. Check Existing Order");
 
 
 
     }
+
+
 }

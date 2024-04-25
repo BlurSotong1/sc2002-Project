@@ -1,5 +1,6 @@
 package foms.workers;
 
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import foms.management.lists.OperationsOnBranchList;
@@ -11,6 +12,8 @@ import foms.management.lists.BranchList;
 
 
 public class AdminWorker extends Worker implements Serializable {
+
+
 
     /**
      * list of branches.
@@ -25,22 +28,22 @@ public class AdminWorker extends Worker implements Serializable {
     /**
      * Admin worker perform operations on branch list.
      */
-    private OperationsOnBranchList jobsOnBranchList;
+    private transient OperationsOnBranchList jobsOnBranchList;
 
     /**
      * Admin worker perform operations on worker list of one of the branch.
      */
-    private OperationsOnWorkerList jobsOnWorkerList;
+    private transient OperationsOnWorkerList jobsOnWorkerList;
 
     /**
      * Admin worker perform operations on a branch..
      */
-    private OperationsOnBranchStatus jobsOnBranch;
+    private transient OperationsOnBranchStatus jobsOnBranch;
 
     /**
      * Admin worker perform operations on payment list of one of the branch.
      */
-    private OperationsOnPaymentList jobsOnPaymentList;
+    private transient OperationsOnPaymentList jobsOnPaymentList;
 
     /**
      * Constructor for AdminWorker class.
