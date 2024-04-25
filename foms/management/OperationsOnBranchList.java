@@ -49,11 +49,11 @@ public class OperationsOnBranchList {
 
             while (true) {
                 try {
-                    System.out.print("Enter the location of the branch (Enter 0 to return previous page): ");
+                    System.out.print("Enter the location of the branch (Enter 0 to exit): ");
                     location = scanner.nextLine();
                     if (location.equals("0")) {
                         System.out.println("Returning to previous page..");
-                        break;
+                        return;
                     }
                 } catch (Exception e) {
                     System.out.println("Something went wrong");

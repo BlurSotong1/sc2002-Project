@@ -66,6 +66,14 @@ public class AdminWorker extends Worker implements Serializable {
     }
 
     /**
+     * Gets the list of workers in the company.
+     * @return list of workers in the company.
+     */
+    public AllWorkersList getAllWorkersList() {
+        return allWorkersList;
+    }
+
+    /**
      * Use the operations on branch list.
      * @return operations on branch list.
      */
