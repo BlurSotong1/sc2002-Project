@@ -1,9 +1,13 @@
 package foms.workers;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
-import foms.management.*;
+import foms.management.lists.OperationsOnBranchList;
+import foms.management.lists.OperationsOnPaymentList;
+import foms.management.branch.OperationsOnBranchStatus;
+import foms.management.filters.OperationsOnWorkerList;
+import foms.management.lists.AllWorkersList;
+import foms.management.lists.BranchList;
 
 
 public class AdminWorker extends Worker implements Serializable {

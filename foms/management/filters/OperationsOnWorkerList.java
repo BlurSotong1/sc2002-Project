@@ -1,8 +1,11 @@
-package foms.management;
+package foms.management.filters;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import foms.management.lists.AllWorkersList;
+import foms.management.lists.BranchList;
+import foms.management.branch.Branch;
 import foms.workers.AdminWorker;
 import foms.workers.*;
 

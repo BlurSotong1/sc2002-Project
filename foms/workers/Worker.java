@@ -1,7 +1,5 @@
 package foms.workers;
 
-import foms.management.OperationsOnWorkerList;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

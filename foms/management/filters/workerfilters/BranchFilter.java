@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import foms.management.Branch;
-import foms.management.BranchList;
+import foms.management.branch.Branch;
+import foms.management.lists.BranchList;
 import foms.workers.StaffWorker;
 import foms.workers.Worker;
 

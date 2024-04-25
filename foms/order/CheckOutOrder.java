@@ -1,14 +1,11 @@
 package foms.order;
 
-import foms.management.Branch;
-import foms.management.OperationsOnPaymentList;
+import foms.management.branch.Branch;
 
 import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static foms.order.OrderStatus.CANCELLED;
-import static foms.order.OrderStatus.PREPARING;
 
 /**
  * This is for customer to check out their order
@@ -43,7 +40,7 @@ public class CheckOutOrder implements Serializable {
             System.out.println("Thank you for choosing us.\n" +
                     "This is your receipt.");
             printReceipt();
-            customer.getCart().setOrderStatus(PREPARING);
+            customer.getCart().setOrderStatus(OrderStatus.PREPARING);
             customer.getBranch().getOrderList().addOrderToOrderList(customer.getCart());
         } else {
             handlePaymentFailure();
@@ -123,7 +120,7 @@ public class CheckOutOrder implements Serializable {
                 else if (userChoice == 1){
                     paymentHandling();
                 } else if (userChoice == 2) {
-                    customer.getCart().setOrderStatus(CANCELLED);
+                    customer.getCart().setOrderStatus(OrderStatus.CANCELLED);
                     //log out customer here?
                 }
             } catch (InputMismatchException e) {

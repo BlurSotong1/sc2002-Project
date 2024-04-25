@@ -2,11 +2,11 @@ package foms.management.filters.menufilters;
 
 import foms.food.Drink;
 import foms.food.FoodItem;
-import foms.management.Menu;
+import foms.management.lists.Menu;
 
 import java.util.ArrayList;
 
-public class DrinksFilter implements MenuFilters{
+public class DrinksFilter extends BaseMenuFilter implements MenuFilters{
     @Override
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {
         System.out.println("Drinks");

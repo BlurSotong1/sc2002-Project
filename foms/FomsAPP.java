@@ -1,6 +1,6 @@
 package foms;
 
-import foms.management.Branch;
+import foms.management.branch.Branch;
 
 import java.io.*;
 

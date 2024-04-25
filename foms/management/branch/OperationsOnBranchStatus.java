@@ -1,5 +1,6 @@
-package foms.management;
+package foms.management.branch;
 
+import foms.management.lists.BranchList;
 import foms.workers.AdminWorker;
 import java.util.InputMismatchException;
 import java.util.Scanner;
