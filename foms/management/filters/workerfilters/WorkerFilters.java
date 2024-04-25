@@ -1,13 +1,16 @@
 package foms.management.filters.workerfilters;
+
 import foms.workers.Worker;
 
 import java.util.ArrayList;
+
 public interface WorkerFilters {
 
     /**
-     * Abstract method
-     * Display worker's information
+     * return list of workers (filtered)
      * @param workerList list of workers
+     * @return filtered list of workers
      */
-    public void display(ArrayList<Worker> workerList);
+    public ArrayList<Worker> filter(ArrayList<Worker> workerList);
+
 }

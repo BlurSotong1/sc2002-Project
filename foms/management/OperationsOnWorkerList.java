@@ -198,5 +198,11 @@ public class OperationsOnWorkerList {
         }
     }
 
+    /**
+     * display list of workers in the company.
+     */
+    public void displayWorkerList() {
+        admin.getAllWorkersList().displayWorkerListInSystem();
 
+    }
 }

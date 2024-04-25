@@ -1,7 +1,9 @@
 package foms.management;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import foms.management.filters.workerfilters.*;
 import foms.management.filters.workerfilters.WorkerFilters;
 import foms.workers.Worker;
 
@@ -20,7 +22,7 @@ public class WorkerList {
         this.workerList = new ArrayList<Worker>();
     }
 
-    /*
+    /**
      * Add a worker into list of workers.
      * @param worker is the Worker object.
      */
@@ -28,12 +30,111 @@ public class WorkerList {
         workerList.add(worker);
     }
 
-    /*
+    /**
      * Display worker list
-     * @param filter is the filter selected to display worker list.
      */
-    public void displayWorkerListInBranch(WorkerFilters filter) {
-        filter.display(workerList);
+    public void displayWorkerListInBranch() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("List of workers");
+        for (Worker worker: workerList) {
+            System.out.println(worker.toString());
+        }
+
+        System.out.println("Do you want to filter the list of workers? Y/N");
+
+        while(true) {
+            String choice = sc.nextLine();
+            if (choice.equals("Y")) {
+                filterWorkerListInBranch(workerList);
+                return;
+            }
+            else if (choice.equals("N")) {
+                System.out.println("Returning to previous page..");
+                return;
+            }
+            else {
+                System.out.println("Do you want to filter the list of workers? Y/N");
+                continue;
+            }
+        }
+    }
+
+    /**
+     * Filter worker list
+     * @param workerList list of workers
+     */
+    public void filterWorkerListInBranch(ArrayList<Worker> workerList) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Worker> filteredList;
+
+        System.out.println("Filters:\n1.Role\n2.Age\n3.Gender");
+        System.out.println("Enter filter (Enter 0 to exit): ");
+        while(true) {
+            try {
+                String choice = sc.nextLine();
+                if (choice.equals("1")) {
+                    WorkerFilters roleFilter = new RoleFilter();
+                    filteredList = roleFilter.filter(workerList);
+                    if (filteredList == null)
+                        return;
+                    for (Worker worker: filteredList) {
+                        System.out.println(worker.toString());
+                    }
+                    break;
+                }
+                else if (choice.equals("2")) {
+                    WorkerFilters ageFilter = new AgeFilter();
+                    filteredList = ageFilter.filter(workerList);
+                    if (filteredList == null)
+                        return;
+                    for (Worker worker: filteredList) {
+                        System.out.println(worker.toString());
+                    }
+                    break;
+                }
+                else if (choice.equals("3")) {
+                    WorkerFilters genderFilter = new GenderFilter();
+                    filteredList = genderFilter.filter(workerList);
+                    if (filteredList == null)
+                        return;
+                    for (Worker worker: filteredList) {
+                        System.out.println(worker.toString());
+                    }
+                    break;
+                }
+                else if (choice.equals("0")) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                else {
+                    System.out.println("Filters:\n1.Role\n2.Age\n3.Gender");
+                    System.out.println("Invalid filter. Enter filter (number) (Enter 0 to exit): ");
+                    continue;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Something Went Wrong");
+                return;
+            }
+        }
+
+        System.out.println("Do you want to add another filter? Y/N");
+        while(true) {
+            String choice = sc.nextLine();
+            if (choice.equals("Y")) {
+                filterWorkerListInBranch(filteredList);
+                return;
+            }
+            else if (choice.equals("N")) {
+                System.out.println("Returning to previous page..");
+                return;
+            }
+            else {
+                System.out.println("Do you want to add another filter? Y/N");
+                continue;
+            }
+        }
+
     }
 
     /**

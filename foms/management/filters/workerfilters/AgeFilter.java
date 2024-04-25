@@ -9,7 +9,7 @@ import foms.workers.Worker;
 public class AgeFilter implements WorkerFilters{
 
     /**
-     * return list of workers (gender filtered)
+     * return list of workers (age filtered)
      * @param workerList list of workers
      * @return filtered list of workers
      */
@@ -28,13 +28,14 @@ public class AgeFilter implements WorkerFilters{
                     for(Worker worker: workerList) {
                         if (worker.getAge()==choice) {
                             filteredList.add(worker);
-                            return filteredList;
                         }
                     }
+                    return filteredList;
                 }
             }
             catch (InputMismatchException e) {
                 System.out.println("Not a number. Enter age to filter (Enter 0 to exit): ");
+                sc.next();
                 continue;
             }
             catch (Exception e) {
