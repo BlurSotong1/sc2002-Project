@@ -14,6 +14,7 @@ public class DrinksFilter implements MenuFilters{
         for (FoodItem foodItem: menu) {
             if (foodItem instanceof Drinks) {
                 System.out.printf("%d. %s\n",counter,foodItem.getName());
+                counter++;
             }
         }
     }

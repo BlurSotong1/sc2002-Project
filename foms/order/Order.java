@@ -66,7 +66,7 @@ public class Order implements Serializable {
         //the index of the food
         fromMenu = filter.findIndexedFoodItemInFilteredMenu(indexedFoodItem,menu);
         if (fromMenu == null) {
-            System.out.println("Error");
+            System.out.println("Error om prder add filtered but before food add");
             return;
         }
 
@@ -81,7 +81,7 @@ public class Order implements Serializable {
             case "Drinks" -> new Drinks(fromMenu.getName(), fromMenu.getPrice(), fromMenu.getDescription());
 
             default -> {
-                System.out.println("Error!");
+                System.out.println("Error in order add filtered food!");
                 yield null; // or throw an exception or return a default value
             }
         };
