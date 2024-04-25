@@ -136,9 +136,9 @@ public class OperationsOnWorkerList {
                                         while (true) {
                                             String choice4 = sc.next();
                                             if (choice4.equals("1")) {
-                                                Worker staff = new StaffWorker(workerName, workerAge, workerGender, workerLoginID, branch);
-                                                branch.getWorkerList().addCreatedWorker(staff);
-                                                admin.getAllWorkersList().addCreatedWorker(staff);
+                                                Worker manager = new ManagerWorker(workerName, workerAge, workerGender, workerLoginID, branch);
+                                                branch.getWorkerList().addCreatedWorker(manager);
+                                                admin.getAllWorkersList().addCreatedWorker(manager);
                                                 System.out.printf("Added %s.\n", workerName);
                                                 return;
                                             }
@@ -161,9 +161,9 @@ public class OperationsOnWorkerList {
                                         while (true) {
                                             String choice4 = sc.next();
                                             if (choice4.equals("1")) {
-                                                Worker manager = new StaffWorker(workerName, workerAge, workerGender, workerLoginID, branch);
-                                                branch.getWorkerList().addCreatedWorker(manager);
-                                                admin.getAllWorkersList().addCreatedWorker(manager);
+                                                Worker staff = new StaffWorker(workerName, workerAge, workerGender, workerLoginID, branch);
+                                                branch.getWorkerList().addCreatedWorker(staff);
+                                                admin.getAllWorkersList().addCreatedWorker(staff);
                                                 System.out.printf("Added %s.\n", workerName);
                                                 return;
                                             }

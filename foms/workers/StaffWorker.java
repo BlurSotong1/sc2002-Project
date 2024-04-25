@@ -29,9 +29,14 @@ public class StaffWorker extends Worker{
         setRole('S');
     }
 
+    /**
+     * @return Stringified details of staff
+     */
     @Override
     public String toString() {
-        return String.format(super.toString() + "%-15s", branch.getName());
+        return String.format("%-15s%-5d%-3c%-15s%-15s%-3c",
+                getName(), getAge(), getGender(), getLoginID(), getBranch().getName(), getRole());
+
     }
 
     /**

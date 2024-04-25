@@ -62,8 +62,8 @@ public class AdminWorker extends Worker implements Serializable {
      */
     @Override
     public String toString() {
-        String manager = "Admin";
-        return String.format(super.toString()+"%-20s", "Admin");
+        return String.format("%-15s%-5d%-3c%-15s%-3c",
+                getName(), getAge(), getGender(), getLoginID(), getRole());
     }
 
     /**

@@ -200,7 +200,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
      */
     @Override
     public String toString() {
-        String manager = "Manager";
-        return String.format(super.toString()+"%-20s", "Manager");
+        return String.format("%-15s%-5d%-3c%-15s%-15s%-3c",
+                getName(), getAge(), getGender(), getLoginID(), getBranch().getName(), getRole());
     }
 }
