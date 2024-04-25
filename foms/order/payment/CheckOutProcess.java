@@ -1,7 +1,6 @@
 package foms.order.payment;
 
 import foms.order.Customer;
-import foms.order.Order;
 import foms.order.OrderStatus;
 
 import java.io.Serializable;
@@ -16,7 +15,7 @@ public class CheckOutProcess implements Serializable {
     /**
      * The Customer who is ready to check out their order
      */
-    private Customer customer;
+    final private Customer customer;
 
     public CheckOutProcess(Customer customer) {
         this.customer = customer;
@@ -36,7 +35,7 @@ public class CheckOutProcess implements Serializable {
         while (!checkOutOrNot.equals("1")) { //if not 1 then continue prompting
             checkOutOrNot = scanner.next();
 
-            if (checkOutOrNot.equals("0")) { //dont check out so return
+            if (checkOutOrNot.equals("0")) { //don't check out so return
                 System.out.println("Returning to order screen!");
                 return;
             } else { //wrong input
