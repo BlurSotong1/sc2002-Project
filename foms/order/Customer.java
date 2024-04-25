@@ -13,10 +13,23 @@ import java.util.Scanner;
 
 import static foms.order.OrderStatus.COMPLETED;
 
+/**
+ * Represent a customer in foms.
+ */
 public class Customer implements Serializable {
+    /**
+     * Customer's order.
+     */
     private Order cart;
+    /**
+     * Customer's branch.
+     */
     private static Branch branch;
 
+    /**
+     * Customer choosing a branch.
+     * Customer can only choose those that are open.
+     */
     public void selectBranch(){
         int branchChoice;
         Scanner scanner = new Scanner(System.in);
@@ -41,8 +54,9 @@ public class Customer implements Serializable {
     }
 
     /**
-     * display menu for users and ask users to select food item
-     * @return Food Item which will be passed into Order class
+     * Display menu for users and ask users to select food item
+     * New food item for the cart will be created here
+     * Food Item will be passed into Order class by calling its method
      */
     public void addFoodItemToCart(){
         Scanner scanner = new Scanner(System.in);
@@ -103,8 +117,8 @@ public class Customer implements Serializable {
     }
 
     /**
-     * display all items in cart and ask users to select cart item
-     * @return Food Item which will be passed into Order class (removeIndexedFoodItemFromCart method)
+     * Display all items in cart and ask users to select cart item
+     * Index of Food Item will be passed into Order class (removeIndexedFoodItemFromCart method)
      */
     public void removeFoodItem(){
         Scanner scanner = new Scanner(System.in);
@@ -132,7 +146,7 @@ public class Customer implements Serializable {
 
     /**
      * display all items in cart and asl users to select cart item
-     * @return Food Item which will be passed into Order class (editFoodItem method)
+     * Food Item which will be passed into Order class (editFoodItem method)
      */
     public void editFoodItem(){
         Scanner scanner = new Scanner(System.in);
@@ -149,6 +163,8 @@ public class Customer implements Serializable {
 
                     }else if(foodChoice>=1 || foodChoice <= cart.getCart().size()){
                         FoodItem itemToBeEdited = cart.getCart().get(foodChoice-1);
+
+                        //i feel like this part should be done in the SetMeal.customise method, what do yall think
                         if(itemToBeEdited instanceof SetMeal){
                             System.out.println("Customising...\n" +
                                     "(1) Main\n" +
@@ -161,14 +177,15 @@ public class Customer implements Serializable {
                                 System.out.println("Returning back...");
                                 break;
                             }else if (customiseChoice==1){
-                                MainDish selectedMainDish = (SetMeal)itemToBeEdited.getMainDish();
+                                MainDish selectedMainDish = (SetMeal)itemToBeEdited.customiseFoodItem();
                             }else if (customiseChoice==2){
-                                MainDish selectedSides = (SetMeal)itemToBeEdited.getSides();
+                                Sides selectedSides = (SetMeal)itemToBeEdited.customiseFoodItem();
                             }else if (customiseChoice==3){
-                                MainDish selectedDrinks = (SetMeal)itemToBeEdited.getDrink();
+                                Drink selectedDrinks = (SetMeal)itemToBeEdited.customiseFoodItem();
                             }
+                        }else {
+                            cart.editFoodItem(itemToBeEdited);
                         }
-                        cart.editFoodItem(itemToBeEdited);
                     }
                 }catch(InputMismatchException e){
                     System.out.println("Enter a valid input.");
@@ -178,10 +195,17 @@ public class Customer implements Serializable {
             }
     }
 
+    /**
+     * method for customer to collect their order.
+     * @param orderID use orderID to identify their orders
+     * once they collected, we will change the order status from READYTOPICKUP to COMPLETED
+     * orderList will remove this order once this step is done
+     */
     public void collectOrder(int orderID){
         cart.setOrderStatus(COMPLETED);
     }
 
 
-
+    public Branch getBranch() { return branch;}
+    public void setBranch(){this.branch=branch;}
 }

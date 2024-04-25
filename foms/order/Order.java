@@ -6,10 +6,25 @@ import java.util.ArrayList;
 
 import foms.food.*;
 
+/**
+ * Represents an order placed by customer
+ */
 public class Order implements Serializable {
+    /**
+     * The orderID of an order
+     */
     private int orderID;
+    /**
+     * ArrayList of cart items
+     */
     private ArrayList<FoodItem> cart;
+    /**
+     * Sum of the amount of all the cart items
+     */
     private static double amount;
+    /**
+     * Order status of the order
+     */
     private OrderStatus orderStatus;
 
     /**
@@ -28,8 +43,8 @@ public class Order implements Serializable {
     /**
      * method to add food into cart
      * @param cartItem customer will be asked what menuItem they want to add in the Customer class
-     * check whether the menuItem is valid (downcasting)
-     * add to cart , amount increase,
+     * food item is already craeted in Customer class
+     * add to cart , amount increases
      */
     public void addToCart(FoodItem foodItem){
         cart.add(foodItem);
@@ -41,7 +56,8 @@ public class Order implements Serializable {
 
     /**
      * method to delete food from cart
-     * @param foodToDelete customer will be asked what foodToBeDelete in Customer class
+     * @param indexOfFoodToDelete customer will be asked what food to be deleted in Customer class
+     *                            and the index of the food will be passed
      * checking whether it is in cart has already done in the Customer Class
      */
     public void removeIndexedFoodItem(int indexOfFoodToDelete){
@@ -53,14 +69,11 @@ public class Order implements Serializable {
 
     /**
      * method to editCart
-     * make use of displayCartItems function
-     * retrieves the selected FoodItem from the cart and directly calls its customise() method.
-     * This approach takes advantage of polymorphism,
-     * allowing the correct customise() implementation to be invoked dynamically at runtime based on the actual type of the FoodItem.
+     * @param itemToBeEdited retrieves the selected FoodItem from the cart and
+     *                       directly calls its customiseFoodItem() method.
      */
     public void editFoodItem(FoodItem itemToBeEdited){
         itemToBeEdited.customiseFoodItem();
-
     }
 
     /**
@@ -72,59 +85,56 @@ public class Order implements Serializable {
             return;
         }
         if(orderStatus==OrderStatus.PENDING) {
+            System.out.println("Order ID: "+ getOrderID());
+            System.out.println();
             for(int i=0; i<cart.size(); i++){
-                System.out.println("("+(i+1)+") "+ cart.get(i));
+                System.out.println("("+(i+1)+") "+ cart.get(i) + " - " + cart.get(i).getPrice());
             }
         }
         System.out.println();
 
     }
+
     /**
-     * method to viewSingleOrderDetails()
-     * for receipt printing
-     * customer can view their own order
-     * multiple single order details to form multiple order details
-     * for staffs and managers to view and process order accordingly
-     * output - includes orderID, food item names, food prices
+     * Get order ID of the order
+     * @return orderID of the order
      */
-    public void viewSingleOrderDetails(int inputOrderID) {
-        for(Order order: OperationsOnOrderList.getOrderList()){
-            if(order.getOrderID()==inputOrderID){
-                StringBuilder details = new StringBuilder();		//create a StringBuilder is more efficient than concatenating strings directly
-                details.append("Order ID: ").append(orderID).append("\n");	//append the orderID to identify the order
-                details.append("Items:\n");
-                for(FoodItem item : cart) {
-                    details.append("- ").append(item.getName()).append(": $").append(item.getPrice()).append("\n");
-                    //append the name and price of each food item to the details string
-                }
-                System.out.println(details.toString());
-            }
-        }
-        System.out.println("OrderID not found. Please key in the correct OrderID.");
-    }
-
-
     public int getOrderID(){
         return orderID;
     }
-    public void setOrderID(int orderID){
-        this.orderID=orderID;
-    }
+
+    /**
+     * Get Cart Items placed in the cart
+     * @return cart items
+     */
     public ArrayList<FoodItem> getCart(){
         return cart;
     }
-    public void setCart(ArrayList<FoodItem>cart){
-        this.cart = cart;
-    }
+
+    /**
+     * Get the total price of items in cart
+     * @return price of all items in cart
+     */
     public double getAmount(){
         return amount;
     }
-    public void setAmount(double newAmount){
-        this.amount = newAmount;
-    }
+
+    /**
+     * Get the order status for this order
+     * @return order status
+     */
     public OrderStatus getOrderStatus(){
         return orderStatus;
     }
+
+    /**
+     * Change the order status for this order
+     * After paying - from PENDING to PREPARING
+     * In the processing order - from PREPARING to READYTOPICKUP
+     * After customer collected the food - from READYTOPICKUP to COMPLETED
+     * If customer canceled order during payment - from PENDING to CANCELED
+     * @param newOrderStatus this includes Order's new Order Status
+     */
     public void setOrderStatus(OrderStatus newOrderStatus){
         this.orderStatus=newOrderStatus;
     }
