@@ -61,6 +61,7 @@ public class FomsAPP implements Serializable {
                     //check if user is first login
                     if (worker.getLoginPassword().equals("default")) {
                         System.out.println("Enter your new password:");
+                        scanner.nextLine();
                         String newPassword = scanner.nextLine();
                         worker.setLoginPassword(newPassword);
                     }

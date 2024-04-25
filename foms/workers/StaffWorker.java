@@ -42,7 +42,7 @@ public class StaffWorker extends Worker implements Serializable {
     public void processOrder(){
         Scanner sc = new Scanner(System.in);
         getBranch().getOrderList().displayOrderList();
-        System.out.println("Select the order to display its details (Enter 0 to exit): ");
+        System.out.println("Select the order to process (Enter 0 to exit): ");
         while (true) {
             try {
                 int choice = sc.nextInt();
