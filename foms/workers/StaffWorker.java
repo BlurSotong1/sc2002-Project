@@ -4,6 +4,8 @@ import foms.management.branch.Branch;
 import foms.order.Order;
 
 import java.io.Serializable;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class StaffWorker extends Worker implements Serializable {
     /**
@@ -11,10 +13,6 @@ public class StaffWorker extends Worker implements Serializable {
      */
     private Branch branch;
 
-    /**
-     * is the class that enables staff to do their job through functions that deals with menu.
-     */
-    private Order order;
 
     /**
      * Constructor for manager class.
@@ -37,6 +35,61 @@ public class StaffWorker extends Worker implements Serializable {
     public String toString() {
         return String.format(super.toString() + "%-15s", branch.getName());
     }
+
+    /**
+     * Process order
+     */
+    public void processOrder(){
+        Scanner sc = new Scanner(System.in);
+        getBranch().getOrderList().displayOrderList();
+        System.out.println("Select the order to display its details (Enter 0 to exit): ");
+        while (true) {
+            try {
+                int choice = sc.nextInt();
+                if (choice == 0) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                Order order = getBranch().getOrderList().findOrder(choice - 1);
+                getBranch().getOrderList().processOrder(order.getOrderID());
+            }
+            catch(InputMismatchException e)
+            {
+                System.out.println("Enter the order index (number) (Enter 0 to exit): ");
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage()+" Enter the order index (number) (Enter 0 to exit): ");
+            }
+        }
+    }
+
+    public void displayOrders(){
+        Scanner sc = new Scanner(System.in);
+        getBranch().getOrderList().displayOrderList();
+        System.out.println("Select the order to display its details (Enter 0 to exit): ");
+        while (true){
+            try{
+                int choice = sc.nextInt();
+                if (choice ==0){
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                Order order = getBranch().getOrderList().findOrder(choice-1);
+                order.displayCart();
+                return;
+            }
+            catch(InputMismatchException e)
+            {
+                  System.out.println("Enter the order index (number) (Enter 0 to exit): ");
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage()+" Enter the order index (number) (Enter 0 to exit): ");
+            }
+        }
+    }
+
+
+
 
     /**
      * Gets the branch object of this worker.

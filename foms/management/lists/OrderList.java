@@ -47,9 +47,10 @@ public class OrderList implements Serializable {
             return;
         }
         System.out.println("Orders:");
+        int i=1;
         for (Order order : orderList) {
-            System.out.println(order.getOrderStatus());
-            order.displayCart();
+            System.out.println(i + ". "+order.getOrderID()+ ", status: "+order.getOrderStatus());
+            i++;
         }
     }
 
@@ -74,10 +75,10 @@ public class OrderList implements Serializable {
             if (orderID == order.getOrderID()) {
                 if (order.getOrderStatus() == OrderStatus.PREPARING) {
                     order.setOrderStatus(OrderStatus.READYTOPICKUP);
-                    System.out.println("Your order is ready to pick up now.");
+                    System.out.println("The order is ready to pick up now.");
                 } else if (order.getOrderStatus() == OrderStatus.READYTOPICKUP) {
                     order.setOrderStatus(OrderStatus.COMPLETED);
-                    System.out.println("Your order has completed now.");
+                    System.out.println("The order has completed now.");
                     orderList.remove(order);
                 }
             }
