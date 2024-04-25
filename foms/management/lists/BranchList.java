@@ -147,4 +147,6 @@ public class BranchList implements Serializable {
     public ArrayList<Branch> getBranchList() {
         return branchList;
     }
+
+
 }

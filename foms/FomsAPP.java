@@ -11,23 +11,15 @@ import java.util.Scanner;
 
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-
-        Branch branch = new Branch("jp", "jp",15);
-        AdminWorker choonggi = new AdminWorker("choonggi",20,'M',"choonggi001");
-        choonggi.getJobsOnBranchList().addBranch();
-
-        try {
-            FileOutputStream fileOut = new FileOutputStream("AdminInfo.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(choonggi);
-            out.close();
-            fileOut.close();
-        } catch (IOException e) {
-            System.out.println("we are screwed");
-        }
-
-        BranchList.serializeBranchList();
-        AllWorkersList.serializeALlWorkerList();
+        BranchList dummy = new BranchList();
+        Branch branch1 = new Branch("NTU", "NTU", 18);
+        dummy.addCreatedBranch(branch1);
+        Branch branch2 = new Branch("JE", "JE", 18);
+        dummy.addCreatedBranch(branch2);
+        Branch branch3 = new Branch("JP", "JP", 18);
+        dummy.addCreatedBranch(branch3);
+        Branch branch4 = new Branch("HOUGANG", "HOUGANG", 18);
+        dummy.addCreatedBranch(branch4);
 
         //calling state
         AdminWorker admin = null;
