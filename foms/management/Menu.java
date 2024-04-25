@@ -159,6 +159,10 @@ public class Menu {
     public int getMenuSize() {
         return menu.size();
     }
+
+    public ArrayList<FoodItem> getMenuArraylist() {
+        return menu;
+    }
 }
 
 
