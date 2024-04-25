@@ -73,7 +73,7 @@ public class OperationsOnBranchList implements Serializable {
                         }
                     }
                     catch (InputMismatchException e){
-                        System.out.println("Enter a valid worker age (number):");
+                        System.out.println("Enter the branch quota (number):");
                         scanner.next();
                         continue;
                     }
