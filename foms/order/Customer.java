@@ -144,6 +144,10 @@ public class Customer implements Serializable {
     public void removeFoodItem(){
         Scanner scanner = new Scanner(System.in);
         int foodChoice;
+        if (order.getCart().isEmpty()) {
+            System.out.println("cart is empty!");
+            return;
+        }
 
         while (true) {
             try{
@@ -207,7 +211,7 @@ public class Customer implements Serializable {
                 scanner.next();
                 continue;
             } catch (Exception e) {
-                System.out.println("error");
+                System.out.println("error in customer edit menu");
                 return;
             }
 
@@ -256,6 +260,6 @@ public class Customer implements Serializable {
     }
 
     public CollectOrder getCollectOrder() {
-        return getCollectOrder();
+        return collectOrder;
     }
 }
