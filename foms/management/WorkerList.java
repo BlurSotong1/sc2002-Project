@@ -2,7 +2,7 @@ package foms.management;
 
 import java.util.ArrayList;
 
-import foms.workerfilters.*;
+import foms.management.filters.workerfilters.WorkerFilters;
 import foms.workers.Worker;
 
 public class WorkerList {

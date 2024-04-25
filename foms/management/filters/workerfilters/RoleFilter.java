@@ -1,4 +1,5 @@
 package foms.management.filters.workerfilters;
 
-public interface BaseWorkerFilter {
+public class RoleFilter {
+
 }

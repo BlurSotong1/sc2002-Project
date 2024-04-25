@@ -2,9 +2,9 @@ package foms.management;
 
 import java.util.ArrayList;
 
+import foms.management.filters.workerfilters.WorkerFilters;
 import foms.workers.AdminWorker;
 import foms.workers.Worker;
-import foms.workerfilters.*;
 
 public class AllWorkersList {
     /**
