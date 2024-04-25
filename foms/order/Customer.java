@@ -241,4 +241,8 @@ public class Customer implements Serializable {
     public void setPaymentMethod(Payment paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }

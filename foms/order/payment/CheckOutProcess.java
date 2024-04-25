@@ -1,6 +1,7 @@
 package foms.order.payment;
 
 import foms.order.Customer;
+import foms.order.Order;
 import foms.order.OrderStatus;
 
 import java.io.Serializable;
@@ -8,20 +9,29 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * This is for customer to check out their order
- * We will handle payment processing and payment failure in this class
+ * This class facilitates the checkout process for customers.
+ * It handles payment processing and payment failure.
  */
 public class CheckOutProcess implements Serializable {
     /**
-     * The Customer who is ready to check out their order
+     * The Customer who is ready to check out their order.
      */
     final private Customer customer;
 
+    /**
+     * Constructor for CheckOutProcess class.
+     *
+     * @param customer The Customer who is ready to check out their order.
+     */
     public CheckOutProcess(Customer customer) {
         this.customer = customer;
     }
 
-    public void CheckOut () {
+    /**
+     * Checks out the order that the customer has put into the cart.
+     * If the checkout is successful, the order is emptied out so that the customer can order again.
+     */
+    public void CheckOut() {
         System.out.println("Checking out Process");
         System.out.printf("Your total bill is: %.2f", customer.getOrder().getAmount());
         System.out.println("Proceed to checkout?\n" +
@@ -45,9 +55,9 @@ public class CheckOutProcess implements Serializable {
 
         System.out.println("checking out now.");
 
-        int maxIndex =1;
-        for (Payment payment:customer.getBranch().getPaymentList().getAvailablePayments()) {
-            System.out.printf("%d. %s",maxIndex,payment.getName());
+        int maxIndex = 1;
+        for (Payment payment : customer.getBranch().getPaymentList().getAvailablePayments()) {
+            System.out.printf("%d. %s", maxIndex, payment.getName());
             maxIndex++;
         }
 
@@ -82,18 +92,15 @@ public class CheckOutProcess implements Serializable {
 
         printReceipt();
 
-        customer.getBranch().getOrderList().addOrderToOrderList(customer.getOrder());
         customer.getOrder().setOrderStatus(OrderStatus.PREPARING);
-
+        customer.getBranch().getOrderList().addOrderToOrderList(customer.getOrder());
+        customer.setOrder(new Order());
     }
 
-
     /**
-     * receipt printing with orderID
-     * will be printed once customer checkout their order in the update order status function
+     * Prints the receipt with order details including orderID, items, amount due, amount paid, and payment method.
+     * This will be printed once the customer checks out their order.
      */
-
-
     private void printReceipt() {
         System.out.println("OrderID: " + customer.getOrder().getOrderID());
         customer.getOrder().displayCart();
@@ -101,8 +108,4 @@ public class CheckOutProcess implements Serializable {
         System.out.println("Amount Paid: " + customer.getOrder().getAmount());
         System.out.println("Paid using: " + customer.getPaymentMethod().getName());
     }
-
-
 }
-
-

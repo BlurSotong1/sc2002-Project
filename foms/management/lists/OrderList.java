@@ -40,7 +40,6 @@ public class OrderList implements Serializable {
     /**
      * method to display every Order in the OrderList
      * use for loop and utilise displayCart method in order
-     * add a total amount and order status
      */
     public void displayOrderList() {
         if(orderList.isEmpty()){
@@ -51,7 +50,6 @@ public class OrderList implements Serializable {
         for (Order order : orderList) {
             System.out.println(order.getOrderStatus());
             order.displayCart();
-            System.out.println("Total amount = " + order.getAmount());
         }
     }
 
