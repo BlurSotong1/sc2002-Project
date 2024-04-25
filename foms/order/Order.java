@@ -92,7 +92,7 @@ public class Order implements Serializable {
             System.out.println("Order ID: "+ getOrderID());
             System.out.println();
             for(int i=0; i<cart.size(); i++){
-                System.out.println("("+(i+1)+") "+ cart.get(i) + " - " + cart.get(i).getPrice());
+                System.out.println((i+1)+". "+ cart.get(i) + " - " + cart.get(i).getPrice());
             }
         }
         System.out.println();

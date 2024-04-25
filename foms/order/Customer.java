@@ -66,28 +66,28 @@ public class Customer implements Serializable {
             try{
                 System.out.println("Select food item to add into your cart:\n" +
                         "Press 0 to go back to main menu");
-                Menu.displayMenu();
+                branch.getMenu().displayMenu();
                 foodChoice=scanner.nextInt();
 
                 if(foodChoice ==0){
                     System.out.println("Going back to main menu.");
                     break;
                 }
-                else if(foodChoice>=1 || foodChoice <= Menu.getMenu().size()) {
-                    FoodItem cartItem = Menu.getMenu().get(foodChoice-1);
+                else if(foodChoice>=1 || foodChoice <= branch.getMenu().getMenuSize()) {
+                    FoodItem cartItem = branch.getMenu().get(foodChoice-1);
 
                     if(cartItem instanceof SetMeal){
                         SetMeal setMeal = (SetMeal)cartItem;
                         cart.addToCart(setMeal);
 
                         System.out.println("What do you want for your sides:");
-                        Menu.displayMenu("Sides");
+                        branch.getMenu().displayMenu("Sides");
                         int sidesChoice = scanner.nextInt();
                         Sides selectedSides = setMeal.getSides(sidesChoice-1);
                         setMeal.setSides(selectedSides);
 
                         System.out.println("What do you want for your drinks:");
-                        Menu.displayMenu("Drink");
+                        branch.getMenu().displayMenu("Drink");
                         int drinkChoice = scanner.nextInt();
                         Drink selectedDrink = setMeal.getDrink(drinkChoice-1);
                         setMeal.setSides(selectedDrink);
@@ -222,6 +222,7 @@ public class Customer implements Serializable {
 
                     CheckOutOrder customerCheckOut = new CheckOutOrder(this);
                     customerCheckOut.updateOrderStatus(this);
+
                 }
 
             }catch(InputMismatchException e){

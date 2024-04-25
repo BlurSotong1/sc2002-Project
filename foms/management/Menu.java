@@ -132,7 +132,7 @@ public class Menu {
 
                             case "1"-> foodItem.updatePrice();
                             case "2" -> foodItem.updateDescription();
-                            case "3": return;
+                            case "3" -> return;
                             default -> System.out.println("Enter a valid option!");
                         }
                         return;
@@ -158,6 +158,10 @@ public class Menu {
      */
     public int getMenuSize() {
         return menu.size();
+    }
+
+    public ArrayList<FoodItem> getMenuArraylist() {
+        return menu;
     }
 }
 
