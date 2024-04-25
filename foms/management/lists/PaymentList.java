@@ -23,6 +23,8 @@ public class PaymentList implements Serializable {
 
     public void removeIndexedPayment(int index) {
         if (index >= 0 && index < paymentList.size()) {
+            Payment paymentToBoRemoved = paymentList.get(index);
+            paymentToBoRemoved.setPaymentStatus(false);
             paymentList.remove(index);
         }
     }
