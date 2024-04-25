@@ -165,4 +165,10 @@ public abstract class Worker {
     public void setRole(char role) {
         this.role = role;
     }
+
+    /**
+     * Changes the password of this worker.
+     * @param password is the new password of this worker.
+     */
+    public void setLoginPassword(String password){this.loginPassword=password;}
 }

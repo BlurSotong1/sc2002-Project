@@ -13,7 +13,7 @@ public class OperationsOnWorkerList {
     /**
      * Operations on worker list is performed by admin worker.
      */
-    private AdminWorker admin;
+    private static AdminWorker admin;
 
 
     /**
@@ -103,7 +103,7 @@ public class OperationsOnWorkerList {
                         }
 
                         BranchList.displayBranchNames();
-                        System.out.println("Select new worker branch (Enter 0 to exit):");
+                        System.out.println("Select new worker branch (Enter 0 to exit): ");
                         while (true) {
                             try {
                                 int choice2 = sc.nextInt()-1;
@@ -147,12 +147,16 @@ public class OperationsOnWorkerList {
                                                 System.out.printf("Added %s.\n", workerName);
 
                                                 if (branch.checkQuotaRatio()==false){
+                                                    System.out.printf("%s Manpower:\n", branch.getName());
+                                                    System.out.printf("Number of staff (excluding Manager): \t%d\n", branch.getNumStaff());
+                                                    System.out.printf("Number of manager: \t%d\n", branch.getNumManager());
                                                     System.out.println("Note that quota is not met.");
-                                                    System.out.printf("Number of staff (excluding Manager) in %s: %d\n",branch.getName(), branch.getNumStaff());
-                                                    System.out.printf("Number of manager in %s: %d\n", branch.getName(),branch.getNumManager());
                                                     return;
                                                 }
                                                 else {
+                                                    System.out.printf("%s Manpower:\n", branch.getName());
+                                                    System.out.printf("Number of staff (excluding Manager): \t%d\n", branch.getNumStaff());
+                                                    System.out.printf("Number of manager: \t%d\n", branch.getNumManager());
                                                     System.out.println("Quota is met.");
                                                     return;
                                                 }
@@ -183,13 +187,17 @@ public class OperationsOnWorkerList {
                                                 System.out.printf("Added %s.\n", workerName);
 
                                                 if (branch.checkQuotaRatio()==false){
-                                                    System.out.println("Note that quota is met.");
-                                                    System.out.printf("Number of staff (excluding Manager) in %s: %d\n",branch.getName(), branch.getNumStaff());
-                                                    System.out.printf("Number of manager in %s: %d\n", branch.getName(),branch.getNumManager());
+                                                    System.out.printf("%s Manpower:\n", branch.getName());
+                                                    System.out.printf("Number of staff (excluding Manager): \t%d\n", branch.getNumStaff());
+                                                    System.out.printf("Number of manager: \t%d\n", branch.getNumManager());
+                                                    System.out.println("Note that quota is not met.");
                                                     return;
                                                 }
                                                 else {
-                                                    System.out.println("Quota is not met.");
+                                                    System.out.printf("%s Manpower:\n", branch.getName());
+                                                    System.out.printf("Number of staff (excluding Manager): \t%d\n", branch.getNumStaff());
+                                                    System.out.printf("Number of manager: \t%d\n", branch.getNumManager());
+                                                    System.out.println("Quota is met.");
                                                     return;
                                                 }
 
@@ -261,12 +269,21 @@ public class OperationsOnWorkerList {
                             ((ManagerWorker)worker).getBranch().getWorkerList().removeWorkerObject(worker);
                         }
                         System.out.printf("Removed %s.\n", worker.getName());
-                        System.out.println("List of workers:");
-                        for(Worker worker1 : admin.getAllWorkersList().getWorkerList()) {
-                            System.out.printf("%d: %s\n", i+1, worker1.toString());
-                            i++;
+                        if (((StaffWorker)worker).getBranch().checkQuotaRatio()==false){
+                            System.out.printf("%s Manpower:\n", ((StaffWorker)worker).getBranch().getName());
+                            System.out.printf("Number of staff (excluding Manager): \t%d\n", ((StaffWorker)worker).getBranch().getNumStaff());
+                            System.out.printf("Number of manager: \t%d\n", ((StaffWorker)worker).getBranch().getNumManager());
+                            System.out.println("Note that quota is not met.");
+                            return;
                         }
-                        return;
+                        else {
+                            System.out.printf("%s Manpower:\n", ((StaffWorker)worker).getBranch().getName());
+                            System.out.printf("Number of staff (excluding Manager): \t%d\n", ((StaffWorker)worker).getBranch().getNumStaff());
+                            System.out.printf("Number of manager: \t%d\n", ((StaffWorker)worker).getBranch().getNumManager());
+                            System.out.println("Quota is met.");
+                            return;
+                        }
+
                     }
                     else if (choice2.equals("0")) {
                         System.out.println("Did not remove worker.\nReturning to previous page..");
@@ -278,7 +295,7 @@ public class OperationsOnWorkerList {
                 }
             }
             catch (InputMismatchException e) {
-                System.out.println("Enter a valid branch index.");
+                System.out.println("Enter a valid worker index.");
                 scanner.next();
                 continue;
             }
@@ -298,5 +315,85 @@ public class OperationsOnWorkerList {
 
     }
 
+    /**
+     * Promote a staff to Branch Manager
+     */
+    public void promoteToManager() {
+        Scanner scanner = new Scanner(System.in);
+        int i=0;
+        System.out.println("List of workers:");
+        for(Worker worker : admin.getAllWorkersList().getWorkerList()) {
+            System.out.printf("%d: %s\n", i+1, worker.toString());
+            i++;
+        }
+
+        System.out.println("Enter the staff worker index to make manager (Enter 0 to exit): ");
+        while (true) {
+            try {
+                int choice = scanner.nextInt()-1;
+                if (choice==-1) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                Worker worker = admin.getAllWorkersList().findWorker(choice);
+                if (worker instanceof ManagerWorker) {
+                    System.out.println(worker.getName()+" is already a manager.");
+                    System.out.println("Enter the staff worker index to make manager (Enter 0 to exit): ");
+                    continue;
+                }
+                else if (worker instanceof AdminWorker) {
+                    System.out.println(worker.getName()+" is an admin.");
+                    System.out.println("Enter the staff worker index to make manager (Enter 0 to exit): ");
+                    continue;
+                }
+                else {
+                    String name = worker.getName();
+                    int age = worker.getAge();
+                    char gender = worker.getGender();
+                    String loginID = worker.getLoginID();
+                    String loginPassword = worker.getLoginPassword();
+                    Branch branch = ((StaffWorker)worker).getBranch();
+                    ManagerWorker newManager = new ManagerWorker(name, age, gender, loginID, branch);
+                    newManager.setLoginPassword(loginPassword);
+
+                    admin.getAllWorkersList().removeWorkerObject(worker);
+                    admin.getAllWorkersList().addCreatedWorker(newManager);
+
+                    ((StaffWorker)worker).getBranch().getWorkerList().removeWorkerObject(worker);
+                    ((StaffWorker)worker).getBranch().getWorkerList().addCreatedWorker(newManager);
+
+                    ((StaffWorker)worker).getBranch().setNumStaff(((StaffWorker)worker).getBranch().getNumStaff()-1);
+                    ((StaffWorker)worker).getBranch().setNumManager(((StaffWorker)worker).getBranch().getNumManager()+1);
+
+                    if (((StaffWorker)worker).getBranch().checkQuotaRatio()==false){
+                        System.out.printf("%s Manpower:\n", ((StaffWorker)worker).getBranch().getName());
+                        System.out.printf("Number of staff (excluding Manager): \t%d\n", ((StaffWorker)worker).getBranch().getNumStaff());
+                        System.out.printf("Number of manager: \t%d\n", ((StaffWorker)worker).getBranch().getNumManager());
+                        System.out.println("Note that quota is not met.");
+                        return;
+                    }
+                    else {
+                        System.out.printf("%s Manpower:\n", ((StaffWorker)worker).getBranch().getName());
+                        System.out.printf("Number of staff (excluding Manager): \t%d\n", ((StaffWorker)worker).getBranch().getNumStaff());
+                        System.out.printf("Number of manager: \t%d\n", ((StaffWorker)worker).getBranch().getNumManager());
+                        System.out.println("Quota is met.");
+                        return;
+                    }
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Enter a valid worker index.");
+                scanner.next();
+                continue;
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage()+" Enter a valid worker index.");
+                continue;
+            }
+
+        }
+    }
+
 }
+
 
