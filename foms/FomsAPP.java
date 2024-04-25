@@ -49,6 +49,8 @@ public class FomsAPP implements Serializable {
             try {
                 int choice = scanner.nextInt();
                 if (choice == 1) {
+                    Customer customer = new Customer();
+
 
                 }
                 else if (choice == 2) {
