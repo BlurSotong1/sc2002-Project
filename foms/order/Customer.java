@@ -73,6 +73,7 @@ public class Customer implements Serializable {
                     System.out.println("Going back to main menu.");
                     break;
                 }
+
                 else if(foodChoice>=1 || foodChoice <= Menu.getMenu().size()) {
                     FoodItem cartItem = Menu.getMenu().get(foodChoice-1);
 
