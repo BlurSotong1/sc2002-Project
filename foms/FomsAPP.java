@@ -2,6 +2,7 @@ package foms;
 
 import foms.food.*;
 import foms.management.branch.Branch;
+import foms.management.branch.loginSystemCtrl;
 import foms.management.lists.AllWorkersList;
 import foms.management.lists.BranchList;
 import foms.management.lists.WorkerList;
@@ -12,6 +13,7 @@ import foms.workers.StaffWorker;
 import foms.workers.Worker;
 
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FomsAPP implements Serializable {
@@ -35,19 +37,54 @@ public class FomsAPP implements Serializable {
 
         createTestCases(admin);
 
-
-
-
-
-
-
-/*
+        //Start of Program
         Scanner scanner = new Scanner(System.in);
         System.out.println("**************************************************");
         System.out.println("Welcome to FastFood Operations Management System!");
         System.out.println("To start ordering, enter: 1");
         System.out.println("To login as a Staff Member, enter: 2.");
         System.out.print("Enter your choice: ");
+
+        while (true){
+            try {
+                int choice = scanner.nextInt();
+                if (choice == 1) {
+
+                }
+                else if (choice == 2) {
+                    Worker worker = loginSystemCtrl.loginToSystemAsWorker();
+                    System.out.println("Login successful.");
+                    //check if user is first login
+                    if (worker.getLoginPassword().equals("password")) {
+                        System.out.println("Enter your new password:");
+                        String newPassword = scanner.nextLine();
+                        worker.setLoginPassword(newPassword);
+                    }
+                    if (worker instanceof ManagerWorker){
+                        allManagerActions(worker);
+                    }
+                    else if (worker instanceof StaffWorker){
+
+                    }
+                    else if (worker instanceof AdminWorker){
+
+                    }
+
+
+                }
+                else{
+                    System.out.print("Invalid choice. Enter again: ");
+                    continue;
+                }
+            }catch (InputMismatchException e){
+                System.out.print("Invalid choice. Enter again: ");
+                scanner.next();
+                continue;
+            }
+        }
+
+
+/*
 
 
 
@@ -63,7 +100,7 @@ public class FomsAPP implements Serializable {
 
     }
 
-    public void allCustomerActions() {
+    public static void allCustomerActions(Customer customer) {
         System.out.println("1. Place New Order");
 
         Customer customer = new Customer();
@@ -71,10 +108,16 @@ public class FomsAPP implements Serializable {
         customer.addFoodItemToCart();
 
         System.out.println("2. Check Existing Order");
+    }
 
-
+    public static void allManagerActions(Worker manager){
 
     }
+
+    public static void allStaffActions(Worker staff){}
+
+    public static void allAdminActions(Worker admin){}
+
 
     public static void createTestCases(AdminWorker admin) {
         BranchList dummy = new BranchList(); //quota is staff+manager
