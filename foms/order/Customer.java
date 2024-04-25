@@ -147,6 +147,11 @@ public class Customer implements Serializable {
 
         while (true) {
             try{
+
+                if (order.getCart().isEmpty()) {
+                    System.out.println("cart is empty!");
+                    return;
+                }
                 System.out.print("Select the food item that you want to delete from your cart:\n " +
                         "(Enter 0 to exit)\n" +
                         "Enter your choice: ");
@@ -182,6 +187,10 @@ public class Customer implements Serializable {
     public void editFoodItem(){
         Scanner scanner = new Scanner(System.in);
         //display order then ask person choose
+        if (order.getCart().isEmpty()) {
+            System.out.println("Empty cart!");
+            return;
+        }
         order.displayCart();
 
         int choice;
@@ -197,6 +206,9 @@ public class Customer implements Serializable {
                 System.out.println("Enter a number!");
                 scanner.next();
                 continue;
+            } catch (Exception e) {
+                System.out.println("error");
+                return;
             }
 
             if (choice == 0) { //terminate

@@ -15,7 +15,7 @@ public class BaseMenuFilter implements MenuFilters, Serializable {
         for (FoodItem foodItem: menu) {
 
                 System.out.printf("%d. %s\n",counter,foodItem.getName());
-
+                counter++;
         }
     }
 
