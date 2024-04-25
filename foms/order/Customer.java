@@ -208,4 +208,6 @@ public class Customer implements Serializable {
 
     public Branch getBranch() { return branch;}
     public void setBranch(){this.branch=branch;}
+    public Order getCart(){return cart;}
+
 }

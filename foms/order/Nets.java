@@ -1,6 +1,6 @@
 package foms.order;
 
-public class Nets implements Payment {
+public class NETS implements Payment {
     private String name = "Nets";
     private boolean paymentStatus;
 
