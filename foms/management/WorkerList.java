@@ -9,7 +9,7 @@ public class WorkerList {
     /**
      * list of workers in a branch.
      */
-    private static ArrayList<Worker> workerList;
+    private ArrayList<Worker> workerList;
 
     /**
      * Constructor for WorkerList class.

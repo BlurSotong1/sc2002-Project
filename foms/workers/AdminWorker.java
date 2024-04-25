@@ -14,6 +14,11 @@ public class AdminWorker extends Worker implements Serializable {
     private BranchList branchList;
 
     /**
+     * list of all workers in the company.
+     */
+    private WorkerList allWorkersList;
+
+    /**
      * Admin worker perform operations on branch list.
      */
     private OperationsOnBranchList jobsOnBranchList;
@@ -45,6 +50,7 @@ public class AdminWorker extends Worker implements Serializable {
         super(name, age, gender, loginID);
         setRole('A');
         branchList = new BranchList();
+        allWorkersList = new WorkerList();
         jobsOnBranchList = new OperationsOnBranchList(this);
         jobsOnWorkerList = new OperationsOnWorkerList(this);
         jobsOnBranch = new OperationsOnBranchStatus(this);
