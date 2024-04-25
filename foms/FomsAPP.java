@@ -66,17 +66,17 @@ public class FomsAPP implements Serializable {
                         return;
                     }
                     if (worker instanceof ManagerWorker){
-                        allManagerActions(worker);
+                        allManagerActions((ManagerWorker)worker);
                         serialisationBeforeQuitting(admin);
                         return;
                     }
                     else if (worker instanceof StaffWorker){
-                        allStaffActions(worker);
+                        allStaffActions((StaffWorker)worker);
                         serialisationBeforeQuitting(admin);
                         return;
                     }
                     else if (worker instanceof AdminWorker){
-                        allAdminActions(admin);
+                        allAdminActions((AdminWorker)admin);
                         serialisationBeforeQuitting(admin);
                         return;
                     }
@@ -205,7 +205,10 @@ public class FomsAPP implements Serializable {
 
     }
 
-    private static void allStaffActions(Worker staff){}
+    private static void allStaffActions(StaffWorker staff){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome "+staff.getName());
+    }
 
     private static void allAdminActions(AdminWorker admin){
         Scanner sc = new Scanner(System.in);
