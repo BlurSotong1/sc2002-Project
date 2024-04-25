@@ -62,11 +62,4 @@ public class PaymentList implements Serializable {
         }
     }
 
-    public Payment findPayment(int index) throws IndexOutOfBoundsException{
-        if(index>=0 && index<paymentList.size()){
-            return paymentList.get(index);
-        }else{
-            throw new IndexOutOfBoundsException("Payment not found!");
-        }
-    }
 }

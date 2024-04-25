@@ -56,7 +56,7 @@ public class OperationsOnPaymentList implements Serializable {
                     return;
                 }
 
-                newPayment = branch.getPaymentList().findPayment(paymentMethod-1);
+                newPayment = branch.getPaymentList().getPayment(paymentMethod-1);
 
                 if(!newPayment.getPaymentStatus()){
                     branch.getPaymentList().addCreatedPayment(newPayment);
@@ -103,7 +103,7 @@ public class OperationsOnPaymentList implements Serializable {
                 paymentToRemoveChoice=scanner.nextInt();
                 branch.getPaymentList().removeIndexedPayment(paymentToRemoveChoice-1);
 
-                Payment paymentToRemove = branch.getPaymentList().findPayment(paymentToRemoveChoice-1);
+                Payment paymentToRemove = branch.getPaymentList().getPayment(paymentToRemoveChoice-1);
                 System.out.println("Payment method "+ paymentToRemove.getName() + " deleted successfully.");
 
             } catch (InputMismatchException e) {
