@@ -1,10 +1,16 @@
 package foms;
 
 import foms.food.*;
-import foms.management.branch.*;
-import foms.management.lists.*;
+import foms.management.branch.Branch;
+import foms.management.branch.loginSystemCtrl;
+import foms.management.lists.AllWorkersList;
+import foms.management.lists.BranchList;
+import foms.management.lists.WorkerList;
 import foms.order.Customer;
-import foms.workers.*;
+import foms.workers.AdminWorker;
+import foms.workers.ManagerWorker;
+import foms.workers.StaffWorker;
+import foms.workers.Worker;
 
 import java.io.*;
 import java.util.InputMismatchException;
@@ -55,13 +61,13 @@ public class FomsAPP implements Serializable {
                         worker.setLoginPassword(newPassword);
                     }
                     if (worker instanceof ManagerWorker){
-                        allManagerActions((ManagerWorker)worker);
+                        allManagerActions(worker);
                     }
                     else if (worker instanceof StaffWorker){
-                        allStaffActions((StaffWorker) worker);
+
                     }
                     else if (worker instanceof AdminWorker){
-                        allAdminActions((AdminWorker) worker);
+
                     }
 
 
@@ -78,99 +84,70 @@ public class FomsAPP implements Serializable {
         }
 
 
-/*
-
-
-
-
-        for (Branch branch2: admin.getBranchList().getBranchList())
-            System.out.printf("\n\n%s", branch2.getName());
-       // Customer customer = new Customer();
-       // System.out.println("Welcome Customer!");
-        customer.addFoodItemToCart(); */
-
-        //admin.getJobsOnWorkerList().addWorker();
 
 
     }
 
-    public static void allCustomerActions(Customer customer) {
-        System.out.println("1. Place New Order");
+    private static void placeNewOrder(Customer customer) {
 
-        Customer customer = new Customer();
-
-        customer.addFoodItemToCart();
-
-        System.out.println("2. Check Existing Order");
-    }
-
-    public static void allManagerActions(ManagerWorker manager){
-
-    }
-
-    public static void allStaffActions(StaffWorker staff){}
-
-    public static void allAdminActions(AdminWorker admin){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome "+admin.getName());
-        System.out.println();
+        String input;
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
             try {
-                System.out.println("------------------ Staff Account Settings------------------");
-                System.out.println("1. Add staff account");
-                System.out.println("2. Remove staff account");
-                System.out.println("3. Display staff list");
-                System.out.println("4. Promote a staff");
-                System.out.println("5. Transfer a staff");
-                System.out.println();
-                System.out.println("------------------ Branch Settings------------------");
-                System.out.println("6. Add a branch");
-                System.out.println("7. Remove a branch");
-                System.out.println("8. Open a branch");
-                System.out.println("9. Close a branch");
-                System.out.println("10. Add payment method in a branch");
-                System.out.println("11. Remove payment method in a branch");
-                System.out.println();
-                System.out.println("0. Exit");
-                System.out.println("What would you like to do?");
+                System.out.print("Placing New Order" +
+                        "\n1. Add food item to cart" +
+                        "\n2. Edit food items in cart" +
+                        "\n3. Add Special Requests to foods" +
+                        "\n4. Remove food item from cart" +
+                        "\n5. Check out" +
+                        "\n0. Exit to Previous Screen" +
+                        "\nEnter Your Choice: ");
 
-                String choice = sc.nextLine();
-                if (choice.equals("1"))
-                    admin.getJobsOnWorkerList().addWorker();
-                else if (choice.equals("2"))
-                    admin.getJobsOnWorkerList().removeWorker();
-                else if (choice.equals("3"))
-                    admin.getJobsOnWorkerList().displayWorkerList();
-                else if (choice.equals("4"))
-                    admin.getJobsOnWorkerList().promoteToManager();
-                else if (choice.equals("5"))
-                    admin.getJobsOnBranchList().transferStaff();
-                else if (choice.equals("6"))
-                    admin.getJobsOnBranchList().addBranch();
-                else if (choice.equals("7"))
-                    admin.getJobsOnBranchList().removeBranch();
-                else if (choice.equals("8"))
-                    admin.getJobsOnBranch().openBranch();
-                else if (choice.equals("9"))
-                    admin.getJobsOnBranch().closeBranch();
-                else if (choice.equals("10"))
-                    admin.getJobsOnPaymentList().addPayment();
-                else if (choice.equals("11"))
-                    admin.getJobsOnPaymentList().removeFromPaymentList();
-                else if (choice.equals("0")) {
-                    System.out.println("Signing out account..");
-                    return;
+
+                input = scanner.next();
+
+                switch (input) {
+                    case "0" -> {
+                        System.out.println("Quitting place order...");
+                        return;
+                    }
+                    case "1" -> {
+                        System.out.println("Adding food item to cart...");
+                        customer.addFoodItemToCart();
+                    }
+                    case "2" -> {
+                        System.out.println("Editing food items in cart...");
+                        customer.editFoodItem();
+                    }
+
+                    case "3" -> {
+                        System.out.println("Removing food item from cart...");
+                        customer.removeFoodItem();
+                    }
+                    case "4" -> {
+                        System.out.println("Checking out...");
+                        customer.getCheckOutProcess().CheckOut();
+                    }
+                    default -> System.out.println("Invalid input. Please enter a valid option.");
                 }
-                else {
-                    System.out.println("Invalid. Please enter again:");
-                    continue;
-                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a valid number!");
+            } catch (Exception e) {
+                System.out.println("Error occurred");
+                scanner.next();
             }
-            catch (Exception e) {
-                System.out.println("Something went wrong.");
-            }
+        }
     }
+
+    public static void allManagerActions(Worker manager){
+
+    }
+
+    public static void allStaffActions(Worker staff){}
+
+    public static void allAdminActions(Worker admin){}
 
 
     public static void createTestCases(AdminWorker admin) {
