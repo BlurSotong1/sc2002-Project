@@ -221,7 +221,7 @@ public class Customer implements Serializable {
                     cart.setDineInOption(dineInOption);
 
                     CheckOutOrder customerCheckOut = new CheckOutOrder(this);
-                    customerCheckOut.updateOrderStatus();
+                    customerCheckOut.updateOrderStatus(this);
                 }
 
             }catch(InputMismatchException e){

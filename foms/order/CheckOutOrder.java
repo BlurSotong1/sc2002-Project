@@ -37,7 +37,7 @@ public class CheckOutOrder implements Serializable {
      * if customer paid, receipt will be printed and order status from PENDING to PREPARING
      * if customer failed to pay, will be brought to handle payment failure site
      */
-    public void updateOrderStatus() {
+    public void updateOrderStatus(Customer customer) {
         Scanner scanner = new Scanner(System.in);
         if (paymentHandling()) {
             System.out.println("Thank you for choosing us.\n" +
@@ -94,6 +94,7 @@ public class CheckOutOrder implements Serializable {
                 System.out.println(e.getMessage()+"Error occurred. ");
             }
         }
+        return true;
     }
 
     /**
