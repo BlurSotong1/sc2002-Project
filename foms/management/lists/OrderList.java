@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import foms.order.Order;
 import foms.order.OrderStatus;
-import foms.workers.StaffWorker;
 
 /**
  * OrderList will collate all the Orders in the branch
@@ -31,11 +30,11 @@ public class OrderList implements Serializable {
         }
     }
 
-    public void removeIndexedOrder(int index) {
-        if(index>=0 && index < orderList.size()){
-            orderList.remove(index);
-        }
-    }
+//    public void removeIndexedOrder(int index) {
+//        if(index>=0 && index < orderList.size()){
+//            orderList.remove(index);
+//        }
+//    }
 
     /**
      * method to display every Order in the OrderList
@@ -53,36 +52,14 @@ public class OrderList implements Serializable {
         }
     }
 
-    public Order findOrder(int index) throws IndexOutOfBoundsException{
-        if(index>=0 && index<orderList.size()){
-            return orderList.get(index);
-        }else{
-            throw new IndexOutOfBoundsException("Order not found!");
-        }
-    }
+//    public Order findOrder(int index) throws IndexOutOfBoundsException{
+//        if(index>=0 && index<orderList.size()){
+//            return orderList.get(index);
+//        }else{
+//            throw new IndexOutOfBoundsException("Order not found!");
+//        }
+//    }
 
-    /**
-     * multiple single order details to form multiple order details
-     * for staffs and managers to view and process order accordingly
-     * once Order is added
-     *
-     * @param orderID
-     */
-    public void processOrder(int orderID) {
-
-        for (Order order : orderList) {
-            if (orderID == order.getOrderID()) {
-                if (order.getOrderStatus() == OrderStatus.PREPARING) {
-                    order.setOrderStatus(OrderStatus.READYTOPICKUP);
-                    System.out.println("Your order is ready to pick up now.");
-                } else if (order.getOrderStatus() == OrderStatus.READYTOPICKUP) {
-                    order.setOrderStatus(OrderStatus.COMPLETED);
-                    System.out.println("Your order has completed now.");
-                    orderList.remove(order);
-                }
-            }
-        }
-    }
 
 
 

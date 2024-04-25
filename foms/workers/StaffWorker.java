@@ -29,6 +29,9 @@ public class StaffWorker extends Worker implements Serializable {
         this.branch = branch;
         setRole('S');
     }
+    //TODO process order
+    //TODO view all orders
+    //TODO view single order
 
     @Override
     public String toString() {
