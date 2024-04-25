@@ -1,8 +1,7 @@
 package foms.management.lists;
 
 import foms.management.branch.Branch;
-import foms.management.lists.BranchList;
-import foms.order.Payment;
+import foms.order.payment.Payment;
 import foms.workers.AdminWorker;
 
 import java.io.Serializable;

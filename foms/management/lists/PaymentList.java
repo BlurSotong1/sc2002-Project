@@ -1,9 +1,6 @@
 package foms.management.lists;
 
-import foms.order.Cash;
-import foms.order.PayWave;
-import foms.order.Payment;
-import foms.order.ShoppePay;
+import foms.order.payment.Payment;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,13 +1,9 @@
-package foms.order;
+package foms.order.payment;
 
-public class ShoppePay implements Payment{
-        private String name = "ShoppePay";
+public class ShopeePay implements Payment {
+        private String name = "ShopeePay";
         private boolean paymentStatus;
 
-        @Override
-        public boolean processPayment(double amount) {
-            return true;
-        }
 
         @Override
         public String getName() {
