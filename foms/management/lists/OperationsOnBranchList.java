@@ -48,6 +48,7 @@ public class OperationsOnBranchList {
             }
 
             String location;
+            int quota;
 
             while (true) {
                 try {
@@ -62,11 +63,27 @@ public class OperationsOnBranchList {
                     return;
                 }
 
-                admin.getBranchList().addCreatedBranch(new Branch(branchName, location));
-                return;
+                System.out.print("Enter the branch quota (Enter 0 to exit): ");
+                while (true) {
+                    try {
+                        quota = scanner.nextInt();
+                        if (quota == 0) {
+                            System.out.println("Returning to previous page..");
+                            return;
+                        }
+                    }
+                    catch (InputMismatchException e){
+                        System.out.println("Enter a valid worker age (number):");
+                        scanner.next();
+                        continue;
+                    }
+
+
+                    admin.getBranchList().addCreatedBranch(new Branch(branchName, location, quota));
+                    return;
+                }
             }
         }
-
     }
 
 

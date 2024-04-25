@@ -19,7 +19,7 @@ public class Branch implements Serializable {
     private String location;
 
     /**
-     * maximum number of staff (excluding manager) that can be in this branch.
+     * maximum number of staff that can be in this branch.
      */
     private int quota;
 
@@ -70,10 +70,10 @@ public class Branch implements Serializable {
      * There is  0 staff, 0 manager, 0 total number of staff.
      * Create list of workers, list of orders, menu and list of payment methods in the branch.
      */
-    public Branch(String name, String location) {
+    public Branch(String name, String location, int quota) {
         this.name = name;
         this.location = location;
-        this.quota = 0;
+        this.quota = quota;
         this.numStaff = 0;
         this.numManager = 0;
         this.totalNumStaff = 0;
@@ -115,8 +115,8 @@ public class Branch implements Serializable {
     }
 
     /**
-     * Gets the number of staff (excluding manager) that can be in this branch.
-     * @return the number of staff (excluding manager) that can be in this branch.
+     * Gets the number of staff that can be in this branch.
+     * @return the number of staff that can be in this branch.
      */
     public int getQuota() {
         return quota;
@@ -204,8 +204,8 @@ public class Branch implements Serializable {
     }
 
     /**
-     * Changes the maximum number of staff (excluding manager) that can be in this branch.
-     * @param quota is the new maximum number of staff (excluding manager) that can be in this branch.
+     * Changes the maximum number of staff that can be in this branch.
+     * @param quota is the new maximum number of staff that can be in this branch.
      */
     public void setQuota (int quota) {
         this.quota = quota;
