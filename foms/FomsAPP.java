@@ -158,9 +158,8 @@ public class FomsAPP implements Serializable {
                 System.out.print("Placing New Order" +
                         "\n1. Add food item to cart" +
                         "\n2. Edit food items in cart" +
-                        "\n3. Add Special Requests to foods" +
-                        "\n4. Remove food item from cart" +
-                        "\n5. Check out" +
+                        "\n3. Delete food item from cart" +
+                        "\n4. Check out" +
                         "\n0. Exit to Previous Screen" +
                         "\nEnter Your Choice: ");
 
@@ -193,11 +192,11 @@ public class FomsAPP implements Serializable {
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("Enter a valid number!");
-            } catch (Exception e) {
-                System.out.println("Error occurred");
-                scanner.next();
-            }
+                System.out.println("Enter a valid number!"); }
+//            } catch (Exception e) {
+//                System.out.println("Error occurred");
+//
+//            }
         }
     }
 
