@@ -1,7 +1,6 @@
 package foms.workers;
 
 import foms.management.Branch;
-import foms.management.OperationsOnOrderList;
 
 public class StaffWorker extends Worker{
     /**
@@ -12,7 +11,7 @@ public class StaffWorker extends Worker{
     /**
      * is the class that enables staff to do their job through functions that deals with menu.
      */
-    private OperationsOnOrderList jobsOnOrderlist;
+    private Order order;
 
     /**
      * Constructor for manager class.

@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class SetMeal extends FoodItem implements Serializable {
     private FoodItem mainDish;
     private FoodItem sideDish;
+    private FoodItem drink;
     /**
      * constructor for set meal. creates a setmeal with maindish, lets the customer choose later.
      * @param mainDish is the maindish of the food. set meal is auto set name to __ set meal
@@ -16,11 +17,15 @@ public class SetMeal extends FoodItem implements Serializable {
         this.mainDish = mainDish;
     }
 
-    private FoodItem drink;
-
-
-
-
+    public void setMainDish(FoodItem mainDish) {
+        this.mainDish = mainDish;
     }
 
+    public void setSideDish(FoodItem sideDish) {
+        this.sideDish = sideDish;
+    }
+
+    public void setDrink(FoodItem drink) {
+        this.drink = drink;
+    }
 }
