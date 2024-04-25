@@ -1,18 +1,14 @@
 package foms.order.payment;
 
-import foms.order.payment.Payment;
-
 import java.io.Serializable;
 
-public class PayWave implements Serializable,Payment {
+public class NETS implements Serializable,Payment {
 
-    final private String name = "Paywave";
+    final private String name = "NETS";
     private boolean paymentStatus = true;
-
-
     @Override
     public String getName() {
-        return name;
+        return "NETS";
     }
 
     @Override
@@ -22,7 +18,6 @@ public class PayWave implements Serializable,Payment {
 
     @Override
     public void setPaymentStatus(boolean status) {
-        this.paymentStatus = status;
+        paymentStatus = status;
     }
 }
-

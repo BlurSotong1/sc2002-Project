@@ -3,6 +3,8 @@ package foms.order;
 import foms.food.*;
 import foms.management.branch.Branch;
 import foms.management.lists.BranchList;
+import foms.order.payment.CheckOutProcess;
+import foms.order.payment.Payment;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -24,9 +26,16 @@ public class Customer implements Serializable {
      * Customer's branch.
      */
     private Branch branch;
+
+    /**
+     * payment method that the customer will use to pay for their food.
+     */
+    private Payment paymentMethod;
+
     /**
      * Customer's option to check out.
      */
+    private CheckOutProcess checkOutProcess;
 
     /**
      * constructor for branch.
@@ -224,4 +233,11 @@ public class Customer implements Serializable {
         return order;
     }
 
+    public Payment getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(Payment paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 }

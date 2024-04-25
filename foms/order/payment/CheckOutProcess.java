@@ -3,7 +3,6 @@ package foms.order.payment;
 import foms.order.Customer;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -16,13 +15,6 @@ public class CheckOutProcess implements Serializable {
      * The Customer who is ready to check out their order
      */
     private Customer customer;
-
-    /**
-     * amount the customer paid for the bill
-     */
-    private double amountPaid = 0.0;
-
-    private Payment paymentMethod;
 
     public CheckOutProcess(Customer customer) {
         this.customer = customer;
@@ -70,7 +62,7 @@ public class CheckOutProcess implements Serializable {
                 }
 
                 if (choice > 0 && choice < maxIndex) { //valid indexing
-                    this.paymentMethod = customer.getBranch().getPaymentList().getPayment(choice);
+                    customer.setPaymentMethod(customer.getBranch().getPaymentList().getPayment(choice));
                     break;
                 } else {
                     System.out.println("Enter a valid range!");
@@ -83,23 +75,26 @@ public class CheckOutProcess implements Serializable {
             }
         }
 
-        System.out.printf("Paying using %s", paymentMethod.getName());
+        System.out.printf("Paying using %s", customer.getPaymentMethod().getName());
 
+        System.out.println("Payment successful!");
 
+        printReceipt();
     }
 
 
     /**
-     * receipt printi6ng with orderID
+     * receipt printing with orderID
      * will be printed once customer checkout their order in the update order status function
      */
+
+
     private void printReceipt() {
         System.out.println("OrderID: " + customer.getOrder().getOrderID());
         customer.getOrder().displayCart();
-        System.out.println("Total amount = " + customer.getOrder().getAmount());
-        System.out.println("Amount paid = " + amountPaid);
-        System.out.println("Change = " + (amountPaid - customer.getOrder().getAmount()));
-
+        System.out.println("Amount Due: " + customer.getOrder().getAmount());
+        System.out.println("Amount Paid: " + customer.getOrder().getAmount());
+        System.out.println("Paid using: " + customer.getPaymentMethod().getName());
     }
 
 
