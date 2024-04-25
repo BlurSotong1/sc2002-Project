@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        //calling state
+        //Deserialisation
         AdminWorker admin = null;
         try {
             FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
