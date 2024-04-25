@@ -3,10 +3,11 @@ package foms.management.lists;
 import foms.management.branch.Branch;
 import foms.workers.*;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class OperationsOnBranchList {
+public class OperationsOnBranchList implements Serializable {
     /**
      * operations On branch list is performed by admin worker.
      */

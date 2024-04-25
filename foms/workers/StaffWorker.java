@@ -3,7 +3,9 @@ package foms.workers;
 import foms.management.branch.Branch;
 import foms.order.Order;
 
-public class StaffWorker extends Worker{
+import java.io.Serializable;
+
+public class StaffWorker extends Worker implements Serializable {
     /**
      * branch that the staff works at.
      */

@@ -1,12 +1,13 @@
 package foms.workers;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * An abstract class that will be used to store all workers in an arraylist
  */
-public abstract class Worker {
+public abstract class Worker implements Serializable {
     /**
      * first name and last name of this worker.
      */

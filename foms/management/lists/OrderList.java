@@ -1,5 +1,6 @@
 package foms.management.lists;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import foms.order.Order;
 import foms.order.OrderStatus;
@@ -8,7 +9,7 @@ import foms.workers.StaffWorker;
 /**
  * OrderList will collate all the Orders in the branch
  */
-public class OrderList {
+public class OrderList implements Serializable {
 
     private ArrayList<Order> orderList;
 

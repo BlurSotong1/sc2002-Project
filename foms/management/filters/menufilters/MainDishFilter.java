@@ -4,9 +4,10 @@ import foms.food.FoodItem;
 import foms.food.MainDish;
 import foms.management.lists.Menu;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainDishFilter implements MenuFilters{
+public class MainDishFilter implements MenuFilters, Serializable {
     @Override
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {
         System.out.println("Main Dish");

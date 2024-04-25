@@ -3,11 +3,12 @@ package foms.management.lists;
 import foms.food.FoodItem;
 import foms.management.filters.menufilters.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu implements Serializable {
 
     /**
      * this branch's menu

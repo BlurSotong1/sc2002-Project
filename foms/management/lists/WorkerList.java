@@ -1,5 +1,6 @@
 package foms.management.lists;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ import foms.management.filters.workerfilters.WorkerFilters;
 import foms.workers.AdminWorker;
 import foms.workers.Worker;
 
-public class WorkerList {
+public class WorkerList implements Serializable {
 
 
     /**

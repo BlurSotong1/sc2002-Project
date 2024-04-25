@@ -1,6 +1,8 @@
 package foms.order.payment;
 
 import foms.order.Customer;
+import foms.order.Order;
+import foms.order.OrderStatus;
 
 import java.io.Serializable;
 import java.util.InputMismatchException;
@@ -80,6 +82,9 @@ public class CheckOutProcess implements Serializable {
         System.out.println("Payment successful!");
 
         printReceipt();
+
+        customer.getBranch().getOrderList().addOrderToOrderList(customer.getOrder());
+        customer.getOrder().setOrderStatus(OrderStatus.PREPARING);
     }
 
 

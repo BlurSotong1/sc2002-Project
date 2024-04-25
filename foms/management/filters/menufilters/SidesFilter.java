@@ -4,9 +4,10 @@ import foms.food.FoodItem;
 import foms.food.Sides;
 import foms.management.lists.Menu;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SidesFilter implements MenuFilters{
+public class SidesFilter implements MenuFilters, Serializable {
 
     @Override
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {

@@ -3,9 +3,10 @@ package foms.management.filters.menufilters;
 import foms.food.FoodItem;
 import foms.management.lists.Menu;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public interface MenuFilters {
+public interface MenuFilters extends Serializable {
     /**
      * Abstract method
      * Display the entire menu information

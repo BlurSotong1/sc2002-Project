@@ -2,10 +2,11 @@ package foms.management.lists;
 
 import foms.management.branch.Branch;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BranchList {
+public class BranchList implements Serializable {
     /**
     * list of branches.
      */

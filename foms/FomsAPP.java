@@ -6,6 +6,9 @@ import java.io.*;
 
 public class FomsAPP implements Serializable {
     public static void main(String[] args) {
+
+        /* this is testing serialisation
+
         Branch branch = new Branch("jp","jp");
     try {
         FileOutputStream fileOut = new FileOutputStream("BranchInfo.ser");
@@ -25,6 +28,6 @@ public class FomsAPP implements Serializable {
         } catch (IOException e) {
             System.out.println("this didnt work");
         }
-
+*/
     }
 }

@@ -1,12 +1,13 @@
 package foms.management.filters.workerfilters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import foms.workers.Worker;
 
-public class AgeFilter implements WorkerFilters{
+public class AgeFilter implements WorkerFilters, Serializable {
 
     /**
      * return list of workers (age filtered)

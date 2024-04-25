@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class FoodItem implements Serializable {
+public abstract class FoodItem implements Serializable {
     private String name;
     private double price;
     private boolean availability = true;

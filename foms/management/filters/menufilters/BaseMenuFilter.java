@@ -3,9 +3,10 @@ package foms.management.filters.menufilters;
 import foms.food.FoodItem;
 import foms.management.lists.Menu;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BaseMenuFilter implements MenuFilters{
+public class BaseMenuFilter implements MenuFilters, Serializable {
 
     @Override
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {

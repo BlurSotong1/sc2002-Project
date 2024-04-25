@@ -1,5 +1,6 @@
 package foms.management.lists;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,7 +8,7 @@ import foms.management.branch.Branch;
 import foms.workers.AdminWorker;
 import foms.workers.*;
 
-public class OperationsOnWorkerList {
+public class OperationsOnWorkerList implements Serializable {
     /**
      * Operations on worker list is performed by admin worker.
      */

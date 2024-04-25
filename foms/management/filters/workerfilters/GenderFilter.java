@@ -1,11 +1,12 @@
 package foms.management.filters.workerfilters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import foms.workers.Worker;
 
-public class GenderFilter implements WorkerFilters{
+public class GenderFilter implements WorkerFilters, Serializable {
 
     /**
      * return list of workers (gender filtered)

@@ -2,10 +2,12 @@ package foms.management.branch;
 
 import foms.management.lists.BranchList;
 import foms.workers.AdminWorker;
+
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class OperationsOnBranchStatus {
+public class OperationsOnBranchStatus implements Serializable {
     /**
      * Operations on branch status is performed by admin worker.
      */
