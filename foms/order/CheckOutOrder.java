@@ -44,6 +44,7 @@ public class CheckOutOrder implements Serializable {
                     "This is your receipt.");
             printReceipt();
             customer.getCart().setOrderStatus(PREPARING);
+            customer.getBranch().getOrderList().addOrderToOrderList(customer.getCart());
         } else {
             handlePaymentFailure();
         }

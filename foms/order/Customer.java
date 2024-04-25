@@ -222,6 +222,7 @@ public class Customer implements Serializable {
 
                     CheckOutOrder customerCheckOut = new CheckOutOrder(this);
                     customerCheckOut.updateOrderStatus(this);
+
                 }
 
             }catch(InputMismatchException e){
