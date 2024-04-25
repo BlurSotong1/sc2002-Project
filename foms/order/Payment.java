@@ -1,6 +1,8 @@
 package foms.order;
 
 
+import java.io.Serializable;
+
 // Define the Payment interface
 public interface Payment {
     boolean processPayment(double amount);

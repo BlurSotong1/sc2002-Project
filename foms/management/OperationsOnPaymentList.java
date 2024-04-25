@@ -60,7 +60,7 @@ public class OperationsOnPaymentList implements Serializable {
                 if(!newPayment.getPaymentStatus()){
                     branch.getPaymentList().addCreatedPayment(newPayment);
                     newPayment.setPaymentStatus(true);
-                    System.out.println("Payment method "+paymentMethod+" added successfully.");
+                    System.out.println("Payment method "+newPayment.getName()+" added successfully.");
                     branch.getPaymentList().displayAllPayments();
                 }else {
                     System.out.println("Payment method already exists.");
@@ -101,7 +101,9 @@ public class OperationsOnPaymentList implements Serializable {
                 branch.getPaymentList().displayAllPayments();
                 paymentToRemoveChoice=scanner.nextInt();
                 branch.getPaymentList().removeIndexedPayment(paymentToRemoveChoice-1);
-                System.out.println("Payment method deleted successfully.");
+
+                Payment paymentToRemove = branch.getPaymentList().findPayment(paymentToRemoveChoice-1);
+                System.out.println("Payment method "+ paymentToRemove.getName() + " deleted successfully.");
 
             } catch (InputMismatchException e) {
                 System.out.println("Enter a valid input.");

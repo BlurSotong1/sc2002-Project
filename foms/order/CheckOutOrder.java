@@ -64,7 +64,7 @@ public class CheckOutOrder implements Serializable {
             System.out.println("The total amount is $"+remainingAmount);
             System.out.println("Select your payment mode:\n" +
                     "Press 0 to go back to main menu.");
-            customerBranch.getPaymentList().displayPaymentList();
+            customerBranch.getPaymentList().displayAvailablePayments();
             try {
                 userChoice = sc.nextInt();
                 if(userChoice==0){
