@@ -1,14 +1,12 @@
-package foms.order;
+package foms.order.payment;
 
-public class PayWave implements foms.order.Payment {
+import foms.order.payment.Payment;
+
+public class PayWave implements Payment {
 
     private String name = "Paywave";
     private boolean paymentStatus;
 
-    @Override
-    public boolean processPayment(double amount) {
-        return true;
-    }
 
     @Override
     public String getName() {
