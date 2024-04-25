@@ -67,22 +67,22 @@ public class Menu {
             return;
         }
 
-        System.out.printf("Please confirm that you want to remove %s to menu.\n",foodItem.getName());
-        System.out.println("Enter 1 to remove, 2 to exit.");
+        System.out.printf("Please confirm that you want to remove %s from menu.\n",foodItem.getName());
+        System.out.println("Enter 1 to remove (Enter 0 to exit): ");
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-
-                if (scanner.next().equals("1")) {
+                String choice = scanner.next();
+                if (choice.equals("1")) {
                     menu.remove(foodItem);
-                    System.out.printf("Removed %s from menu\n", foodItem.getName());
+                    System.out.printf("Removed %s from menu.\n", foodItem.getName());
                     return;
-                } else if (scanner.next().equals("2")) {
-                    System.out.println("Did not remove item to menu.");
+                } else if (choice.equals("0")) {
+                    System.out.println("Did not remove item to menu.\nReturning to previous page..");
                     return;
                 } else {
-                    System.out.println("Enter 1 or 2!");
+                    System.out.println("Enter 1 to remove (Enter 0 to exit): ");
                 }
             } catch (Exception e) {
                 System.out.println("Something went wrong.");

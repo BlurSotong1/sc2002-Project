@@ -131,24 +131,25 @@ public class ManagerWorker extends StaffWorker implements Serializable {
         int IndexOfFoodItemToRemove;
         int maxIndexOfMenu = getBranch().getMenu().getMenuSize();
 
-        System.out.print("Enter the food number to remove (press 0 to exit): ");
+        System.out.print("Enter the food index to remove (press 0 to exit): ");
         while (true) {
             try {
 
                 IndexOfFoodItemToRemove = scanner.nextInt() -1; //-1 because display start from 1.
                 if (IndexOfFoodItemToRemove == -1) {
-                    System.out.println("Exiting to previous page..");
+                    System.out.println("Returning to previous page..");
                     return;
 
                 } else if (IndexOfFoodItemToRemove >= 0 && IndexOfFoodItemToRemove < maxIndexOfMenu) {
                     break;
 
                 } else {
-                    System.out.println("Enter within the valid range!");
+                    System.out.println("Food not found. Enter a valid food index.");
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("Enter a number!");
+                System.out.println("Enter a valid food index.");
+                scanner.next();
             }
         }
 
