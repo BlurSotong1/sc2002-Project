@@ -44,6 +44,7 @@ public class Customer implements Serializable {
     public Customer() {
         Order order = new Order();
         this.branch = selectBranch();
+        System.out.printf("Selected %s\n",branch.getName());
     }
 
     /**

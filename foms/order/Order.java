@@ -25,7 +25,7 @@ public class Order implements Serializable {
     /**
      * Order status of the order
      */
-    private OrderStatus orderStatus = OrderStatus.PENDING;;
+    private OrderStatus orderStatus = OrderStatus.PENDING;
     /**
      * dine in option of the order
      */
@@ -37,6 +37,17 @@ public class Order implements Serializable {
     public Order() {
         Random random = new Random();
         orderID = random.nextInt(8999) + 1000; //random orderID between 1000~9999
+    }
+
+    /**
+     * for copying objects over easily in orderlist.
+     * @param order is the order i want to copy to put into arraylist
+     */
+    public Order(Order order) {
+        orderID = order.orderID;
+        cart = new ArrayList<>(order.cart);
+        dineInOption = order.dineInOption;
+        orderStatus = order.orderStatus;
     }
 
     /**

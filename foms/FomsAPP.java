@@ -1,6 +1,7 @@
 package foms;
 
 import foms.management.branch.Branch;
+import foms.order.Customer;
 import foms.workers.AdminWorker;
 
 import java.io.*;
@@ -21,11 +22,12 @@ public class FomsAPP implements Serializable {
         }
 */
         // intro
-        AdminWorker admin;
+        AdminWorker adminWorker = new AdminWorker("choonggi",20,'M',"choonggi001");
+        Branch branch = new Branch("jp", "jp",15);
         try {
             FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            AdminWorker adminWorker = (AdminWorker) in.readObject();
+            adminWorker = (AdminWorker) in.readObject();
             in.close();
             fileIn.close();
         } catch (IOException e) {
@@ -33,6 +35,7 @@ public class FomsAPP implements Serializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        adminWorker.getBranchList().addCreatedBranch(branch);
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("**************************************************");
@@ -40,6 +43,21 @@ public class FomsAPP implements Serializable {
         System.out.println("To start ordering, enter: 1");
         System.out.println("To login as a Staff Member, enter: 2.");
         System.out.print("Enter your choice: ");
+
+        System.out.println("Welcome Customer!");
+        Customer customer = new Customer();
+
+    }
+
+    public void allCustomerActions() {
+        System.out.println("1. Place New Order");
+
+        Customer customer = new Customer();
+
+
+
+        System.out.println("2. Check Existing Order");
+
 
 
     }
