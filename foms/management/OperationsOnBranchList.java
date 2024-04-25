@@ -25,39 +25,45 @@ public class OperationsOnBranchList {
     public void addBranch() {
         Scanner scanner = new Scanner(System.in);
 
-        String branchName;
-        try {
-            System.out.print("Enter the new branch name (Enter 0 to exit): ");
-            branchName = scanner.nextLine();
-            if (branchName.equals("0")) {
-                System.out.println("Returning to previous page..");
+        while (true) {
+            String branchName;
+            try {
+                System.out.print("Enter the new branch name (Enter 0 to exit): ");
+                branchName = scanner.nextLine();
+                if (branchName.equals("0")) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+            } catch (Exception e) {
+                System.out.println("Something went wrong");
                 return;
             }
-        } catch (Exception e) {
-            System.out.println("Something went wrong");
-            return;
-        }
 
 
-        if (admin.getBranchList().isBranchInBranchList(branchName)!= null) { //if not null, means there is a duplicate
-            System.out.println("This branch name already exists in system.\nReturning to Main Menu..");
-            return;
-        }
+            if (admin.getBranchList().isBranchInBranchList(branchName)!= null) { //if not null, means there is a duplicate
+                System.out.println("This branch name already exists in system.");
+                continue;
+            }
 
-        String location;
-        try {
-            System.out.print("Enter the location of the branch (Enter 0 to exit): ");
-            location = scanner.nextLine();
-            if (location.equals("0")) {
-                System.out.println("Returning to previous page..");
+            String location;
+
+            while (true) {
+                try {
+                    System.out.print("Enter the location of the branch (Enter 0 to return previous page): ");
+                    location = scanner.nextLine();
+                    if (location.equals("0")) {
+                        System.out.println("Returning to previous page..");
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Something went wrong");
+                    return;
+                }
+
+                admin.getBranchList().addCreatedBranch(new Branch(branchName, location));
                 return;
             }
-        } catch (Exception e) {
-            System.out.println("Something went wrong");
-            return;
         }
-
-        admin.getBranchList().addCreatedBranch(new Branch(branchName, location));
 
     }
 
