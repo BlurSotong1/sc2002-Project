@@ -43,8 +43,7 @@ public class Customer implements Serializable {
      */
     public Customer() {
         Order order = new Order();
-        this.branch = selectBranch();
-        System.out.printf("Selected %s\n",branch.getName());
+        selectBranch();
     }
 
     /**
@@ -53,7 +52,7 @@ public class Customer implements Serializable {
      * @return branch if chose correct one, null if close app.
      */
 
-    public Branch selectBranch(){
+    public void selectBranch(){
         int branchChoice;
         Scanner scanner = new Scanner(System.in);
         while(true) {
@@ -64,7 +63,7 @@ public class Customer implements Serializable {
 
                 if (branchChoice == 0) {
                     System.out.println("Exiting... ");
-                    return null;
+                    return;
                 }
 
                 Branch branch = BranchList.findBranch(branchChoice-1);
@@ -72,7 +71,7 @@ public class Customer implements Serializable {
                 if(!branch.getStatus()){
                     System.out.println("The branch is closed. Please select another branch.");
                 } else {
-                    return branch;
+                    this.branch = branch;
                 }
 
             }catch(InputMismatchException e){
@@ -213,13 +212,28 @@ public class Customer implements Serializable {
     }
 
 
+    //todo
+    public void checkOrder() {
+    }
     /**
      * method for customer to collect their order.
-     * @param orderID use orderID to identify their orders
      * once they collected, we will change the order status from READYTOPICKUP to COMPLETED
      * orderList will remove this order once this step is done
      */
-    public void collectOrder(int orderID){
+    public void collectOrder(){
+//TODO
+        Scanner scanner = new Scanner(System.in);
+        int input;
+        while (true) {
+            try {
+                System.out.print("Enter your orderID to collect: ");
+                input = scanner.nextInt();
+
+                for (Order order: branch.getOrderList().getOrderList()) {
+                    if ()
+                }
+            }
+        }
         order.setOrderStatus(COMPLETED);
     }
 
@@ -244,5 +258,9 @@ public class Customer implements Serializable {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public CheckOutProcess getCheckOutProcess() {
+        return checkOutProcess;
     }
 }
