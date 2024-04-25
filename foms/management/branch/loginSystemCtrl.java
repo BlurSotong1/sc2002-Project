@@ -21,7 +21,7 @@ public class loginSystemCtrl implements Serializable {
         while (true) {
             try {
                 System.out.print("Enter your login ID (press 0 to exit): ");
-                loginID = scanner.next();
+                loginID = scanner.nextLine();
 
                 if (loginID.equals("0")) { //return to main menu
                     System.out.println("Exiting login...");
@@ -29,7 +29,7 @@ public class loginSystemCtrl implements Serializable {
                 }
 
                 System.out.print("Enter your login Password: ");
-                loginPassword = scanner.next();
+                loginPassword = scanner.nextLine();
 
 
                 //find for worker then check if password is equal

@@ -63,7 +63,6 @@ public class FomsAPP implements Serializable {
                         System.out.println("Enter your new password:");
                         String newPassword = scanner.nextLine();
                         worker.setLoginPassword(newPassword);
-                        return;
                     }
                     if (worker instanceof ManagerWorker){
                         allManagerActions((ManagerWorker)worker);
@@ -213,12 +212,23 @@ public class FomsAPP implements Serializable {
             try{
                 System.out.println("1. Display orders");
                 System.out.println("2. Process order");
+                System.out.println();
+                System.out.println("0. Exit");
+                System.out.println("What would you like to do?");
 
                 String choice = sc.nextLine();
                 if (choice.equals("1"))
                     staff.displayOrders();
                 else if (choice.equals("2"))
                     staff.processOrder();
+                else if (choice.equals("0")) {
+                    System.out.println("Signing out account..");
+                    return;
+                }
+                else{
+                    System.out.println("Invalid. Please enter again:");
+                    continue;
+                }
             }
             catch (Exception e) {
                 System.out.println("Something went wrong.");
