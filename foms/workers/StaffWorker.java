@@ -1,6 +1,7 @@
 package foms.workers;
 
 import foms.management.Branch;
+import foms.order.Order;
 
 public class StaffWorker extends Worker{
     /**
