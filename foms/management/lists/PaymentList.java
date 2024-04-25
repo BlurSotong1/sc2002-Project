@@ -1,4 +1,4 @@
-package foms.management;
+package foms.management.lists;
 
 import foms.order.Cash;
 import foms.order.PayWave;

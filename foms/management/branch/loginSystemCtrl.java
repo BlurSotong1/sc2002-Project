@@ -1,10 +1,9 @@
-package foms.management;
+package foms.management.branch;
 
+import foms.management.filters.OperationsOnWorkerList;
 import foms.workers.Worker;
 
 import java.util.Scanner;
-
-import static jdk.dynalink.linker.support.Guards.isNotNull;
 
 public class loginSystemCtrl {
     /**

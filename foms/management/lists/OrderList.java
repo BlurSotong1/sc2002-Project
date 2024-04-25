@@ -1,4 +1,4 @@
-package foms.management;
+package foms.management.lists;
 
 import java.util.ArrayList;
 import foms.order.Order;

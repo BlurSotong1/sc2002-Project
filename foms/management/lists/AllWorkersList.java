@@ -1,4 +1,4 @@
-package foms.management;
+package foms.management.lists;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,20 +8,26 @@ import foms.management.filters.workerfilters.WorkerFilters;
 import foms.workers.AdminWorker;
 import foms.workers.Worker;
 
-public class WorkerList {
-
-
+public class AllWorkersList {
     /**
-     * list of workers in a branch.
+     * list of all workers in the company.
      */
-    private ArrayList<Worker> workerList;
+    private static ArrayList<Worker> allWorkersList;
 
     /**
-     * Constructor for WorkerList class.
+     * admin worker in the company.
+     */
+    private static AdminWorker admin;
+
+    /**
+     * Constructor for AllWorkerList class.
      * Create a worker list.
+     * @param admin admin worker in the company
      */
-    public WorkerList() {
-        this.workerList = new ArrayList<Worker>();
+    public AllWorkersList(AdminWorker admin) {
+        this.admin = admin;
+        this.allWorkersList = new ArrayList<Worker>();
+        allWorkersList.add(admin);
     }
 
     /**
@@ -29,16 +35,16 @@ public class WorkerList {
      * @param worker is the Worker object.
      */
     public void addCreatedWorker(Worker worker) {
-        workerList.add(worker);
+        allWorkersList.add(worker);
     }
 
     /**
-     * Display worker list
+     * Display worker list in the company.
      */
-    public void displayWorkerListInBranch() {
+    public void displayWorkerListInSystem() {
         Scanner sc = new Scanner(System.in);
         System.out.println("List of workers");
-        for (Worker worker: workerList) {
+        for (Worker worker: allWorkersList) {
             System.out.println(worker.toString());
         }
 
@@ -47,7 +53,7 @@ public class WorkerList {
         while(true) {
             String choice = sc.nextLine();
             if (choice.equals("Y")) {
-                filterWorkerListInBranch(workerList);
+                filterWorkerListInSystem(allWorkersList);
                 return;
             }
             else if (choice.equals("N")) {
@@ -61,15 +67,16 @@ public class WorkerList {
         }
     }
 
+
     /**
      * Filter worker list
      * @param workerList list of workers
      */
-    public void filterWorkerListInBranch(ArrayList<Worker> workerList) {
+    public void filterWorkerListInSystem(ArrayList<Worker> workerList) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Worker> filteredList;
 
-        System.out.println("Filters:\n1.Role\n2.Age\n3.Gender");
+        System.out.println("Filters:\n1.Role\n2.Age\n3.Gender\n4.Branch");
         System.out.println("Enter filter (Enter 0 to exit): ");
         while(true) {
             try {
@@ -104,12 +111,22 @@ public class WorkerList {
                     }
                     break;
                 }
+                else if (choice.equals("4")) {
+                    WorkerFilters branchFilter = new BranchFilter();
+                    filteredList = branchFilter.filter(workerList);
+                    if (filteredList == null)
+                        return;
+                    for (Worker worker: filteredList) {
+                        System.out.println(worker.toString());
+                    }
+                    break;
+                }
                 else if (choice.equals("0")) {
                     System.out.println("Returning to previous page..");
                     return;
                 }
                 else {
-                    System.out.println("Filters:\n1.Role\n2.Age\n3.Gender");
+                    System.out.println("Filters:\n1.Role\n2.Age\n3.Gender\n4.Branch");
                     System.out.println("Invalid filter. Enter filter (number) (Enter 0 to exit): ");
                     continue;
                 }
@@ -124,7 +141,7 @@ public class WorkerList {
         while(true) {
             String choice = sc.nextLine();
             if (choice.equals("Y")) {
-                filterWorkerListInBranch(filteredList);
+                filterWorkerListInSystem(filteredList);
                 return;
             }
             else if (choice.equals("N")) {
@@ -140,10 +157,23 @@ public class WorkerList {
     }
 
     /**
+     * @param loginID is the name of branch that you want to check if duplicate exists.
+     * @return  Branch if there is a duplicate, null if no duplicate.
+     */
+    public static Worker isWorkerInSystem(String loginID) {
+        for(Worker worker : allWorkersList) {
+            if (worker.getLoginID().equals(loginID)) // duplicate exist.
+                return worker;
+        }
+        return null;
+    }
+
+    /**
      * Gets the list of workers in a branch.
      * @return list of workers in a branch.
      */
     public ArrayList<Worker> getWorkerList() {
-        return workerList;
+        return allWorkersList;
     }
+
 }

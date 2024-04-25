@@ -2,7 +2,7 @@ package foms.management.filters.menufilters;
 
 import foms.food.FoodItem;
 import foms.food.Sides;
-import foms.management.Menu;
+import foms.management.lists.Menu;
 
 import java.util.ArrayList;
 

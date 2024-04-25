@@ -1,4 +1,4 @@
-package foms.management;
+package foms.management.lists;
 
 import foms.food.FoodItem;
 import foms.management.filters.menufilters.*;

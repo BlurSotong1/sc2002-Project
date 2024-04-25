@@ -1,4 +1,6 @@
-package foms.management;
+package foms.management.lists;
+
+import foms.management.branch.Branch;
 
 import java.util.ArrayList;
 import java.util.Scanner;

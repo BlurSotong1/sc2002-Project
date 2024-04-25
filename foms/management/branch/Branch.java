@@ -1,4 +1,9 @@
-package foms.management;
+package foms.management.branch;
+
+import foms.management.lists.Menu;
+import foms.management.lists.OrderList;
+import foms.management.lists.PaymentList;
+import foms.management.lists.WorkerList;
 
 import java.io.Serializable;
 

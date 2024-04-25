@@ -1,8 +1,7 @@
 package foms.management.filters.menufilters;
 
 import foms.food.FoodItem;
-import foms.management.Menu;
-import foms.workers.Worker;
+import foms.management.lists.Menu;
 
 import java.util.ArrayList;
 

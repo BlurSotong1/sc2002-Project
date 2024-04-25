@@ -1,7 +1,6 @@
 package foms.order;
 
-import foms.management.Branch;
-import foms.management.OperationsOnPaymentList;
+import foms.management.branch.Branch;
 
 import java.io.Serializable;
 import java.util.InputMismatchException;
