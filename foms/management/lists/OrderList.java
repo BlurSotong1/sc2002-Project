@@ -24,7 +24,8 @@ public class OrderList implements Serializable {
      */
     public void addOrderToOrderList(Order order) {
         if(order.getOrderStatus().equals(OrderStatus.PREPARING)){
-            orderList.add(order);
+            Order order1 = new Order(order);
+            orderList.add(order1);
         }else{
             System.out.println("Order is still pending.");
         }

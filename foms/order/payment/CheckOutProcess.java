@@ -84,6 +84,7 @@ public class CheckOutProcess implements Serializable {
 
         customer.getBranch().getOrderList().addOrderToOrderList(customer.getOrder());
         customer.getOrder().setOrderStatus(OrderStatus.PREPARING);
+
     }
 
 
