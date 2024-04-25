@@ -37,6 +37,8 @@ public class Customer implements Serializable {
      */
     private CheckOutProcess checkOutProcess;
 
+    private CollectOrder collectOrder;
+
     /**
      * constructor for branch.
      * will call select branch function when creating customer.
@@ -44,6 +46,7 @@ public class Customer implements Serializable {
     public Customer() {
         Order order = new Order();
         selectBranch();
+        this.collectOrder = new CollectOrder(this);
     }
 
     /**
@@ -211,31 +214,6 @@ public class Customer implements Serializable {
 
     }
 
-
-    //todo
-    public void checkOrder() {
-    }
-    /**
-     * method for customer to collect their order.
-     * once they collected, we will change the order status from READYTOPICKUP to COMPLETED
-     * orderList will remove this order once this step is done
-     */
-    public void collectOrder(){
-//TODO
-        Scanner scanner = new Scanner(System.in);
-        int input;
-        while (true) {
-            try {
-                System.out.print("Enter your orderID to collect: ");
-                input = scanner.nextInt();
-
-                for (Order order: branch.getOrderList().getOrderList()) {
-                    if ()
-                }
-            }
-        }
-        order.setOrderStatus(COMPLETED);
-    }
 
 
     public Branch getBranch() { return branch;}
