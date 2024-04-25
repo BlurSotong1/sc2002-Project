@@ -7,9 +7,19 @@ import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Admin will use this class to add and remove payment
+ */
 public class OperationsOnPaymentList implements Serializable {
-    private static AdminWorker admin;
+    /**
+     * The admin who has access to this method
+     */
+    private AdminWorker admin;
 
+    /**
+     * Constructor with the given admin
+     * @param admin is the admin worker performing the operations on branch list.
+     */
     public OperationsOnPaymentList(AdminWorker admin) {
         this.admin = admin;
     }
@@ -17,14 +27,17 @@ public class OperationsOnPaymentList implements Serializable {
     /**
      * add payment method to the payment list
      * will go through the Branch list then display Branch
+     * display Branch's payment list
+     * admin will be prompt to add payment method
      * find payment to add in the branch payment list
-     * if it is not found in the branch list yet, can add , otherwise no
+     * if it is not found in the branch list yet, can add, otherwise no
      */
     public void addPayment() {
         Scanner scanner = new Scanner(System.in);
         int branchChoice;
-        String paymentMethod;
+        int paymentMethod;
         Branch branch = null;
+        Payment newPayment;
         while (true) {
             System.out.println("Select the branch that you want to add your payment method: ");
             BranchList.displayBranchNames();
@@ -32,31 +45,33 @@ public class OperationsOnPaymentList implements Serializable {
                 branchChoice = scanner.nextInt();
                 branch = BranchList.findBranch(branchChoice - 1);
 
-                System.out.println("These are the current payment methods:");
-                branch.getPaymentList().displayPaymentList();
+                System.out.println("Payment methods:");
+                branch.getPaymentList().displayAllPayments();
 
                 System.out.println("Enter the new payment method (Enter 0 to exit):");
-                paymentMethod = scanner.next();
-
-                if (paymentMethod.equals("0")) {
-                    System.out.println("Returning to previous page...");
+                paymentMethod = scanner.nextInt();
+                if(paymentMethod==0){
+                    System.out.println("Returning to previous page.");
                     return;
                 }
 
-                if (!isPaymentInPaymentList(branch, paymentMethod)){
-                    branch.getPaymentList().addCreatedPayment(paymentMethod);
+                newPayment = branch.getPaymentList().findPayment(paymentMethod-1);
+
+                if(!newPayment.getPaymentStatus()){
+                    branch.getPaymentList().addCreatedPayment(newPayment);
+                    newPayment.setPaymentStatus(true);
                     System.out.println("Payment method "+paymentMethod+" added successfully.");
-                    branch.getPaymentList().displayPaymentList();
+                    branch.getPaymentList().displayAllPayments();
                 }else {
                     System.out.println("Payment method already exists.");
                 }
 
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Branch not found. Enter a valid branch index.");
-            } catch (Exception e) {
-                System.out.println(e.getMessage() + "Error. Please try again.");
             } catch (InputMismatchException e) {
                 System.out.println("Enter a valid input.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Enter a valid index.");
+            } catch (Exception e) {
+                System.out.println(e.getMessage() + "Error. Please try again.");
             }
 
         }
@@ -65,38 +80,37 @@ public class OperationsOnPaymentList implements Serializable {
     /**
      * remove payment method to the payment list
      * will go through the Branch list then display Branch
+     * display Branch's payment list
      * find payment to remove from the branch payment list
      * if it is found in the branch list yet, can remove , otherwise no
-     *
-     * @param payment new payment method to be removed should be done in main function
      */
-    public void removeFromPaymentList(Payment payment) {
+    public void removeFromPaymentList() {
         Scanner scanner = new Scanner(System.in);
         int branchChoice;
-        Branch branch;
+        int paymentToRemoveChoice;
+        Branch branch=null;
+        Payment paymentToBeDeleted;
         while (true) {
             System.out.println("Select the branch that you want to remove your payment method: ");
             BranchList.displayBranchNames();
             try {
                 branchChoice = scanner.nextInt();
-                branch =BranchList.findBranch(branchChoice-1);
+                branch = BranchList.findBranch(branchChoice-1);
 
-
+                System.out.println("These are the current payment methods:");
+                branch.getPaymentList().displayAllPayments();
+                paymentToRemoveChoice=scanner.nextInt();
+                branch.getPaymentList().removeIndexedPayment(paymentToRemoveChoice-1);
+                System.out.println("Payment method deleted successfully.");
 
             } catch (InputMismatchException e) {
-                System.out.println("Branch not found. Enter a valid branch index.");
+                System.out.println("Enter a valid input.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Enter a valid index.");
             } catch (Exception e) {
                 System.out.println(e.getMessage() + "Error. Please try again.");
             }
         }
     }
 
-    public boolean isPaymentInPaymentList(Branch branch, String paymentMethod) {
-        for (Payment paymentInPaymentList : branch.getPaymentList().getAvailablePayments()) {
-            if (paymentMethod.equals(paymentInPaymentList.getName())) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

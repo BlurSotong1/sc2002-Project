@@ -1,6 +1,9 @@
 package foms.management;
 
+import foms.order.Cash;
+import foms.order.PayWave;
 import foms.order.Payment;
+import foms.order.ShoppePay;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,8 +17,8 @@ public class PaymentList implements Serializable {
         this.paymentList = new ArrayList<>();
     }
 
-    public void addCreatedPayment(String payment) {
-        paymentList.add(payment);
+    public void addCreatedPayment(Payment newPaymentMethod) {
+        paymentList.add(newPaymentMethod);
     }
 
     public void removeIndexedPayment(int index) {
@@ -36,7 +39,19 @@ public class PaymentList implements Serializable {
         return paymentList.stream().filter(Payment::getPaymentStatus).collect(Collectors.toList());
     }
 
-    public void displayPaymentList() {
+    public void displayAllPayments(){
+        if (paymentList.isEmpty()) {
+            System.out.println("No available payment methods.");
+        } else {
+            System.out.println("Payment Methods:");
+            for (Payment payment: paymentList) {
+                int i=1;
+                System.out.println(i + ". " + payment.getName()+" - "+ payment.getPaymentStatus());
+            }
+        }
+    }
+
+    public void displayAvailablePayments() {
         List<Payment> availablePayments = getAvailablePayments();
         if (availablePayments.isEmpty()) {
             System.out.println("No available payment methods.");
@@ -45,6 +60,14 @@ public class PaymentList implements Serializable {
             for (int i = 0; i < availablePayments.size(); i++) {
                 System.out.println((i + 1) + ". " + availablePayments.get(i).getName());
             }
+        }
+    }
+
+    public Payment findPayment(int index) throws IndexOutOfBoundsException{
+        if(index>=0 && index<paymentList.size()){
+            return paymentList.get(index);
+        }else{
+            throw new IndexOutOfBoundsException("Payment not found!");
         }
     }
 }
