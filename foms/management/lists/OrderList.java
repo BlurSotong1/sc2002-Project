@@ -77,8 +77,8 @@ public class OrderList implements Serializable {
                     order.setOrderStatus(OrderStatus.READYTOPICKUP);
                     System.out.println("The order is ready to pick up now.");
                 } else if (order.getOrderStatus() == OrderStatus.READYTOPICKUP) {
-                    order.setOrderStatus(OrderStatus.COMPLETED);
-                    System.out.println("The order has completed now.");
+                    order.setOrderStatus(OrderStatus.CANCELLED);
+                    System.out.println("The order has been cancelled due to over time.");
                     orderList.remove(order);
                 }
             }

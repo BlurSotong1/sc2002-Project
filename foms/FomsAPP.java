@@ -16,6 +16,9 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -238,7 +241,14 @@ public class FomsAPP implements Serializable {
                 }
 
                 case "2" -> {
-                    manager.processOrder();
+                    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+
+                    // Schedule the task to run every 5 minutes after an initial delay of 0 seconds
+                    scheduler.scheduleAtFixedRate(() -> {
+                        manager.processOrder();
+                        System.out.println("Task executed");
+                    }, 0, 15, TimeUnit.SECONDS);
+
                 }
 
                 case "3" -> {
@@ -282,8 +292,16 @@ public class FomsAPP implements Serializable {
                 System.out.println("What would you like to do?");
 
                 String choice = sc.nextLine();
-                if (choice.equals("1"))
+                if (choice.equals("1")) {
+                    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
                     staff.displayOrders();
+                    // Schedule the task to run every 5 minutes after an initial delay of 0 seconds
+                    scheduler.scheduleAtFixedRate(() -> {
+                        staff.processOrder();
+                        System.out.println("Task executed");
+                    }, 0, 15, TimeUnit.SECONDS);
+                }
+
                 else if (choice.equals("2"))
                     staff.processOrder();
                 else if (choice.equals("0")) {

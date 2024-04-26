@@ -62,9 +62,11 @@ public class CollectOrder implements Serializable {
                 }
                 for (Order order: customer.getBranch().getOrderList().getOrderList()) {
                     if (order.getOrderID() == input) { //correct order ID
+
                         if (order.getOrderStatus().equals(OrderStatus.READYTOPICKUP)) {
                             System.out.println("Order is ready for collection.");
                             System.out.println("You've picked your order up!");
+                            order.setOrderStatus(COMPLETED);
                             customer.getBranch().getOrderList().getOrderList().remove(order);
                             return;
                         } else {
