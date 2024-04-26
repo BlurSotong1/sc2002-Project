@@ -37,9 +37,9 @@ public class FomsAPP implements Serializable {
 //        }
 //        BranchList.deserializeBranchList();
 //        AllWorkersList.deserializeAllWorkerList();
-
-        AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
-        createTestCases(admin);
+//
+AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
+      createTestCases(admin);
 
 
 

@@ -59,6 +59,7 @@ public class StaffWorker extends Worker implements Serializable {
                     getBranch().getOrderList().processOrder(order.getOrderID());
                     System.out.println("Task executed");
                 }, 0, 15, TimeUnit.SECONDS);
+                return;
 
             }
             catch(InputMismatchException e)
@@ -86,7 +87,15 @@ public class StaffWorker extends Worker implements Serializable {
                     System.out.println("Returning to previous page..");
                     return;
                 }
-                getBranch().getOrderList().getOrderList().get(choice-1).displayCart();
+                int index = 0;
+                for (Order order: getBranch().getOrderList().getOrderList()) {
+                    if (index == choice) {
+                        order.displayCart();
+                    }
+                    index++;
+                }
+
+
                 return;
             }
             catch(InputMismatchException e)
