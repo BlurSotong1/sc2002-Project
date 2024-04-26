@@ -8,21 +8,28 @@ import foms.order.Order;
 import foms.order.OrderStatus;
 
 /**
- * OrderList will collate all the Orders in the branch
+ * OrderList will collate all the Orders in the branch.
  */
 public class OrderList implements Serializable {
 
+    /**
+     * This orderList.
+     */
     private ArrayList<Order> orderList;
 
+    /**
+     * Constructor for OrderList class.
+     * Initializes an empty list of orders.
+     */
     public OrderList() {
         this.orderList = new ArrayList<>();
     }
 
 
     /**
-     * method to add Order to Order List
+     * Method to add an order to the order list.
      *
-     * @param order order with OrderStatus PREPARING will be added to this OrderList
+     * @param order Order with OrderStatus PREPARING will be added to this OrderList.
      */
     public void addOrderToOrderList(Order order) {
         Order newOrder = new Order(order);
@@ -32,8 +39,8 @@ public class OrderList implements Serializable {
 
 
     /**
-     * method to display every Order in the OrderList
-     * use for loop and utilise displayCart method in order
+     * Method to display every Order in the OrderList.
+     * Uses a for loop to iterate through the list and displays each order's ID and status.
      */
     public void displayOrderList() {
         if(orderList.isEmpty()){
@@ -48,6 +55,13 @@ public class OrderList implements Serializable {
         }
     }
 
+    /**
+     * Finds an order by index in the order list.
+     *
+     * @param index Index of the order in the order list.
+     * @return The order object corresponding to the index.
+     * @throws IndexOutOfBoundsException if the index is out of bounds.
+     */
     public Order findOrder(int index) throws IndexOutOfBoundsException{
         if(index>=0 && index<orderList.size()){
             return orderList.get(index);
@@ -57,11 +71,11 @@ public class OrderList implements Serializable {
     }
 
     /**
-     * multiple single order details to form multiple order details
-     * for staffs and managers to view and process order accordingly
-     * once Order is added
+     * Process an order based on its ID.
+     * If the order status is PREPARING, it changes it to READYTOPICKUP.
+     * If the order status is READYTOPICKUP, it changes it to CANCELLED.
      *
-     * @param orderID is the order id of the order.
+     * @param orderID The ID of the order to process.
      */
     public void processOrder(int orderID) {
 
@@ -82,10 +96,19 @@ public class OrderList implements Serializable {
 
 
     // Getter and Setter methods
+
+    /**
+     * Get the list of orders.
+     * @return The list of orders.
+     */
     public ArrayList<Order> getOrderList() {
         return orderList;
     }
 
+    /**
+     * Set the list of orders.
+     * @param orderList The list of orders to set.
+     */
     public void setOrderList(ArrayList<Order> orderList) {
         this.orderList = orderList;
     }

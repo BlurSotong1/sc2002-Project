@@ -8,32 +8,32 @@ import foms.management.filters.menufilters.MenuFilters;
 import foms.management.lists.Menu;
 
 /**
- * Represents an order placed by customer
+ * Represents an order placed by customer.
  */
 public class Order implements Serializable {
     /**
-     * The orderID of an order
+     * The orderID of an order.
      */
     private int orderID;
     /**
-     * ArrayList of cart items
+     * ArrayList of cart items.
      */
     private ArrayList<FoodItem> cart;
     /**
-     * Sum of the amount of all the cart items
+     * Sum of the amount of all the cart items.
      */
     private double totalAmount = 0.0;
     /**
-     * Order status of the order
+     * Order status of the order.
      */
     private OrderStatus orderStatus = OrderStatus.PENDING;
     /**
-     * dine in option of the order
+     * dine in option of the order.
      */
     private boolean dineInOption = true;
 
     /**
-     * customer creates an order with the given orderID
+     * Constructs a new Order with a randomly generated orderID and an empty cart.
      */
     public Order() {
         Random random = new Random();
@@ -42,8 +42,8 @@ public class Order implements Serializable {
     }
 
     /**
-     * for copying objects over easily in orderlist.
-     * @param order is the order i want to copy to put into arraylist
+     * Constructs a new Order by copying another order.
+     * @param order The order to copy.
      */
     public Order(Order order) {
         orderID = order.orderID;
@@ -53,6 +53,11 @@ public class Order implements Serializable {
         orderStatus = order.orderStatus;
     }
 
+    /**
+     * Deep copies the cart of the provided order.
+     * @param order The order to copy the cart from.
+     * @return The deep copied cart.
+     */
     public ArrayList<FoodItem> deepCopyCart(Order order) {
         ArrayList<FoodItem> cartToCopy = order.cart;
         ArrayList<FoodItem> copiedCart = new ArrayList<>(cart.size());
@@ -81,11 +86,11 @@ public class Order implements Serializable {
 
 
     /**
-     * control flow of adding food item to menu.
-     * creates a new object and adds it to the cart, copying object from menu.
-     * @param indexedFoodItem is the index of the food item that i need to retrieve from filtered menu.
-     * @param filterType is the filter
-     * @param menu is the menu object that has the menu list.
+     * Adds a food item to the cart based on the provided index from the filtered menu.
+     * Creates a new object and adds it to the cart, copying the object from the menu.
+     * @param indexedFoodItem The index of the food item to retrieve from the filtered menu.
+     * @param filterType The filter type used.
+     * @param menu The menu object that contains the menu list.
      */
     public void addToCart(int indexedFoodItem, int filterType, Menu menu){
 
@@ -124,11 +129,10 @@ public class Order implements Serializable {
 
     }
 
+
     /**
-     * method to delete food from cart
-     * @param indexOfFoodItemToDelete customer will be asked what food to be deleted in Customer class
-     *                            and the index of the food will be passed
-     * checking whether it is in cart has already done in the Customer Class
+     * Removes a food item from the cart.
+     * @param indexOfFoodItemToDelete The index of the food item to delete from the cart.
      */
     public void removeIndexedFoodItem(int indexOfFoodItemToDelete){
         FoodItem cartItem = cart.get(indexOfFoodItemToDelete);
@@ -138,17 +142,17 @@ public class Order implements Serializable {
     }
 
     /**
-     * method to editCart
-     * @param index retrieves the selected FoodItem by indexing from the cart and
-     * directly calls its customiseFoodItem() method.
+     * Edits a food item in the cart by calling its customiseFoodItem() method.
+     * @param index The index of the selected food item in the cart.
      */
     public void editFoodItem(int index){
 
         getCart().get(index).customiseFoodItem();
     }
 
+
     /**
-     * method to display and list all items in cart
+     * Displays and lists all items in the cart.
      */
     public void displayCart(){
 
@@ -228,11 +232,15 @@ public class Order implements Serializable {
 
 
     /**
-     * make changes to dine in option for this order
-     * @param dineInOption customer's choice of dine in option
+     * Sets the dine-in option for this order.
+     * @param dineInOption Customer's choice of dine-in option.
      */
     public void setDineInOption(boolean dineInOption) {this.dineInOption=dineInOption;}
 
+    /**
+     * Gets the size of the cart.
+     * @return The size of the cart.
+     */
     public int getCartSize () {
         return cart.size();
     }
