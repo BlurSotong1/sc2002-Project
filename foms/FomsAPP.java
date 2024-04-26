@@ -41,20 +41,19 @@ public class FomsAPP implements Serializable {
 
 
         while (true){
-            //Start of Program
             Scanner scanner = new Scanner(System.in);
+            try {
+            //Start of Program
             System.out.println("**************************************************");
             System.out.println("Welcome to FastFood Operations Management System!");
             System.out.println("To start ordering, enter: 1");
             System.out.println("To login as a Staff Member, enter: 2.");
             System.out.println("To exit application, enter : 0");
             System.out.print("Enter your choice: ");
-            try {
                 int choice = scanner.nextInt();
                 if (choice == 1) {
                     allCustomerActions();
                     serialisationBeforeQuitting(admin);
-                    return;
                 }
                 else if (choice == 2) {
                     Worker worker = loginSystemCtrl.loginToSystemAsWorker();
