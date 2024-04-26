@@ -7,8 +7,15 @@ import foms.management.lists.Menu;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The SetMealFilter class implements the MenuFilters interface to display and filter set meals from the menu.
+ */
 public class SetMealFilter implements MenuFilters, Serializable {
 
+    /**
+     * Displays the filtered menu containing only set meals.
+     * @param menu the list of food items to filter
+     */
     @Override
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {
         System.out.println("Set Meals");
@@ -30,10 +37,11 @@ public class SetMealFilter implements MenuFilters, Serializable {
 
 
     /**
-     * do not need to check whether index range is valid. will check in this function
-     * @param index is the index of the food in the arraylist in the filtered list.
-     * @param menuObj is the menu object of the branch,
-     * @return fooditem found or null if invalid index.
+     * Finds the food item in the filtered menu based on the index.
+     *
+     * @param index   The index of the food item in the filtered menu.
+     * @param menuObj The Menu object representing the menu selected by the customer.
+     * @return The FoodItem object at the specified index in the filtered menu, or null if the index is invalid.
      */
     @Override
     public FoodItem findIndexedFoodItemInFilteredMenu(int index, Menu menuObj) {

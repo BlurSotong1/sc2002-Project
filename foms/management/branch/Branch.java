@@ -7,58 +7,61 @@ import foms.management.lists.WorkerList;
 
 import java.io.Serializable;
 
+/**
+ * The Branch class represents a branch of the organization.
+ */
 public class Branch implements Serializable {
     /**
-     * name of this branch.
+     * The name of this branch.
      */
     private String name;
 
     /**
-     * location of this branch.
+     * The location of this branch.
      */
     private String location;
 
     /**
-     * maximum number of staff that can be in this branch.
+     * The maximum number of staff that can be in this branch.
      */
     private int quota;
 
     /**
-     * number of staff (excluding manager) in this branch.
+     * The number of staff (excluding manager) in this branch.
      */
     private int numStaff;
 
     /**
-     * number of managers in this branch.
+     * The number of managers in this branch.
      */
     private int numManager;
 
     /**
-     * total number of staff in this branch.
+     * The total number of staff in this branch.
      */
     private int totalNumStaff;
 
     /**
-     * status of this branch. Open = true, Closed = false.
+     * The status of this branch. Open = true, Closed = false.
      */
     private boolean status;
 
     /**
-     * list of workers in this branch.
+     * The list of workers in this branch.
      */
     private WorkerList workerList;
 
     /**
-     * list of orders in this branch.
+     * The list of orders in this branch.
      */
     private OrderList orderList;
     /**
-     * menu of the branch.
+     * The menu of the branch.
      */
     private Menu menu;
 
     /**
-     * list of payment methods in this branch.
+     * The list of payment methods in this branch.
      */
     private PaymentList paymentList;
 

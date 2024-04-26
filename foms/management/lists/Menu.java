@@ -9,10 +9,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Filter;
 
+/**
+ * The Menu class represents the menu of a branch.
+ */
 public class Menu implements Serializable {
 
     /**
-     * this branch's menu
+     * This branch's menu.
      */
     private ArrayList<FoodItem> menu;
 
@@ -24,8 +27,10 @@ public class Menu implements Serializable {
     }
 
     /**
-     * @param foodName is the foodname that you want to check if duplicate exists.
-     * @return  FoodItem if there is a duplicate, null if no duplicate.
+     * Checks if a food item with the given name exists in the menu.
+     *
+     * @param foodName the name of the food item to check for duplicates
+     * @return the FoodItem if a duplicate exists, null otherwise
      */
     public FoodItem isFoodItemInMenu(String foodName) {
 
@@ -37,6 +42,11 @@ public class Menu implements Serializable {
         return null;
     }
 
+    /**
+     * Adds a created food item to the menu.
+     *
+     * @param foodItem the FoodItem object to add to the menu
+     */
     public void addCreatedFoodItemToMenu(FoodItem foodItem) {
 
         System.out.printf("Please confirm that you want to add %s to menu.\n",foodItem.getName());
@@ -63,6 +73,11 @@ public class Menu implements Serializable {
         }
     }
 
+    /**
+     * Removes a food item from the menu based on its index.
+     *
+     * @param index the index of the food item to remove from the menu
+     */
     public void removeIndexedFoodItemFromMenu(int index) {
         FoodItem foodItem;
         try {
@@ -96,8 +111,9 @@ public class Menu implements Serializable {
     }
 
     /**
-     * asks the person to choose the menu filter type and prints accordingly.
-     * @return input on the latest chosen filter, if needed.
+     * Asks the person to choose the menu filter type and prints accordingly.
+     *
+     * @return the input on the latest chosen filter, if needed
      */
     public int displayMenu() {
 
@@ -141,7 +157,11 @@ public class Menu implements Serializable {
 
     }
 
-
+    /**
+     * Displays the menu based on the specified filter type.
+     *
+     * @param filterType the type of filter to be applied to the menu
+     */
     public void displayMenu(String filterType) {
 
         MenuFilters filter;
@@ -159,8 +179,8 @@ public class Menu implements Serializable {
 
 
     /**
-     * updates food information of the indexed food item in menu.
-     * @param index index of the food in the menu.
+     * Updates food information of the indexed food item in menu.
+     * @param index is the index of the food in the menu.
      */
     public void updateIndexedFoodItemFromMenu(int index) {
 
@@ -212,17 +232,26 @@ public class Menu implements Serializable {
 
     }
     /**
-     * for getting menu size
+     * Get the Menu size.
      * @return the size of the menu.
      */
     public int getMenuSize() {
         return menu.size();
     }
 
+    /**
+     * Get the Menu.
+     * @return the Menu.
+     */
     public ArrayList<FoodItem> getMenuArraylist() {
         return menu;
     }
 
+    /**
+     * Find the filter of the menu.
+     * @param filterType is the type of filter used for filtering the menu.
+     * @return filtered Menu.
+     */
     public static MenuFilters findWhichFilter(int filterType) {
         switch (filterType) {
             case 1 -> {

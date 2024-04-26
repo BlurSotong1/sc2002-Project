@@ -6,18 +6,30 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The BranchList class represents a list of branches.
+ */
 public class BranchList implements Serializable {
     /**
-    * list of ball ranches.
+    * List of branches.
      */
     private static ArrayList<Branch> branchList = new ArrayList<>();
 
+    /**
+     * Serializes the branch list to a file named "BranchList.ser".
+     * @throws IOException If an I/O error occurs while writing the object stream.
+     */
     public static void serializeBranchList() throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BranchList.ser"))) {
             oos.writeObject(branchList);
         }
     }
 
+    /**
+     * Deserializes the branch list from a file named "BranchList.ser".
+     * @throws IOException If an I/O error occurs while reading the object stream.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     */
     public static void deserializeBranchList()throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("BranchList.ser"))) {
             branchList= (ArrayList<Branch>) ois.readObject();

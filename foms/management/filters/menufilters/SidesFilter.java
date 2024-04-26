@@ -7,8 +7,15 @@ import foms.management.lists.Menu;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The SidesFilter class implements the MenuFilters interface to display and filter sides from the menu.
+ *  */
 public class SidesFilter implements MenuFilters, Serializable {
 
+    /**
+     * Displays the filtered menu containing only sides.
+     * @param menu the list of food items to filter
+     */
     @Override
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {
         int counter = 1;
@@ -28,6 +35,13 @@ public class SidesFilter implements MenuFilters, Serializable {
         }
     }
 
+    /**
+     * Finds the food item in the filtered menu based on the index.
+     *
+     * @param index   The index of the food item in the filtered menu.
+     * @param menuObj The Menu object representing the menu selected by the customer.
+     * @return The FoodItem object at the specified index in the filtered menu, or null if the index is invalid.
+     */
     @Override
     public FoodItem findIndexedFoodItemInFilteredMenu(int index, Menu menuObj) {
 
