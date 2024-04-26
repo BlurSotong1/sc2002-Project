@@ -418,6 +418,104 @@ public class OperationsOnWorkerList implements Serializable {
         }
     }
 
+    /**
+     * Edit worker.
+     */
+    public void editWorker() {
+        Scanner scanner = new Scanner(System.in);
+        int i=0;
+        System.out.println("List of workers:");
+        for(Worker worker : admin.getAllWorkersList().getWorkerList()) {
+            System.out.printf("%d: %s\n", i+1, worker.toString());
+            i++;
+        }
+
+        Worker worker;
+        System.out.println("Enter the staff worker index to edit (Enter 0 to exit): ");
+        while (true) {
+            try {
+                int choice = scanner.nextInt();
+                if (choice==0) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                worker = admin.getAllWorkersList().findWorker(choice-1);
+                break;
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Enter a valid worker index.");
+                scanner.next();
+                continue;
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage()+" Enter a valid worker index.");
+                continue;
+            }
+        }
+
+        while(true) {
+            try {
+                System.out.println("1. name\n2. age\n3. gender\n4. loginPassword");
+                System.out.println("Enter the information type that you would like to edit for "+worker.getName()+" (Enter 0 to exit):");
+                int choice2 = scanner.nextInt();
+                if (choice2 == 1) {
+                    System.out.println("Enter new name:");
+                    scanner.nextLine();
+                    String newName = scanner.nextLine();
+                    worker.setName(newName);
+                    System.out.println("Name changed.");
+                    return;
+                }
+                else if (choice2 == 2) {
+                    System.out.println("Enter new age:");
+                    int newAge = scanner.nextInt();
+                    worker.setAge(newAge);
+                    System.out.println("Age changed.");
+                    return;
+                }
+                else if (choice2 == 3) {
+                    System.out.println("1. Male\n2. Female\nEnter new gender:");
+                    int newGender = scanner.nextInt();
+                    if (newGender == 1) {
+                        worker.setGender('M');
+                        System.out.println("Gender changed.");
+                        return;
+                    }
+                    else if (newGender == 2) {
+                        worker.setGender('F');
+                        System.out.println("Gender changed.");
+                        return;
+                    }
+                    else {
+                        System.out.println("Invalid input.");
+                        continue;
+                    }
+                }
+                else if(choice2==4) {
+                    System.out.println("Enter new login password:");
+                    scanner.nextLine();
+                    String newPassword = scanner.nextLine();
+                    worker.setLoginPassword(newPassword);
+                    System.out.println("Login password changed.");
+                    return;
+                }
+                else if(choice2 ==0) {
+                    System.out.println("Returning to previous page..");
+                    return;
+                }
+                else {
+                    System.out.println("Invald input.");
+                    continue;
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Invald input.");
+                scanner.next();
+                continue;
+            }
+        }
+    }
+
 }
 
 

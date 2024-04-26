@@ -19,25 +19,25 @@ import java.util.Scanner;
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         //Deserialisation
-        AdminWorker admin = null;
-        try {
-            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            admin = (AdminWorker) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException e) {
-            System.out.println("this didnt work");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        BranchList.deserializeBranchList();
-        AllWorkersList.deserializeAllWorkerList();
+//        AdminWorker admin = null;
+//        try {
+//            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
+//            ObjectInputStream in = new ObjectInputStream(fileIn);
+//            admin = (AdminWorker) in.readObject();
+//            in.close();
+//            fileIn.close();
+//        } catch (IOException e) {
+//            System.out.println("this didnt work");
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//        BranchList.deserializeBranchList();
+//        AllWorkersList.deserializeAllWorkerList();
 
-//    AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
-//    createTestCases(admin);
+    AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
+    createTestCases(admin);
 
-    // Choonggi001 is adminID Choonggi is admin password
+     //Choonggi001 is adminID Choonggi is admin password
 
         while (true){
             Scanner scanner = new Scanner(System.in);
@@ -284,17 +284,18 @@ public class FomsAPP implements Serializable {
                 System.out.println("------------------ Staff Account Settings------------------");
                 System.out.println("1. Add staff account");
                 System.out.println("2. Remove staff account");
-                System.out.println("3. Display staff list");
-                System.out.println("4. Promote a staff");
-                System.out.println("5. Transfer a staff");
+                System.out.println("3. Edit staff account");
+                System.out.println("4. Display staff list");
+                System.out.println("5. Promote a staff");
+                System.out.println("6. Transfer a staff");
                 System.out.println();
                 System.out.println("------------------ Branch Settings------------------");
-                System.out.println("6. Add a branch");
-                System.out.println("7. Remove a branch");
-                System.out.println("8. Open a branch");
-                System.out.println("9. Close a branch");
-                System.out.println("10. Add payment method in a branch");
-                System.out.println("11. Remove payment method in a branch");
+                System.out.println("7. Add a branch");
+                System.out.println("8. Remove a branch");
+                System.out.println("9. Open a branch");
+                System.out.println("10. Close a branch");
+                System.out.println("11. Add payment method in a branch");
+                System.out.println("12. Remove payment method in a branch");
                 System.out.println();
                 System.out.println("0. Exit");
                 System.out.println("What would you like to do?");
@@ -303,15 +304,16 @@ public class FomsAPP implements Serializable {
                 switch (choice) {
                     case "1" -> admin.getJobsOnWorkerList().addWorker();
                     case "2" -> admin.getJobsOnWorkerList().removeWorker();
-                    case "3" -> admin.getJobsOnWorkerList().displayWorkerList();
-                    case "4" -> admin.getJobsOnWorkerList().promoteToManager();
-                    case "5" -> admin.getJobsOnBranchList().transferStaff();
-                    case "6" -> admin.getJobsOnBranchList().addBranch();
-                    case "7" -> admin.getJobsOnBranchList().removeBranch();
-                    case "8" -> admin.getJobsOnBranch().openBranch();
-                    case "9" -> admin.getJobsOnBranch().closeBranch();
-                    case "10" -> admin.getJobsOnPaymentList().addPayment();
-                    case "11" -> admin.getJobsOnPaymentList().removeFromPaymentList();
+                    case "3" -> admin.getJobsOnWorkerList().editWorker();
+                    case "4" -> admin.getJobsOnWorkerList().displayWorkerList();
+                    case "5" -> admin.getJobsOnWorkerList().promoteToManager();
+                    case "6" -> admin.getJobsOnBranchList().transferStaff();
+                    case "7" -> admin.getJobsOnBranchList().addBranch();
+                    case "8" -> admin.getJobsOnBranchList().removeBranch();
+                    case "9" -> admin.getJobsOnBranch().openBranch();
+                    case "10" -> admin.getJobsOnBranch().closeBranch();
+                    case "11" -> admin.getJobsOnPaymentList().addPayment();
+                    case "12" -> admin.getJobsOnPaymentList().removeFromPaymentList();
                     case "0" -> {
                         System.out.println("Signing out account..");
                         return;
