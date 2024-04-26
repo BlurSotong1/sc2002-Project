@@ -131,7 +131,8 @@ public class FomsAPP implements Serializable {
                         return;
                     }
                     case "1" -> {
-                        placeNewOrder(customer);
+                        Customer customer1 = new Customer(customer.getBranch());
+                        placeNewOrder(customer1);
                     }
                     case "2" -> {
                         customer.getCollectOrder().checkOrder();
@@ -155,8 +156,8 @@ public class FomsAPP implements Serializable {
     }
 
 
-    private static void placeNewOrder(Customer customer1) {
-        Customer customer = new Customer(customer1.getBranch());
+    private static void placeNewOrder(Customer customer) {
+
         String input;
         Scanner scanner = new Scanner(System.in);
 
