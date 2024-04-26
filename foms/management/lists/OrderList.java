@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import foms.order.Order;
 import foms.order.OrderStatus;
-import foms.workers.StaffWorker;
 
 /**
  * OrderList will collate all the Orders in the branch
@@ -24,11 +23,7 @@ public class OrderList implements Serializable {
      * @param order order with OrderStatus PREPARING will be added to this OrderList
      */
     public void addOrderToOrderList(Order order) {
-        if(order.getOrderStatus().equals(OrderStatus.PREPARING)){
             orderList.add(order);
-        }else{
-            System.out.println("Order is still pending.");
-        }
     }
 
     public void removeIndexedOrder(int index) {

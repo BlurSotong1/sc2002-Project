@@ -13,33 +13,30 @@ import foms.workers.StaffWorker;
 import foms.workers.Worker;
 
 import java.io.*;
-import java.util.ArrayDeque;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
 
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         //Deserialisation
-//        AdminWorker admin = null;
-//        try {
-//            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
-//            ObjectInputStream in = new ObjectInputStream(fileIn);
-//            admin = (AdminWorker) in.readObject();
-//            in.close();
-//            fileIn.close();
-//        } catch (IOException e) {
-//            System.out.println("this didnt work");
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//        BranchList.deserializeBranchList();
-//        AllWorkersList.deserializeAllWorkerList();
-//
-AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
-      createTestCases(admin);
+        AdminWorker admin = null;
+        try {
+            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            admin = (AdminWorker) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException e) {
+            System.out.println("this didnt work");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        BranchList.deserializeBranchList();
+        AllWorkersList.deserializeAllWorkerList();
+
+//AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
+//      createTestCases(admin);
 
 
 

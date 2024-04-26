@@ -53,6 +53,7 @@ public class StaffWorker extends Worker implements Serializable {
                     return;
                 }
                 Order order = getBranch().getOrderList().findOrder(choice - 1);
+
                 ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
                 // Schedule the task to run every 5 minutes after an initial delay of 0 seconds
                 scheduler.scheduleAtFixedRate(() -> {
