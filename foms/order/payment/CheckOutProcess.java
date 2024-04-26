@@ -52,28 +52,26 @@ public class CheckOutProcess implements Serializable {
                 System.out.println("Enter a valid input!");
             }
         }
+
         System.out.println("Please select your dine-in option: (Press 0 to exit) \n" +
                 "1. Dine in\n" +
                 "2. Take away");
-        int dineInOption = -1;
 
-        while (true) { //if not 1 or 2 then continue prompting
-            dineInOption = scanner.nextInt();
+        int dineInOption = scanner.nextInt();
 
+        while (dineInOption!=0||dineInOption!=1||dineInOption!=2) { //if not 1 or 2 then continue prompting
             if(dineInOption==0){
                 return;
             }
             else if (dineInOption == 1) { //don't check out so return
                 customer.getOrder().setDineInOption(true);
-                return;
             } else if (dineInOption == 2) { //wrong input
                 customer.getOrder().setDineInOption(false);
-                return;
             }else if (dineInOption<0 || dineInOption>=3){
                 System.out.println("Enter a valid input.");
             }
+            dineInOption = scanner.nextInt();
         }
-
 
         System.out.println("checking out now.");
 
