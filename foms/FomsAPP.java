@@ -38,15 +38,17 @@ public class FomsAPP implements Serializable {
         AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
         createTestCases(admin);
 
-        //Start of Program
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("**************************************************");
-        System.out.println("Welcome to FastFood Operations Management System!");
-        System.out.println("To start ordering, enter: 1");
-        System.out.println("To login as a Staff Member, enter: 2.");
-        System.out.print("Enter your choice: ");
+
 
         while (true){
+            //Start of Program
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("**************************************************");
+            System.out.println("Welcome to FastFood Operations Management System!");
+            System.out.println("To start ordering, enter: 1");
+            System.out.println("To login as a Staff Member, enter: 2.");
+            System.out.println("To exit application, enter : 0");
+            System.out.print("Enter your choice: ");
             try {
                 int choice = scanner.nextInt();
                 if (choice == 1) {
@@ -68,20 +70,22 @@ public class FomsAPP implements Serializable {
                     if (worker instanceof ManagerWorker){
                         allManagerActions((ManagerWorker)worker);
                         serialisationBeforeQuitting(admin);
-                        return;
+                        continue;
                     }
                     else if (worker instanceof StaffWorker){
                         allStaffActions((StaffWorker)worker);
                         serialisationBeforeQuitting(admin);
-                        return;
+                        continue;
                     }
                     else if (worker instanceof AdminWorker){
                         allAdminActions((AdminWorker)admin);
                         serialisationBeforeQuitting(admin);
-                        return;
+                        continue;
                     }
-
-
+                }
+                else if (choice ==0){
+                    System.out.println("Exiting app..");
+                    return;
                 }
                 else{
                     System.out.print("Invalid choice. Enter again: ");
@@ -120,7 +124,7 @@ public class FomsAPP implements Serializable {
 
                 switch (input) {
                     case "0" -> {
-                        System.out.println("Quitting the Application...");
+                        System.out.println("Signing out account..");
                         return;
                     }
                     case "1" -> {
