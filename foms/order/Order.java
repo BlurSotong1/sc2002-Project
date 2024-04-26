@@ -13,7 +13,7 @@ public class Order implements Serializable {
     /**
      * The orderID of an order
      */
-    private final int orderID;
+    private int orderID;
     /**
      * ArrayList of cart items
      */
@@ -38,6 +38,7 @@ public class Order implements Serializable {
         Random random = new Random();
         orderID = random.nextInt(8999) + 1000; //random orderID between 1000~9999
         cart = new ArrayList<FoodItem>();
+        System.out.printf("Your OrderID is %d\n",orderID);
     }
 
     /**
@@ -88,8 +89,13 @@ public class Order implements Serializable {
         };
         if (addNewItemToCart == null) return;
 
+        if (addNewItemToCart instanceof SetMeal) {
+
+        }
+
         cart.add(addNewItemToCart);
         totalAmount += addNewItemToCart.getPrice();
+        System.out.printf("added %s to cart.\n", addNewItemToCart.getName());
 
 
     }
@@ -101,7 +107,7 @@ public class Order implements Serializable {
      * checking whether it is in cart has already done in the Customer Class
      */
     public void removeIndexedFoodItem(int indexOfFoodItemToDelete){
-        FoodItem cartItem = cart.get(indexOfFoodItemToDelete - 1);
+        FoodItem cartItem = cart.get(indexOfFoodItemToDelete);
         cart.remove(cartItem);
         totalAmount -= cartItem.getPrice();
         System.out.println(cartItem.getName()+" is removed from the cart.");
@@ -160,13 +166,26 @@ public class Order implements Serializable {
     public double getAmount(){
         return totalAmount;
     }
-
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
     /**
      * Get the order status for this order
      * @return order status
      */
-    public OrderStatus getOrderStatus(){
-        return orderStatus;
+    public String getOrderStatusInString(){
+        if (orderStatus.equals(OrderStatus.READYTOPICKUP)) {
+            return "Ready to Pick Up";
+        }
+
+        if (orderStatus.equals(OrderStatus.PREPARING)) {
+            return "Preparing";
+        }
+
+        if (orderStatus.equals(OrderStatus.PENDING)) {
+            return "Pending";
+        }
+        return "Completed";
     }
 
     /**

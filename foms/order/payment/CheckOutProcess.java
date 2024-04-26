@@ -33,10 +33,10 @@ public class CheckOutProcess implements Serializable {
      */
     public void CheckOut() {
         System.out.println("Checking out Process");
-        System.out.printf("Your total bill is: %.2f", customer.getOrder().getAmount());
+        System.out.printf("Your total bill is: %.2f\n", customer.getOrder().getAmount());
         System.out.println("Proceed to checkout?\n" +
-                "0. Continue Shopping" +
-                "1. Checkout");
+                "0. Continue Shopping\n" +
+                "1. Checkout\n");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -48,7 +48,7 @@ public class CheckOutProcess implements Serializable {
             if (checkOutOrNot.equals("0")) { //don't check out so return
                 System.out.println("Returning to order screen!");
                 return;
-            } else { //wrong input
+            } else if (!checkOutOrNot.equals("1")){ //wrong input
                 System.out.println("Enter a valid input!");
             }
         }
@@ -57,7 +57,7 @@ public class CheckOutProcess implements Serializable {
 
         int maxIndex = 1;
         for (Payment payment : customer.getBranch().getPaymentList().getAvailablePayments()) {
-            System.out.printf("%d. %s", maxIndex, payment.getName());
+            System.out.printf("%d. %s\n", maxIndex, payment.getName());
             maxIndex++;
         }
 
@@ -104,8 +104,8 @@ public class CheckOutProcess implements Serializable {
     private void printReceipt() {
         System.out.println("OrderID: " + customer.getOrder().getOrderID());
         customer.getOrder().displayCart();
-        System.out.println("Amount Due: " + customer.getOrder().getAmount());
-        System.out.println("Amount Paid: " + customer.getOrder().getAmount());
+        System.out.printf("Amount Due: %.2f\n", customer.getOrder().getAmount());
+        System.out.printf("Amount Paid: %.2f\n", customer.getOrder().getAmount());
         System.out.println("Paid using: " + customer.getPaymentMethod().getName());
     }
 }

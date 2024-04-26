@@ -15,8 +15,32 @@ public class CollectOrder implements Serializable {
         this.customer = customer;
     }
 
-    //todo
+
     public void checkOrder() {
+        System.out.println("Checking your order: ");
+        System.out.print("Enter your orderID: ");
+
+        Scanner scanner = new Scanner(System.in);
+        int id;
+        while (true) {
+            try {
+                System.out.print("Enter your orderID (enter 0 to exit): ");
+
+                id = scanner.nextInt();
+
+                for (Order order :customer.getBranch().getOrderList().getOrderList()) {
+                    if (id == order.getOrderID()) { //correct order id
+                        System.out.printf("Order found! The status is: %s\n", order.getOrderStatusInString());
+                        return;
+                    }
+                }
+                System.out.println("Order ID not found!");
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a number!");
+            }
+        }
+
+
     }
     /**
      * method for customer to collect their order.
