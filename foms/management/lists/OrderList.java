@@ -2,6 +2,8 @@ package foms.management.lists;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import foms.food.FoodItem;
 import foms.order.Order;
 import foms.order.OrderStatus;
 
@@ -23,6 +25,7 @@ public class OrderList implements Serializable {
      * @param order order with OrderStatus PREPARING will be added to this OrderList
      */
     public void addOrderToOrderList(Order order) {
+        Order newOrder = new Order(order);
             orderList.add(order);
     }
 
