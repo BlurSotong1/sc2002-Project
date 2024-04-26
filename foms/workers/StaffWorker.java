@@ -27,9 +27,6 @@ public class StaffWorker extends Worker implements Serializable {
         this.branch = branch;
         setRole('S');
     }
-    //TODO process order
-    //TODO view all orders
-    //TODO view single order
 
     @Override
     public String toString() {
@@ -63,6 +60,10 @@ public class StaffWorker extends Worker implements Serializable {
         }
     }
 
+    /**
+     * display all orders in the list
+     * single order details can be viewed subsequently
+     */
     public void displayOrders(){
         Scanner sc = new Scanner(System.in);
         getBranch().getOrderList().displayOrderList();
