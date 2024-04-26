@@ -28,7 +28,7 @@ public class DrinksFilter implements MenuFilters{
             }
         }
 
-        if (index < 0 || index > filteredMenu.size()) {
+        if (index < 0 || index >= filteredMenu.size()) {
             System.out.println("Enter a valid index!");
             return null;
         } else {

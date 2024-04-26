@@ -22,7 +22,7 @@ public class BaseMenuFilter implements MenuFilters, Serializable {
     @Override
     public FoodItem findIndexedFoodItemInFilteredMenu(int index, Menu menuObj) {
 
-        if (index < 0 || index > menuObj.getMenuSize()) {
+        if (index < 0 || index >= menuObj.getMenuSize()) {
             System.out.println("Enter a valid index!");
             return null;
         } else {

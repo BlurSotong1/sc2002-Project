@@ -38,7 +38,6 @@ public class Order implements Serializable {
         Random random = new Random();
         orderID = random.nextInt(8999) + 1000; //random orderID between 1000~9999
         cart = new ArrayList<FoodItem>();
-        System.out.printf("Your OrderID is %d\n",orderID);
     }
 
     /**
@@ -68,7 +67,7 @@ public class Order implements Serializable {
         //the index of the food
         fromMenu = filter.findIndexedFoodItemInFilteredMenu(indexedFoodItem,menu);
         if (fromMenu == null) {
-            System.out.println("Error om order add filtered but before food add");
+            System.out.println("Error on order add filtered but before food add");
             return;
         }
 
