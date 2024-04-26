@@ -466,11 +466,11 @@ public class FomsAPP implements Serializable {
         allWorkersList.addCreatedWorker(worker9);
 
 
-        Worker worker10 = new StaffWorker("Isabella Taylor", 26, 'F', "IsabellaT", branch3);
+        Worker worker10 = new StaffWorker("Isabel Taylor", 26, 'F', "IsabellaT", branch3);
         branch3.getWorkerList().addCreatedWorker(worker10);
         allWorkersList.addCreatedWorker(worker10);
 
-        Worker worker11 = new StaffWorker("William Anderson", 29, 'M', "WilliamA", branch3);
+        Worker worker11 = new StaffWorker("William Ander", 29, 'M', "WilliamA", branch3);
         branch3.getWorkerList().addCreatedWorker(worker11);
         allWorkersList.addCreatedWorker(worker11);
 
@@ -478,7 +478,7 @@ public class FomsAPP implements Serializable {
         branch3.getWorkerList().addCreatedWorker(worker12);
         allWorkersList.addCreatedWorker(worker12);
 
-        Worker worker13 = new StaffWorker("Alexander Martinez", 32, 'M', "AlexanderM", branch3);
+        Worker worker13 = new StaffWorker("Alexander Mars", 32, 'M', "AlexanderM", branch3);
         branch3.getWorkerList().addCreatedWorker(worker13);
         allWorkersList.addCreatedWorker(worker13);
 
