@@ -374,12 +374,18 @@ public class FomsAPP implements Serializable {
 
     private static void createTestCases(AdminWorker admin) {
         BranchList dummy = new BranchList(); //quota is staff+manager
-        Branch branch1 = new Branch("NTU", "NTU", 5); //2 manager demo transfer manager to branch 2
+        Branch branch1 = new Branch("NTU", "NTU", 7);
         dummy.addCreatedBranch(branch1);
-        Branch branch2 = new Branch("JE", "JE", 5); //1 manager, demo add 1, transferred from 1
+        branch1.setNumManager(2);
+        branch1.setNumStaff(4);
+        Branch branch2 = new Branch("JE", "JE", 5);
         dummy.addCreatedBranch(branch2);
-        Branch branch3 = new Branch("JP", "JP", 10); //2 manager, demo add worker but fail?
+        branch2.setNumManager(1);
+        branch2.setNumStaff(4);
+        Branch branch3 = new Branch("JP", "JP", 12);
         dummy.addCreatedBranch(branch3);
+        branch2.setNumManager(2);
+        branch2.setNumStaff(10);
 
 
         FoodItem item1 = new Sides("FRIES",3.20,"yummy and crispy fries");
