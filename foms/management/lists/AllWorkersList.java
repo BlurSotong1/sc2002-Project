@@ -11,18 +11,35 @@ import foms.management.filters.workerfilters.WorkerFilters;
 import foms.workers.AdminWorker;
 import foms.workers.Worker;
 
+/**
+ * The `AllWorkersList` class manages the list of all workers in the company.
+ * It provides functionality to serialize/deserialize the worker list, add and remove workers, display the worker list,
+ * filter the worker list based on various criteria, and find a specific worker.
+ */
 public class AllWorkersList implements Serializable {
     /**
-     * list of all workers in the company.
+     * The list of all workers in the company.
      */
     private static ArrayList<Worker> allWorkersList;
 
+
+    /**
+     * Serializes the list of all workers.
+     *
+     * @throws IOException If an I/O error occurs while writing the file.
+     */
     public static void serializeALlWorkerList() throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("AllWorkerList.ser"))) {
             oos.writeObject(allWorkersList);
         }
     }
 
+    /**
+     * Deserializes the list of all workers.
+     *
+     * @throws IOException            If an I/O error occurs while reading the file.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     */
     public static void deserializeAllWorkerList()throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("AllWorkerList.ser"))) {
             allWorkersList= (ArrayList<Worker>) ois.readObject();
@@ -30,14 +47,15 @@ public class AllWorkersList implements Serializable {
     }
 
     /**
-     * admin worker in the company.
+     * The admin worker in the company.
      */
     private AdminWorker admin;
 
     /**
-     * Constructor for AllWorkerList class.
-     * Create a worker list.
-     * @param admin admin worker in the company
+     * Constructor for the AllWorkersList class.
+     * Creates a worker list with an admin worker.
+     *
+     * @param admin The admin worker in the company.
      */
     public AllWorkersList(AdminWorker admin) {
         this.admin = admin;
@@ -46,23 +64,26 @@ public class AllWorkersList implements Serializable {
     }
 
     /**
-     * Add a worker into list of workers.
-     * @param worker is the Worker object.
+     * Adds a worker to the list of workers.
+     *
+     * @param worker The Worker object to be added.
      */
     public void addCreatedWorker(Worker worker) {
         allWorkersList.add(worker);
     }
 
     /**
-     * Remove worker from list of workers.
-     * @param worker is the Worker object.
+     * Removes a worker from the list of workers.
+     *
+     * @param worker The Worker object to be removed.
      */
     public void removeWorkerObject(Worker worker) {
         allWorkersList.remove(worker);
     }
 
     /**
-     * Display worker list in the company.
+     * Displays the list of workers in the company.
+     * Provides an option to filter the list of workers based on user input.
      */
     public void displayWorkerListInSystem() {
         Scanner sc = new Scanner(System.in);
@@ -92,8 +113,9 @@ public class AllWorkersList implements Serializable {
 
 
     /**
-     * Filter worker list
-     * @param workerList list of workers
+     * Filters the worker list based on various criteria such as role, age, gender, or branch.
+     *
+     * @param workerList The list of workers to be filtered.
      */
     public void filterWorkerListInSystem(ArrayList<Worker> workerList) {
         Scanner sc = new Scanner(System.in);
@@ -180,9 +202,11 @@ public class AllWorkersList implements Serializable {
     }
 
     /**
-     * Find a worker.
-     * @param index is the index of the worker object in the array of worker objects
-     * @return worker object corresponding to the index.
+     * Finds a worker by index in the list of workers.
+     *
+     * @param index The index of the worker object in the list.
+     * @return The worker object corresponding to the index.
+     * @throws IndexOutOfBoundsException If the index is out of bounds.
      */
     public static Worker findWorker(int index) throws IndexOutOfBoundsException{
         if (index >= 0 && index < allWorkersList.size()) {
@@ -194,8 +218,10 @@ public class AllWorkersList implements Serializable {
     }
 
     /**
-     * @param loginID is the name of branch that you want to check if duplicate exists.
-     * @return  Branch if there is a duplicate, null if no duplicate.
+     * Checks if a worker with the given login ID exists in the system.
+     *
+     * @param loginID The login ID of the worker to check for duplicate.
+     * @return The worker object if a duplicate exists, otherwise null.
      */
     public static Worker isWorkerInSystem(String loginID) {
         for(Worker worker : allWorkersList) {
@@ -206,8 +232,9 @@ public class AllWorkersList implements Serializable {
     }
 
     /**
-     * Gets the list of workers in a branch.
-     * @return list of workers in a branch.
+     * Gets the list of all workers in the system.
+     *
+     * @return The list of workers.
      */
     public ArrayList<Worker> getWorkerList() {
         return allWorkersList;

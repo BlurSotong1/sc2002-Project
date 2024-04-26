@@ -7,12 +7,16 @@ import java.util.Scanner;
 
 import foms.management.lists.AllWorkersList;
 
+/**
+ * The `loginSystemCtrl` class manages the login system for workers.
+ * It provides functionality to authenticate workers based on their login ID and password.
+ */
 public class loginSystemCtrl implements Serializable {
     /**
-     * TODO check the arraylist for all workers.
-     * @return Worker if the loginID exists and matches the password/ null if either one is incorrect.
+     * Checks the list of all workers for login credentials.
+     *
+     * @return The authenticated worker if the login ID exists and matches the password, or null if either one is incorrect.
      */
-
     public static Worker loginToSystemAsWorker(){
         String loginID;
         String loginPassword;
