@@ -7,10 +7,6 @@ import java.io.Serializable;
  * It extends the `FoodItem` class and implements the `Serializable` interface.
  */
 public class MainDish extends FoodItem implements Serializable {
-    /**
-     * String of description of the main dish.
-     */
-    private String baseDescription;
 
     /**
      * Constructor for creating a main dish.
