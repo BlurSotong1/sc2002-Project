@@ -44,9 +44,10 @@ public class StaffWorker extends Worker implements Serializable {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            getBranch().getOrderList().displayOrderList();
-            System.out.println("Select the order to process (Enter 0 to exit): ");
+
             try {
+                getBranch().getOrderList().displayOrderList();
+                System.out.println("Select the order to process (Enter 0 to exit): ");
                 int choice = sc.nextInt();
                 if (choice == 0) {
                     System.out.println("Returning to previous page..");
@@ -59,8 +60,8 @@ public class StaffWorker extends Worker implements Serializable {
                     // Schedule the task to run once after 30 seconds delay
                 scheduler.schedule(() -> {
                     getBranch().getOrderList().processOrder(order.getOrderID());
-                    return;
                 }, 30, TimeUnit.SECONDS);
+                return;
 
             }
             catch(InputMismatchException e)
@@ -90,13 +91,11 @@ public class StaffWorker extends Worker implements Serializable {
                 }
                 int index = 0;
                 for (Order order: getBranch().getOrderList().getOrderList()) {
-                    if (index == choice) {
+                    if (index == choice-1) {
                         order.displayCart();
                     }
                     index++;
                 }
-
-
                 return;
             }
             catch(InputMismatchException e)
