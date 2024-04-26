@@ -95,7 +95,7 @@ public class CheckOutProcess implements Serializable {
         customer.getOrder().setOrderStatus(OrderStatus.PREPARING);
         customer.getBranch().getOrderList().addOrderToOrderList(customer.getOrder());
         System.out.printf("Your order ID is: %d\n",customer.getOrder().getOrderID());
-        customer.setOrder(new Order());
+        //customer.setOrder(new Order());
     }
 
     /**

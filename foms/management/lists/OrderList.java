@@ -49,7 +49,7 @@ public class OrderList implements Serializable {
         System.out.println("Orders:");
         int i=1;
         for (Order order : orderList) {
-            System.out.println(i + ". "+order.getOrderID()+ ", status: "+order.getOrderStatus());
+            System.out.println(i + ". OrderID: "+order.getOrderID()+ ", status: "+order.getOrderStatus());
             i++;
         }
     }
