@@ -27,6 +27,9 @@ public class CollectOrder implements Serializable {
                 System.out.print("Enter your orderID (enter 0 to exit): ");
 
                 id = scanner.nextInt();
+                 if (id == 0) {
+                     System.out.println("returning..");
+                 }
 
                 for (Order order :customer.getBranch().getOrderList().getOrderList()) {
                     if (id == order.getOrderID()) { //correct order id
