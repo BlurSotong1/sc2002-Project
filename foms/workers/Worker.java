@@ -8,7 +8,7 @@ import java.util.Scanner;
  * An abstract class that serves as the base class for all workers in the food order management system.
  * It provides common functionality and properties for all types of workers.
  */
-public abstract class Worker implements Serializable {
+public class Worker implements Serializable {
     /**
      * The first name and last name of this worker.
      */
