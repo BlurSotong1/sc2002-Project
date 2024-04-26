@@ -66,8 +66,7 @@ public class Order implements Serializable {
         FoodItem fromMenu;
         //the index of the food
         fromMenu = filter.findIndexedFoodItemInFilteredMenu(indexedFoodItem,menu);
-        if (fromMenu == null) {
-            System.out.println("Error on order add filtered but before food add");
+        if (fromMenu == null) { //return cus cannot create food.
             return;
         }
 

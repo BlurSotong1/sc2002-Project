@@ -39,7 +39,7 @@ public class Drinks extends FoodItem implements Serializable {
         while (true) {
             System.out.println("Enter your choice: \n1. Change ice level" +
                     "\n2. Input Custom Request. (press 0 to quit): ");
-            input = scanner.nextLine(); scanner.nextLine(); //read in the \n
+            input = scanner.nextLine();
             switch (input) {
                 case "0"-> {
                     System.out.println("Returning to main page..");

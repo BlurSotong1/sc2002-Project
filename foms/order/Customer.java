@@ -197,17 +197,17 @@ public class Customer implements Serializable {
             System.out.println("Empty cart!");
             return;
         }
-        order.displayCart();
+
 
         int choice;
         int maxCartIndex = order.getCartSize() -1;
         while (true) {
-
+            order.displayCart();
             System.out.print("Enter the food item you wish to edit:" +
                     "\nPress 0 to exit.\n" +
                     "Enter your choice: ");
             try {
-                choice = scanner.nextInt();
+                choice = scanner.nextInt() - 1;
             } catch (InputMismatchException e) {
                 System.out.println("Enter a number!");
                 scanner.next();

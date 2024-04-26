@@ -36,7 +36,7 @@ public class CheckOutProcess implements Serializable {
         System.out.printf("Your total bill is: %.2f\n", customer.getOrder().getAmount());
         System.out.println("Proceed to checkout?\n" +
                 "0. Continue Shopping\n" +
-                "1. Checkout\n");
+                "1. Checkout");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -73,7 +73,7 @@ public class CheckOutProcess implements Serializable {
                 }
 
                 if (choice > 0 && choice < maxIndex) { //valid indexing
-                    customer.setPaymentMethod(customer.getBranch().getPaymentList().getPayment(choice));
+                    customer.setPaymentMethod(customer.getBranch().getPaymentList().getPayment(choice-1));
                     break;
                 } else {
                     System.out.println("Enter a valid range!");

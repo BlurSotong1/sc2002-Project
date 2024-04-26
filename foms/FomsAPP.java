@@ -57,6 +57,7 @@ public class FomsAPP implements Serializable {
                 }
                 else if (choice == 2) {
                     Worker worker = loginSystemCtrl.loginToSystemAsWorker();
+                    if (worker == null) {continue;}
                     System.out.println("Login successful.");
 
                     //check if user is first login
@@ -162,7 +163,8 @@ public class FomsAPP implements Serializable {
                         "\n1. Add food item to cart" +
                         "\n2. Edit food items in cart" +
                         "\n3. Delete food item from cart" +
-                        "\n4. Check out" +
+                        "\n4. Check Cart" +
+                        "\n5. Check out" +
                         "\n0. Exit to Previous Screen" +
                         "\nEnter Your Choice: ");
 
@@ -187,7 +189,12 @@ public class FomsAPP implements Serializable {
                         System.out.println("Removing food item from cart...");
                         customer.removeFoodItem();
                     }
+
                     case "4" -> {
+                        System.out.println("Checking my Cart");
+                        customer.getOrder().displayCart();
+                    }
+                    case "5" -> {
                         System.out.println("Checking out...");
                         customer.getCheckOutProcess().CheckOut();
                     }
