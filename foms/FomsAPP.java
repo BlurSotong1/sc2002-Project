@@ -385,7 +385,7 @@ AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
         Branch branch3 = new Branch("JP", "JP", 15);
         dummy.addCreatedBranch(branch3);
         branch3.setNumManager(2);
-        branch3.setNumStaff(11);
+        branch3.setNumStaff(10);
 
 
         FoodItem item1 = new Sides("FRIES",3.20,"yummy and crispy fries");
