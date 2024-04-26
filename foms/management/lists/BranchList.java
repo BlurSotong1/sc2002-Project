@@ -1,7 +1,6 @@
 package foms.management.lists;
 
 import foms.management.branch.Branch;
-import foms.workers.AdminWorker;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,9 +8,9 @@ import java.util.Scanner;
 
 public class BranchList implements Serializable {
     /**
-    * list of branches.
+    * list of ball ranches.
      */
-    private static ArrayList<Branch> branchList;
+    private static ArrayList<Branch> branchList = new ArrayList<>();
 
     public static void serializeBranchList() throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BranchList.ser"))) {
@@ -33,7 +32,7 @@ public class BranchList implements Serializable {
      * Create a branch list.
      */
     public BranchList() {
-        this.branchList = new ArrayList<Branch>();
+
     }
 
     /**
@@ -47,8 +46,8 @@ public class BranchList implements Serializable {
         System.out.println("List of branches:");
         for (i = 0; i < length; i++) {
             System.out.printf(i+1 + ". " + branchList.get(i).getName());
-            if (branchList.get(i).getStatus()==false)
-                System.out.printf(" (closed)");
+            if (!branchList.get(i).getStatus())
+                System.out.print(" (closed)");
             System.out.println();
 
         }
@@ -140,13 +139,7 @@ public class BranchList implements Serializable {
         return null;
     }
 
-    /**
-     * Gets the list of branches.
-     * @return list of branches.
-     */
-    public ArrayList<Branch> getBranchList() {
-        return branchList;
-    }
+
 
 
 }
