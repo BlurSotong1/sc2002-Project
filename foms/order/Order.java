@@ -134,7 +134,7 @@ public class Order implements Serializable {
             System.out.println("Cart is empty.");
             return;
         }
-        else if (orderStatus==OrderStatus.PENDING) {
+        else {
 
             System.out.println("Order ID: "+ getOrderID());
 

@@ -242,8 +242,6 @@ AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
 
         }
 
-
-
     }
 
     private static void allStaffActions(StaffWorker staff){
