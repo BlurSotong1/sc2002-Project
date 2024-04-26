@@ -93,6 +93,9 @@ public class PaymentList implements Serializable {
      * @return true if payment is in payment list, false if payment is not in the payment list.
      */
     public boolean checkPayment(Payment payment) {
-        return paymentList.contains(payment);
+        for (Payment payment1 : paymentList)
+            if (payment1.getName().equals(payment.getName()))
+                return true;
+        return false;
     }
 }

@@ -64,7 +64,7 @@ public class OperationsOnPaymentList implements Serializable {
                 }
                 else if (choice2 == 1) {
                     Payment payment = new NETS();
-                    if (branch.getPaymentList().checkPayment(payment)) {
+                    if (!branch.getPaymentList().checkPayment(payment)) {
                         branch.getPaymentList().addCreatedPayment(payment);
                         System.out.printf("NETS is added to list of payment methods in %s.\n", branch.getName());
                         return;
@@ -77,7 +77,7 @@ public class OperationsOnPaymentList implements Serializable {
                 }
                 else if (choice2==3) {
                     Payment payment = new PayWave();
-                    if (branch.getPaymentList().checkPayment(payment)) {
+                    if (!branch.getPaymentList().checkPayment(payment)) {
                         branch.getPaymentList().addCreatedPayment(payment);
                         System.out.printf("PayWave is added to list of payment methods in %s.\n", branch.getName());
                         return;
@@ -90,7 +90,7 @@ public class OperationsOnPaymentList implements Serializable {
                 }
                 else if (choice2==2) {
                     Payment payment = new Paypal();
-                    if (branch.getPaymentList().checkPayment(payment)) {
+                    if (!branch.getPaymentList().checkPayment(payment)) {
                         branch.getPaymentList().addCreatedPayment(payment);
                         System.out.printf("Paypal is added to list of payment methods in %s.\n", branch.getName());
                         return;
@@ -103,7 +103,7 @@ public class OperationsOnPaymentList implements Serializable {
                 }
                 else if (choice2==4) {
                     Payment payment = new ShopeePay();
-                    if (branch.getPaymentList().checkPayment(payment)) {
+                    if (!branch.getPaymentList().checkPayment(payment)) {
                         branch.getPaymentList().addCreatedPayment(payment);
                         System.out.printf("ShopeePay is added to list of payment methods in %s.\n", branch.getName());
                         return;
