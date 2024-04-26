@@ -58,7 +58,6 @@ public class StaffWorker extends Worker implements Serializable {
                 // Schedule the task to run every 5 minutes after an initial delay of 0 seconds
                 scheduler.scheduleAtFixedRate(() -> {
                     getBranch().getOrderList().processOrder(order.getOrderID());
-                    System.out.println("Task executed");
                 }, 0, 15, TimeUnit.SECONDS);
                 return;
 

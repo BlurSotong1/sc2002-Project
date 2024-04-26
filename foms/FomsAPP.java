@@ -5,7 +5,6 @@ import foms.management.branch.Branch;
 import foms.management.branch.loginSystemCtrl;
 import foms.management.lists.AllWorkersList;
 import foms.management.lists.BranchList;
-import foms.management.lists.WorkerList;
 import foms.order.Customer;
 import foms.workers.AdminWorker;
 import foms.workers.ManagerWorker;
@@ -20,25 +19,25 @@ import java.util.Scanner;
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         //Deserialisation
-        AdminWorker admin = null;
-        try {
-            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            admin = (AdminWorker) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException e) {
-            System.out.println("this didnt work");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        BranchList.deserializeBranchList();
-        AllWorkersList.deserializeAllWorkerList();
+//        AdminWorker admin = null;
+//        try {
+//            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
+//            ObjectInputStream in = new ObjectInputStream(fileIn);
+//            admin = (AdminWorker) in.readObject();
+//            in.close();
+//            fileIn.close();
+//        } catch (IOException e) {
+//            System.out.println("this didnt work");
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//        BranchList.deserializeBranchList();
+//        AllWorkersList.deserializeAllWorkerList();
 
-//AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
-//      createTestCases(admin);
+AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
+    createTestCases(admin);
 
-
+    // Choonggi001 is adminID Choonggi is admin password
 
         while (true){
             Scanner scanner = new Scanner(System.in);
@@ -69,33 +68,29 @@ public class FomsAPP implements Serializable {
                     }
                     if (worker instanceof ManagerWorker){
                         allManagerActions((ManagerWorker)worker);
-                        serialisationBeforeQuitting(admin);
                         continue;
                     }
                     else if (worker instanceof StaffWorker){
                         allStaffActions((StaffWorker)worker);
-                        serialisationBeforeQuitting(admin);
-                        continue;
                     }
                     else if (worker instanceof AdminWorker){
-                        allAdminActions((AdminWorker)admin);
-                        serialisationBeforeQuitting(admin);
-                        continue;
+                        assert admin != null;
+                        allAdminActions(admin);
                     }
                 }
                 else if (choice ==0){
+                    serialisationBeforeQuitting(admin);
                     System.out.println("Exiting app..");
                     return;
                 }
                 else{
                     System.out.println("Invalid choice. Enter again: ");
-                    continue;
                 }
             }catch (InputMismatchException e){
                 System.out.println("Invalid choice. Enter again: ");
                 scanner.next();
-                continue;
             }
+            serialisationBeforeQuitting(admin);
         }
 
 
@@ -111,13 +106,14 @@ public class FomsAPP implements Serializable {
 
         while (true) {
             try {
-                System.out.print("What do you want to do?" +
-                        "\n1. Place new Order" +
-                        "\n2. Check for Order Status" +
-                        "\n3. Collect your Order" +
-                        "\n4. Select a different Branch" +
-                        "\n0. Exit to Previous Screen" +
-                        "\nEnter Your Choice: ");
+                System.out.print("""
+                        What do you want to do?
+                        1. Place new Order
+                        2. Check for Order Status
+                        3. Collect your Order
+                        4. Select a different Branch
+                        0. Exit to Previous Screen
+                        Enter Your Choice:\s""");
 
 
                 input = scanner.next();
@@ -131,15 +127,9 @@ public class FomsAPP implements Serializable {
                         Customer customer1 = new Customer(customer.getBranch());
                         placeNewOrder(customer1);
                     }
-                    case "2" -> {
-                        customer.getCollectOrder().checkOrder();
-                    }
-                    case "3" -> {
-                        customer.getCollectOrder().collectOrder();
-                    }
-                    case "4" -> {
-                        customer.selectBranch();
-                    }
+                    case "2" -> customer.getCollectOrder().checkOrder();
+                    case "3" -> customer.getCollectOrder().collectOrder();
+                    case "4" -> customer.selectBranch();
                     default -> System.out.println("Invalid input. Please enter a valid option.");
                 }
 
@@ -160,14 +150,15 @@ public class FomsAPP implements Serializable {
 
         while (true) {
             try {
-                System.out.print("Placing New Order" +
-                        "\n1. Add food item to cart" +
-                        "\n2. Edit food items in cart" +
-                        "\n3. Delete food item from cart" +
-                        "\n4. Check Cart" +
-                        "\n5. Check out" +
-                        "\n0. Exit to Previous Screen" +
-                        "\nEnter Your Choice: ");
+                System.out.print("""
+                        Placing New Order
+                        1. Add food item to cart
+                        2. Edit food items in cart
+                        3. Delete food item from cart
+                        4. Check Cart
+                        5. Check out
+                        0. Exit to Previous Screen
+                        Enter Your Choice:\s""");
 
 
                 input = scanner.next();
@@ -234,34 +225,19 @@ public class FomsAPP implements Serializable {
                     return;
                 }
 
-                case "1" -> {
-                    manager.displayOrders();
-                }
+                case "1" -> manager.displayOrders();
 
-                case "2" -> {
-                        manager.processOrder();
-                }
+                case "2" -> manager.processOrder();
 
-                case "3" -> {
-                    manager.getBranch().getMenu().displayMenu();
-                }
+                case "3" -> manager.getBranch().getMenu().displayMenu();
 
-                case "4" -> {
-                    manager.addFoodItemsToMenu();
-                }
+                case "4" -> manager.addFoodItemsToMenu();
 
-                case "5" -> {
-                    manager.updateFoodItemInformation();
+                case "5" -> manager.updateFoodItemInformation();
 
-                }
+                case "6" -> manager.removeFoodItemFromMenu();
 
-                case "6" -> {
-                    manager.removeFoodItemFromMenu();
-                }
-
-                case "7" -> {
-                    manager.displayBranchWorkers();
-                }
+                case "7" -> manager.displayBranchWorkers();
             }
 
         }
@@ -283,19 +259,14 @@ public class FomsAPP implements Serializable {
                 System.out.println("What would you like to do?");
 
                 String choice = sc.nextLine();
-                if (choice.equals("1")) {
-                    staff.displayOrders();
-                }
-
-                else if (choice.equals("2"))
-                    staff.processOrder();
-                else if (choice.equals("0")) {
-                    System.out.println("Signing out account..");
-                    return;
-                }
-                else{
-                    System.out.println("Invalid. Please enter again:");
-                    continue;
+                switch (choice) {
+                    case "1" -> staff.displayOrders();
+                    case "2" -> staff.processOrder();
+                    case "0" -> {
+                        System.out.println("Signing out account..");
+                        return;
+                    }
+                    default -> System.out.println("Invalid. Please enter again:");
                 }
             }
             catch (Exception e) {
@@ -331,35 +302,23 @@ public class FomsAPP implements Serializable {
                 System.out.println("What would you like to do?");
 
                 String choice = sc.nextLine();
-                if (choice.equals("1"))
-                    admin.getJobsOnWorkerList().addWorker();
-                else if (choice.equals("2"))
-                    admin.getJobsOnWorkerList().removeWorker();
-                else if (choice.equals("3"))
-                    admin.getJobsOnWorkerList().displayWorkerList();
-                else if (choice.equals("4"))
-                    admin.getJobsOnWorkerList().promoteToManager();
-                else if (choice.equals("5"))
-                    admin.getJobsOnBranchList().transferStaff();
-                else if (choice.equals("6"))
-                    admin.getJobsOnBranchList().addBranch();
-                else if (choice.equals("7"))
-                    admin.getJobsOnBranchList().removeBranch();
-                else if (choice.equals("8"))
-                    admin.getJobsOnBranch().openBranch();
-                else if (choice.equals("9"))
-                    admin.getJobsOnBranch().closeBranch();
-                else if (choice.equals("10"))
-                    admin.getJobsOnPaymentList().addPayment();
-                else if (choice.equals("11"))
-                    admin.getJobsOnPaymentList().removeFromPaymentList();
-                else if (choice.equals("0")) {
-                    System.out.println("Signing out account..");
-                    return;
-                }
-                else {
-                    System.out.println("Invalid. Please enter again:");
-                    continue;
+                switch (choice) {
+                    case "1" -> admin.getJobsOnWorkerList().addWorker();
+                    case "2" -> admin.getJobsOnWorkerList().removeWorker();
+                    case "3" -> admin.getJobsOnWorkerList().displayWorkerList();
+                    case "4" -> admin.getJobsOnWorkerList().promoteToManager();
+                    case "5" -> admin.getJobsOnBranchList().transferStaff();
+                    case "6" -> admin.getJobsOnBranchList().addBranch();
+                    case "7" -> admin.getJobsOnBranchList().removeBranch();
+                    case "8" -> admin.getJobsOnBranch().openBranch();
+                    case "9" -> admin.getJobsOnBranch().closeBranch();
+                    case "10" -> admin.getJobsOnPaymentList().addPayment();
+                    case "11" -> admin.getJobsOnPaymentList().removeFromPaymentList();
+                    case "0" -> {
+                        System.out.println("Signing out account..");
+                        return;
+                    }
+                    default -> System.out.println("Invalid. Please enter again:");
                 }
             }
             catch (Exception e) {
@@ -368,7 +327,11 @@ public class FomsAPP implements Serializable {
         }
     }
 
-
+    /**
+     * test cases that was initially created to test for run case.
+     * still stored in serialisation.
+     * @param admin is the admin of the FOMS.
+     */
     private static void createTestCases(AdminWorker admin) {
         BranchList dummy = new BranchList(); //quota is staff+manager
         Branch branch1 = new Branch("NTU", "NTU", 8);
@@ -402,7 +365,7 @@ public class FomsAPP implements Serializable {
         branch2.getMenu().addCreatedFoodItemToMenu(item5);
         branch3.getMenu().addCreatedFoodItemToMenu(item5);
 
-        FoodItem item6 = new Drinks("Chicken Mcnugget", 6.10,"i love chicken nuggets");
+        FoodItem item6 = new Sides("Chicken Mcnugget", 6.10,"i love chicken nuggets");
         branch1.getMenu().addCreatedFoodItemToMenu(item6);
         branch2.getMenu().addCreatedFoodItemToMenu(item6);
         branch3.getMenu().addCreatedFoodItemToMenu(item6);

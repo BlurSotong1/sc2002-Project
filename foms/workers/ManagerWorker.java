@@ -86,7 +86,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
 
         }
 
-        System.out.print("Enter the description (press 0 to exit): ");
+        System.out.print("Enter the description (press 0 to exit): "); scanner.next();
         String description = scanner.nextLine();
 
         if (description.equals("0")) {
