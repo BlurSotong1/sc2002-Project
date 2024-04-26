@@ -152,8 +152,8 @@ public class FomsAPP implements Serializable {
     }
 
 
-    private static void placeNewOrder(Customer customer) {
-
+    private static void placeNewOrder(Customer customer1) {
+        Customer customer = new Customer(customer1.getBranch());
         String input;
         Scanner scanner = new Scanner(System.in);
 

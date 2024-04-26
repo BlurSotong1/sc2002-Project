@@ -50,6 +50,14 @@ public class Customer implements Serializable {
         checkOutProcess = new CheckOutProcess(this);
     }
 
+    public Customer(Branch branch) {
+        order = new Order();
+        this.branch = branch;
+        this.collectOrder = new CollectOrder(this);
+        checkOutProcess = new CheckOutProcess(this);
+    }
+
+
     /**
      *  Customer choosing a branch.
      *      * Customer can only choose those that are open.

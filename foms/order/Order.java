@@ -47,10 +47,12 @@ public class Order implements Serializable {
      */
     public Order(Order order) {
         orderID = order.orderID;
-        cart = new ArrayList<>(order.cart);
+        cart = new ArrayList<>(order.getCart());
         dineInOption = order.dineInOption;
         orderStatus = order.orderStatus;
     }
+
+
 
     /**
      * control flow of adding food item to menu.
