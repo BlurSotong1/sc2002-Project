@@ -65,9 +65,9 @@ public class ManagerWorker extends StaffWorker implements Serializable {
 
         while (true) {
             try {
-                System.out.print("Enter the food type (Enter 0 to exit): \n1: Main Dish \n2: Drinks \n3: Sides");
+                System.out.print("Enter the food type (Enter 0 to exit): \n1: Main Dish \n2: Drinks \n3: Sides\n");
                 foodType = scanner.nextInt();
-
+                scanner.nextLine();
                 if (foodType == 0) { //quit adding
                     System.out.println("Exiting to main menu...");
                     return;

@@ -172,7 +172,7 @@ public class Menu implements Serializable {
             return;
         }
 
-        System.out.printf("Please confirm that you want to upodate %s in the menu.\n",foodItem.getName());
+        System.out.printf("Please confirm that you want to update %s in the menu.\n",foodItem.getName());
         System.out.println("Enter 1 to update, 2 to exit.");
 
         Scanner scanner = new Scanner(System.in);
@@ -182,7 +182,7 @@ public class Menu implements Serializable {
                 if (scanner.next().equals("1")) {
                     System.out.printf("updating %s from menu...\n", foodItem.getName());
                     while (true) {
-                        System.out.println("Choose ur action: \n1. Update Price\n2.Update Description\n3.Quit");
+                        System.out.println("Choose ur action: \n1. Update Price\n2. Update Description\n3. Quit");
 
                         switch (scanner.next()) {
 

@@ -37,6 +37,7 @@ public class CollectOrder implements Serializable {
                 System.out.println("Order ID not found!");
             } catch (InputMismatchException e) {
                 System.out.println("Enter a number!");
+                scanner.next();
             }
         }
 

@@ -514,7 +514,6 @@ public class FomsAPP implements Serializable {
         branch1.getWorkerList().addCreatedWorker(manager1);
         allWorkersList.addCreatedWorker(manager1);
 
-        // Creating 1 more manager for branch1
         Worker manager2 = new ManagerWorker("Haha", 35, 'M', "Haha123", branch1);
         branch1.getWorkerList().addCreatedWorker(manager2);
         allWorkersList.addCreatedWorker(manager2);

@@ -207,7 +207,7 @@ public class Customer implements Serializable {
                     "\nPress 0 to exit.\n" +
                     "Enter your choice: ");
             try {
-                choice = scanner.nextInt() - 1;
+                choice = scanner.nextInt() -1;
             } catch (InputMismatchException e) {
                 System.out.println("Enter a number!");
                 scanner.next();
@@ -217,7 +217,7 @@ public class Customer implements Serializable {
                 return;
             }
 
-            if (choice == 0) { //terminate
+            if (choice == -1) { //terminate
                 System.out.println("exiting..");
                 return;
 
