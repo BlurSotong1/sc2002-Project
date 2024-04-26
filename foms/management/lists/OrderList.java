@@ -67,7 +67,7 @@ public class OrderList implements Serializable {
      * for staffs and managers to view and process order accordingly
      * once Order is added
      *
-     * @param orderID
+     * @param orderID is the order id of the order.
      */
     public void processOrder(int orderID) {
 

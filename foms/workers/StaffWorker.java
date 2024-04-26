@@ -77,8 +77,7 @@ public class StaffWorker extends Worker implements Serializable {
                     System.out.println("Returning to previous page..");
                     return;
                 }
-                Order order = getBranch().getOrderList().findOrder(choice-1);
-                order.displayCart();
+                getBranch().getOrderList().findOrder(choice-1).displayCart();
                 return;
             }
             catch(InputMismatchException e)
