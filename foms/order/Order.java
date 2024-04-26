@@ -47,9 +47,35 @@ public class Order implements Serializable {
      */
     public Order(Order order) {
         orderID = order.orderID;
-        cart = new ArrayList<>(order.getCart());
+        cart = new ArrayList<>();
+        cart = deepCopyCart(order);
         dineInOption = order.dineInOption;
         orderStatus = order.orderStatus;
+    }
+
+    public ArrayList<FoodItem> deepCopyCart(Order order) {
+        ArrayList<FoodItem> cartToCopy = order.cart;
+        ArrayList<FoodItem> copiedCart = new ArrayList<>(cart.size());
+        FoodItem itemToAdd;
+        for (FoodItem item : cartToCopy) {
+            itemToAdd = switch (item.getClass().getSimpleName()) {
+
+                case "SetMeal" -> new SetMeal(((SetMeal) item).getMainDish(), item.getPrice(), item.getDescription());
+
+                case "MainDish" -> new MainDish(item.getName(), item.getPrice(), item.getDescription());
+
+                case "Sides" -> new Sides(item.getName(), item.getPrice(), item.getDescription());
+
+                case "Drinks" -> new Drinks(item.getName(), item.getPrice(), item.getDescription());
+
+                default -> {
+                    System.out.println("Error in order add filtered food!");
+                    yield null; // or throw an exception or return a default value
+                }
+            };
+        }
+
+        return copiedCart;
     }
 
 
@@ -90,10 +116,6 @@ public class Order implements Serializable {
         };
         if (addNewItemToCart == null) return;
 
-        if (addNewItemToCart instanceof SetMeal) {
-
-            //TODO
-        }
 
         cart.add(addNewItemToCart);
         totalAmount += addNewItemToCart.getPrice();

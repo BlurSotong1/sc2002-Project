@@ -19,23 +19,23 @@ import java.util.Scanner;
 public class FomsAPP implements Serializable {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         //Deserialisation
-//        AdminWorker admin = null;
-//        try {
-//            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
-//            ObjectInputStream in = new ObjectInputStream(fileIn);
-//            admin = (AdminWorker) in.readObject();
-//            in.close();
-//            fileIn.close();
-//        } catch (IOException e) {
-//            System.out.println("this didnt work");
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//        BranchList.deserializeBranchList();
-//        AllWorkersList.deserializeAllWorkerList();
+        AdminWorker admin = null;
+        try {
+            FileInputStream fileIn = new FileInputStream("AdminInfo.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            admin = (AdminWorker) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException e) {
+            System.out.println("this didnt work");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        BranchList.deserializeBranchList();
+        AllWorkersList.deserializeAllWorkerList();
 
-AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
-    createTestCases(admin);
+//AdminWorker admin = new AdminWorker("choonggi",20,'M',"Choonggi001");
+//    createTestCases(admin);
 
     // Choonggi001 is adminID Choonggi is admin password
 

@@ -72,11 +72,11 @@ public class CheckOutProcess implements Serializable {
             } else if (dineInOption == 2) { //wrong input
                 customer.getOrder().setDineInOption(false);
                 break;
-            }else if (dineInOption<0 || dineInOption>=3){
+            }else {
                 System.out.println("Enter a valid input.");
                 continue;
             }
-            dineInOption = scanner.nextInt();
+
         }
 
         System.out.println("checking out now.");

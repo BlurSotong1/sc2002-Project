@@ -26,11 +26,7 @@ public class OrderList implements Serializable {
             orderList.add(order);
     }
 
-    public void removeIndexedOrder(int index) {
-        if(index>=0 && index < orderList.size()){
-            orderList.remove(index);
-        }
-    }
+
 
     /**
      * method to display every Order in the OrderList
