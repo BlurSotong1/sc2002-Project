@@ -241,14 +241,7 @@ public class FomsAPP implements Serializable {
                 }
 
                 case "2" -> {
-                    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-
-                    // Schedule the task to run every 5 minutes after an initial delay of 0 seconds
-                    scheduler.scheduleAtFixedRate(() -> {
                         manager.processOrder();
-                        System.out.println("Task executed");
-                    }, 0, 15, TimeUnit.SECONDS);
-
                 }
 
                 case "3" -> {
@@ -293,13 +286,7 @@ public class FomsAPP implements Serializable {
 
                 String choice = sc.nextLine();
                 if (choice.equals("1")) {
-                    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
                     staff.displayOrders();
-                    // Schedule the task to run every 5 minutes after an initial delay of 0 seconds
-                    scheduler.scheduleAtFixedRate(() -> {
-                        staff.processOrder();
-                        System.out.println("Task executed");
-                    }, 0, 15, TimeUnit.SECONDS);
                 }
 
                 else if (choice.equals("2"))

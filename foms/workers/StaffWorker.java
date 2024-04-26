@@ -6,6 +6,9 @@ import foms.order.Order;
 import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class StaffWorker extends Worker implements Serializable {
     /**
@@ -50,7 +53,13 @@ public class StaffWorker extends Worker implements Serializable {
                     return;
                 }
                 Order order = getBranch().getOrderList().findOrder(choice - 1);
-                getBranch().getOrderList().processOrder(order.getOrderID());
+                ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+                // Schedule the task to run every 5 minutes after an initial delay of 0 seconds
+                scheduler.scheduleAtFixedRate(() -> {
+                    getBranch().getOrderList().processOrder(order.getOrderID());
+                    System.out.println("Task executed");
+                }, 0, 15, TimeUnit.SECONDS);
+
             }
             catch(InputMismatchException e)
             {
