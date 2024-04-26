@@ -88,11 +88,11 @@ public class FomsAPP implements Serializable {
                     return;
                 }
                 else{
-                    System.out.print("Invalid choice. Enter again: ");
+                    System.out.println("Invalid choice. Enter again: ");
                     continue;
                 }
             }catch (InputMismatchException e){
-                System.out.print("Invalid choice. Enter again: ");
+                System.out.println("Invalid choice. Enter again: ");
                 scanner.next();
                 continue;
             }
