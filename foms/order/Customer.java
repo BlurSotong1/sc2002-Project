@@ -44,9 +44,10 @@ public class Customer implements Serializable {
      * will call select branch function when creating customer.
      */
     public Customer() {
-        Order order = new Order();
+        order = new Order();
         selectBranch();
         this.collectOrder = new CollectOrder(this);
+        checkOutProcess = new CheckOutProcess(this);
     }
 
     /**
@@ -123,15 +124,15 @@ public class Customer implements Serializable {
                     }
 
                     default -> {
-                        System.out.println("here");
 
-                        order.addToCart(input,filterType,getBranch().getMenu()); // valid index checking is done in fooditems
-                        System.out.println("here2");
+                        order.addToCart(input -1 ,filterType,getBranch().getMenu()); // valid index checking is done in fooditems
+
                     }
                 }
 
             } catch (InputMismatchException e) {
                 System.out.println("Enter a number!");
+                scanner.next();
             }
 
         }

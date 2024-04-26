@@ -36,7 +36,7 @@ public abstract class FoodItem implements Serializable {
         try {
 
             customRequest = scanner.nextLine();
-            scanner.nextLine(); //reading in '\n'
+
             if (customRequest.equals("0")) {
                 System.out.println("Didnt not input custom request. \nReturning to previous page.");
                 return;
