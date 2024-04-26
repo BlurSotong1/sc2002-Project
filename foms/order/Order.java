@@ -161,7 +161,9 @@ public class Order implements Serializable {
             System.out.println("Order ID: "+ getOrderID());
 
             for(int i=0; i<cart.size(); i++){
-                System.out.println((i+1)+". "+ cart.get(i) + " - " + cart.get(i).getPrice());
+                System.out.print((i+1)+". "+ cart.get(i) + " - " + cart.get(i).getPrice() + "\n");
+                if (!cart.get(i).getCustomRequest().equals(" "))
+                    System.out.printf("\t\tCustomer Request: %s\n",cart.get(i).getCustomRequest());
             }
         }
 

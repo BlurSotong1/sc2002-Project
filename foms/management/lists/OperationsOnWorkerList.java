@@ -8,23 +8,24 @@ import foms.management.branch.Branch;
 import foms.workers.AdminWorker;
 import foms.workers.*;
 
+/**
+ * This class represents operations that can be performed on the list of workers by an admin worker.
+ */
 public class OperationsOnWorkerList implements Serializable {
-    /**
-     * Operations on worker list is performed by admin worker.
-     */
+    /** The admin worker performing operations on the worker list. */
     private AdminWorker admin;
 
 
     /**
-     * Constructor for OperationsOnWorkerList class
-     * @param admin is the admin worker performing operations on worker list.
+     * Constructs an OperationsOnWorkerList object with the specified admin worker.
+     * @param admin the admin worker performing operations on the worker list
      */
     public OperationsOnWorkerList(AdminWorker admin){
         this.admin = admin;
     }
 
     /**
-     * add worker.
+     * Adds a new worker to the list.
      */
     public void addWorker() {
         Scanner sc = new Scanner(System.in);
@@ -244,7 +245,7 @@ public class OperationsOnWorkerList implements Serializable {
     }
 
     /**
-     * remove worker.
+     * Remove a worker from the list.
      */
     public void removeWorker() {
         Scanner scanner = new Scanner(System.in);
@@ -320,7 +321,7 @@ public class OperationsOnWorkerList implements Serializable {
     }
 
     /**
-     * display list of workers in the company.
+     * Display list of workers in the company.
      */
     public void displayWorkerList() {
         admin.getAllWorkersList().displayWorkerListInSystem();
@@ -328,7 +329,7 @@ public class OperationsOnWorkerList implements Serializable {
     }
 
     /**
-     * Promote a staff to Branch Manager
+     * Promote a staff worker to Branch Manager.
      */
     public void promoteToManager() {
         Scanner scanner = new Scanner(System.in);

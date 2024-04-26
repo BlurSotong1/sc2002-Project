@@ -5,40 +5,42 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * An abstract class that will be used to store all workers in an arraylist
+ * An abstract class that serves as the base class for all workers in the food order management system.
+ * It provides common functionality and properties for all types of workers.
  */
 public abstract class Worker implements Serializable {
     /**
-     * first name and last name of this worker.
+     * The first name and last name of this worker.
      */
     private String name;
     /**
-     * age of this worker.
+     * The age of this worker.
      */
     private int age;
     /**
-     * gender of this worker.
+     * The gender of this worker.
      */
     private char gender;
     /**
-     * role of this worker;
+     * The role of this worker;
      */
     private char role;
     /**
-     * login ID of this worker. It will not be changeable once set.
+     * The login ID of this worker. It will not be changeable once set.
      */
     private final String loginID;
     /**
-     * login Password of this worker. Default password is default, changeable later on.
+     * The login password of this worker. The default password is "default" and can be changed later.
      */
     private String loginPassword = "default";
 
     /**
-     * Constructor for Worker class.
-     * @param name first name and last name of the worker.
-     * @param age age of the worker.
-     * @param gender gender of the worker.
-     * @param loginID loginID of the worker. Duplicate will be checked in previous function.
+     * Constructor for the Worker class.
+     *
+     * @param name    The first name and last name of the worker.
+     * @param age     The age of the worker.
+     * @param gender  The gender of the worker.
+     * @param loginID The login ID of the worker. Duplicate will be checked in the previous function.
      */
     public Worker(String name, int age, char gender, String loginID) {
         this.name = name;
@@ -49,15 +51,17 @@ public abstract class Worker implements Serializable {
 
 
     /**
-     * Displays the information of this worker in the following order:
-     * name, loginID, age, gender, role.
+     * Displays the information of this worker.
+     *
+     * @return A string containing the name, login ID, age, and gender of this worker.
      */
     public String toString() {
         return String.format("%-20s %-15s %-5d %-3c", name, loginID, age, gender);
     }
 
     /**
-     * Used to change password of the User. must enter previous password to make changes to current password.
+     * Allows the worker to change their password.
+     * Must enter previous password to make changes to current password.
      */
     public void changePassword() {
 
@@ -89,48 +93,48 @@ public abstract class Worker implements Serializable {
 
 
     /**
-     * Gets the name of this worker
-     * @return this worker's name.
+     * Gets the name of this worker.
+     * @return The name of this worker.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets the age of this worker
-     * @return this worker's age.
+     * Gets the age of this worker.
+     * @return The age of this worker.
      */
     public int getAge() {
         return age;
     }
 
     /**
-     * Gets the gender of this worker
-     * @return this worker's gender.
+     * Gets the gender of this worker.
+     * @return The gender of this worker.
      */
     public char getGender() {
         return gender;
     }
 
     /**
-     * Gets the role of this worker
-     * @return this worker's role.
+     * Gets the role of this worker.
+     * @return The role of this worker.
      */
     public char getRole() {
         return role;
     }
 
     /**
-     * Gets the login ID of this worker
-     * @return this worker's login ID.
+     * Gets the login ID of this worker.
+     * @return The loginID of this worker.
      */
     public String getLoginID() {
         return loginID;
     }
 
     /**
-     * Gets the login password of this worker
-     * @return this worker's login password.
+     * Gets the login password of this worker.
+     * @return The login password of this worker.
      */
     public String getLoginPassword() {
         return loginPassword;
@@ -138,14 +142,16 @@ public abstract class Worker implements Serializable {
 
     /**
      * Changes the name of this worker.
-     * @param name is the new name of this worker.
+     *
+     * @param name The new name of this worker.
      */
     public void setName(String name) {
         this.name = name;
     }
     /**
      * Changes the age of this worker.
-     * @param age is the new age of this worker.
+     *
+     * @param age The new age of this worker.
      */
     public void setAge(int age) {
         this.age = age;
@@ -153,7 +159,8 @@ public abstract class Worker implements Serializable {
 
     /**
      * Changes the gender of this worker.
-     * @param gender is the new gender of this worker.
+     *
+     * @param gender The new gender of this worker.
      */
     public void setGender(char gender) {
         this.gender = gender;
@@ -161,7 +168,8 @@ public abstract class Worker implements Serializable {
 
     /**
      * Changes the role of this worker.
-     * @param role is the new role of this worker.
+     *
+     * @param role The new role of this worker.
      */
     public void setRole(char role) {
         this.role = role;
@@ -169,7 +177,8 @@ public abstract class Worker implements Serializable {
 
     /**
      * Changes the password of this worker.
-     * @param password is the new password of this worker.
+     *
+     * @param password The new password of this worker.
      */
     public void setLoginPassword(String password){this.loginPassword=password;}
 }

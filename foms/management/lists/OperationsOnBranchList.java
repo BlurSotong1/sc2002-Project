@@ -6,23 +6,23 @@ import foms.workers.*;
 import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/**
+ * This class represents operations that can be performed on the list of branches by an admin worker.
+ */
 public class OperationsOnBranchList implements Serializable {
-    /**
-     * operations On branch list is performed by admin worker.
-     */
+    /** The admin worker performing operations on the branch list. */
     private static AdminWorker admin;
 
     /**
-     * Constructor for OperationsOnBranchList class
-     * @param admin is the admin worker performing the operations on branch list.
+     * Constructs an OperationsOnBranchList object with the specified admin worker.
+     * @param admin the admin worker performing the operations on the branch list
      */
     public OperationsOnBranchList(AdminWorker admin){
         this.admin = admin;
     }
 
     /**
-     * Add Branch.
+     * Add a new Branch to the list.
      */
     public void addBranch() {
         Scanner scanner = new Scanner(System.in);
@@ -89,7 +89,7 @@ public class OperationsOnBranchList implements Serializable {
 
 
     /**
-     * Remove Branch.
+     * Remove a branch from the list.
      */
     public void removeBranch() {
         Scanner scanner = new Scanner(System.in);
@@ -117,10 +117,7 @@ public class OperationsOnBranchList implements Serializable {
     }
 
     /**
-     * transfer a staff worker from current branch to another branch.
-     */
-    /**
-     * transfer a staff worker from current branch to another branch.
+     * Transfers a staff worker from one branch to another branch.
      */
     public void transferStaff() {
         Scanner scanner = new Scanner(System.in);

@@ -10,18 +10,18 @@ import foms.management.lists.OperationsOnWorkerList;
 import foms.management.lists.AllWorkersList;
 import foms.management.lists.BranchList;
 
-
+/**
+ * Represents an admin worker in the company.
+ */
 public class AdminWorker extends Worker implements Serializable {
 
-
-
     /**
-     * list of branches.
+     * The list of branches.
      */
     private BranchList branchList;
 
     /**
-     * list of all workers in the company.
+     * The list of all workers in the company.
      */
     private AllWorkersList allWorkersList;
 
@@ -36,7 +36,7 @@ public class AdminWorker extends Worker implements Serializable {
     private  OperationsOnWorkerList jobsOnWorkerList;
 
     /**
-     * Admin worker perform operations on a branch..
+     * Admin worker perform operations on a branch.
      */
     private  OperationsOnBranchStatus jobsOnBranch;
 
