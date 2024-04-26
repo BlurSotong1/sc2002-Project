@@ -6,12 +6,16 @@ import java.util.Scanner;
 
 import foms.workers.Worker;
 
+/**
+ * A filter for workers based on their gender.
+ */
 public class GenderFilter implements WorkerFilters, Serializable {
 
     /**
-     * return list of workers (gender filtered)
-     * @param workerList list of workers
-     * @return filtered list of workers
+     * Filters a list of workers based on their gender.
+     *
+     * @param workerList The list of workers to filter.
+     * @return The filtered list of workers.
      */
     @Override
     public ArrayList<Worker> filter(ArrayList<Worker> workerList) {

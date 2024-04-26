@@ -5,12 +5,16 @@ import foms.workers.Worker;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Defines a filter for workers.
+ */
 public interface WorkerFilters extends Serializable {
 
     /**
-     * return list of workers (filtered)
-     * @param workerList list of workers
-     * @return filtered list of workers
+     * Filters a list of workers based on specific criteria.
+     *
+     * @param workerList The list of workers to filter.
+     * @return The filtered list of workers.
      */
     public ArrayList<Worker> filter(ArrayList<Worker> workerList);
 

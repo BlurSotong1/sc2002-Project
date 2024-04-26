@@ -7,15 +7,30 @@ import java.util.Scanner;
 
 import static foms.order.OrderStatus.COMPLETED;
 
+/**
+ * Represents the process of collecting an order by the customer.
+ */
 public class CollectOrder implements Serializable {
 
+    /**
+     * The customer associated with the collection process.
+     */
     Customer customer;
 
+    /**
+     * Constructs a CollectOrder object with the specified customer.
+     *
+     * @param customer The customer associated with the collection process.
+     */
     public CollectOrder (Customer customer) {
         this.customer = customer;
     }
 
 
+    /**
+     * Checks the status of a customer's order based on the order ID.
+     * Prompts the customer to enter their order ID and displays the status of the order.
+     */
     public void checkOrder() {
         System.out.println("Checking your order: ");
         System.out.print("Enter your orderID: ");
@@ -47,9 +62,9 @@ public class CollectOrder implements Serializable {
 
     }
     /**
-     * method for customer to collect their order.
-     * once they collected, we will change the order status from READYTOPICKUP to COMPLETED
-     * orderList will remove this order once this step is done
+     * Allows the customer to collect their order.
+     * Once the order is collected, the status is changed to COMPLETED,
+     * and the order is removed from the order list.
      */
     public void collectOrder(){
 //TODO

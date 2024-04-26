@@ -15,7 +15,7 @@ import java.util.Scanner;
 import static foms.order.OrderStatus.COMPLETED;
 
 /**
- * Represent a customer in foms.
+ * Represents a customer in FOMS.
  */
 public class Customer implements Serializable {
     /**
@@ -40,8 +40,8 @@ public class Customer implements Serializable {
     private CollectOrder collectOrder;
 
     /**
-     * constructor for branch.
-     * will call select branch function when creating customer.
+     * Constructor for the Customer class.
+     * This will call the selectBranch function when creating a customer.
      */
     public Customer() {
         order = new Order();
@@ -50,6 +50,10 @@ public class Customer implements Serializable {
         checkOutProcess = new CheckOutProcess(this);
     }
 
+    /**
+     * Constructor for the Customer class with a specified branch.
+     * @param branch The branch associated with the customer.
+     */
     public Customer(Branch branch) {
         order = new Order();
         this.branch = branch;
@@ -59,11 +63,9 @@ public class Customer implements Serializable {
 
 
     /**
-     *  Customer choosing a branch.
-     *      * Customer can only choose those that are open.
-     * @return branch if chose correct one, null if close app.
+     * Customer choosing a branch.
+     * Customer can only choose branches that are open.
      */
-
     public void selectBranch(){
         int branchChoice;
         Scanner scanner = new Scanner(System.in);
@@ -97,9 +99,7 @@ public class Customer implements Serializable {
     }
 
     /**
-     * Display menu for users and ask users to select food item
-     * New food item for the cart will be created here
-     * Food Item will be passed into Order class by calling its method
+     * Add the food item into the cart.
      */
     public void addFoodItemToCart(){
         Scanner scanner = new Scanner(System.in);
@@ -148,8 +148,7 @@ public class Customer implements Serializable {
     }
 
     /**
-     * Display all items in cart and ask users to select cart item
-     * Index of Food Item will be passed into Order class (removeIndexedFoodItemFromCart method)
+     * Removing food item from the cart.
      */
     public void removeFoodItem(){
         Scanner scanner = new Scanner(System.in);
@@ -195,8 +194,8 @@ public class Customer implements Serializable {
     }
 
     /**
-     * display all items in cart and asl users to select cart item
-     * Food Item which will be passed into Order class (editFoodItem method)
+     * Display all items in the cart and ask users to select a cart item.
+     * The index of the Food Item will be passed into the Order class (editFoodItem method).
      */
     public void editFoodItem(){
         Scanner scanner = new Scanner(System.in);
@@ -242,33 +241,74 @@ public class Customer implements Serializable {
     }
 
 
+// Getters and setters
 
+    /**
+     * Retrieves the branch associated with the customer.
+     *
+     * @return The branch associated with the customer.
+     */
     public Branch getBranch() { return branch;}
 
+    /**
+     * Displays the menu for the customer's branch.
+     *
+     * @return The input on the latest chosen filter, if needed.
+     */
     public int displayMenu () {
         return getBranch().getMenu().displayMenu();
     }
 
+    /**
+     * Retrieves the customer's current order.
+     *
+     * @return The customer's current order.
+     */
     public Order getOrder() {
         return order;
     }
 
+    /**
+     * Retrieves the payment method used by the customer.
+     *
+     * @return The payment method used by the customer.
+     */
     public Payment getPaymentMethod() {
         return paymentMethod;
     }
 
+    /**
+     * Sets the payment method for the customer.
+     *
+     * @param paymentMethod The payment method to set.
+     */
     public void setPaymentMethod(Payment paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
+    /**
+     * Sets the customer's order.
+     *
+     * @param order The order to set.
+     */
     public void setOrder(Order order) {
         this.order = order;
     }
 
+    /**
+     * Retrieves the checkout process associated with the customer.
+     *
+     * @return The checkout process associated with the customer.
+     */
     public CheckOutProcess getCheckOutProcess() {
         return checkOutProcess;
     }
 
+    /**
+     * Retrieves the order collection process associated with the customer.
+     *
+     * @return The order collection process associated with the customer.
+     */
     public CollectOrder getCollectOrder() {
         return collectOrder;
     }

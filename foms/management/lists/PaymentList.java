@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a list of payment methods available for a branch.
+ */
 public class PaymentList implements Serializable {
 
     /**
-     * list of payment methods of a branch
+     * List of payment methods of a branch.
      */
     private ArrayList<Payment> paymentList;
 
@@ -26,16 +29,19 @@ public class PaymentList implements Serializable {
     }
 
     /**
-     * add payment.
-     * @param newPaymentMethod
+     * Add a new payment method to the payment list.
+     *
+     * @param newPaymentMethod The new payment method to be added.
      */
     public void addCreatedPayment(Payment newPaymentMethod) {
         paymentList.add(newPaymentMethod);
     }
 
     /**
-     * remove payment.
-     * @param index
+     * Remove a payment method from the payment list at the specified index.
+     *
+     * @param index The index of the payment method to be removed.
+     * @throws IndexOutOfBoundsException If the index is out of bounds.
      */
     public void removeIndexedPayment(int index) throws IndexOutOfBoundsException {
         paymentList.remove(index);
@@ -44,23 +50,26 @@ public class PaymentList implements Serializable {
     }
 
     /**
+     * Retrieves the payment method at the specified index from the payment list.
      *
-     * @param index
-     * @return
+     * @param index The index of the payment method to retrieve.
+     * @return The payment method at the specified index.
      */
     public Payment getPayment(int index) {
         return paymentList.get(index); //TODO Exception
     }
 
     /**
-     * @return list of payments
+     * Retrieves a list of all available payment methods.
+     *
+     * @return A list of all available payment methods.
      */
     public List<Payment> getAvailablePayments() {
         return paymentList.stream().filter(Payment::getPaymentStatus).collect(Collectors.toList());
     }
 
     /**
-     * Display all the payments that can be added to a branch.
+     * Display all the payments in the payment list.
      */
     public void displayAllPayments(){
         System.out.println("List of payments:");
@@ -80,8 +89,8 @@ public class PaymentList implements Serializable {
     }
 
     /**
-     * check if payment is in payment list
-     * @return true if payment is in payment list, false if payment is not in the payment list
+     * Check if payment is in payment list.
+     * @return true if payment is in payment list, false if payment is not in the payment list.
      */
     public boolean checkPayment(Payment payment) {
         return paymentList.contains(payment);
