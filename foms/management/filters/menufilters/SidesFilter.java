@@ -13,9 +13,16 @@ public class SidesFilter implements MenuFilters, Serializable {
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {
         int counter = 1;
         System.out.println("Sides");
+        String s;
         for (FoodItem foodItem: menu) {
             if (foodItem instanceof Sides) {
-                System.out.printf("%d. %s\n",counter,foodItem.getName());
+                if (foodItem.getAvailability()) {
+                    s = "Available";
+                } else {
+                    s = "Unavailable";
+                }
+                System.out.printf("%d. %s | %s | Price: %.2f (%s)\n",counter,foodItem.getName()
+                        ,foodItem.getDescription(),foodItem.getPrice(),s);
                 counter++;
             }
         }

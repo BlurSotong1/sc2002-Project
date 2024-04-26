@@ -11,10 +11,16 @@ public class BaseMenuFilter implements MenuFilters, Serializable {
     @Override
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {
         int counter = 1;
+        String s;
         System.out.println("All Items");
         for (FoodItem foodItem: menu) {
-
-                System.out.printf("%d. %s\n",counter,foodItem.getName());
+            if (foodItem.getAvailability()) {
+                s = "Available";
+            } else {
+                s = "Unavailable";
+            }
+            System.out.printf("%d. %s | %s | Price: %.2f (%s)\n",counter,foodItem.getName()
+                    ,foodItem.getDescription(),foodItem.getPrice(),s);
                 counter++;
         }
     }

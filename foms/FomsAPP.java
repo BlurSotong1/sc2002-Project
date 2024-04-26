@@ -210,7 +210,61 @@ public class FomsAPP implements Serializable {
         }
     }
 
-    private static void allManagerActions(Worker manager){
+    private static void allManagerActions(ManagerWorker manager){
+
+        String input;
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("1. Display orders");
+            System.out.println("2. Process order");
+            System.out.println("3. Display Menu");
+            System.out.println("4. Add Item to Menu");
+            System.out.println("5. Edit Item in Menu");
+            System.out.println("6. Remove Item from Menu");
+            System.out.println();
+            System.out.println("0. Exit");
+            System.out.println("What would you like to do?");
+
+            input = scanner.next();
+
+            switch (input) {
+                case "0" -> {
+                    System.out.println("Signing out account..");
+                    return;
+                }
+
+                case "1" -> {
+                    manager.displayOrders();
+                }
+
+                case "2" -> {
+                    manager.processOrder();
+                }
+
+                case "3" -> {
+                    manager.getBranch().getMenu().displayMenu();
+                }
+
+                case "4" -> {
+                    manager.addFoodItemsToMenu();
+                }
+
+                case "5" -> {
+                    manager.updateFoodItemInformation();
+
+                }
+
+                case "6" -> {
+                    manager.removeFoodItemFromMenu();
+                }
+
+                case "7" -> {
+                    manager.displayBranchWorkers();
+                }
+            }
+
+        }
+
 
 
     }

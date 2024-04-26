@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Filter;
 
 public class Menu implements Serializable {
 
@@ -246,6 +247,11 @@ public class Menu implements Serializable {
                 return new BaseMenuFilter();
             }
         }
+    }
+
+    public void displayMenuNoFilter() {
+        MenuFilters filter = new BaseMenuFilter();
+        filter.displayFilteredMenu(menu);
     }
 }
 

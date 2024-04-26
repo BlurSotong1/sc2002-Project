@@ -11,9 +11,16 @@ public class DrinksFilter implements MenuFilters{
     public void displayFilteredMenu(ArrayList<FoodItem> menu) {
         System.out.println("Drinks");
         int counter = 1;
+        String s;
         for (FoodItem foodItem: menu) {
             if (foodItem instanceof Drinks) {
-                System.out.printf("%d. %s\n",counter,foodItem.getName());
+                if (foodItem.getAvailability()) {
+                    s = "Available";
+                } else {
+                    s = "Unavailable";
+                }
+                System.out.printf("%d. %s | %s | Price: %.2f (%s)\n",counter,foodItem.getName()
+                        ,foodItem.getDescription(),foodItem.getPrice(),s);
                 counter++;
             }
         }

@@ -127,7 +127,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
     public void removeFoodItemFromMenu() {
         Scanner scanner = new Scanner(System.in);
 
-        getBranch().getMenu().displayMenu();
+        getBranch().getMenu().displayMenuNoFilter();
 
         int IndexOfFoodItemToRemove;
         int maxIndexOfMenu = getBranch().getMenu().getMenuSize();
@@ -166,10 +166,11 @@ public class ManagerWorker extends StaffWorker implements Serializable {
         int IndexOfFoodItemToUpdate;
         int maxIndexOfMenu = getBranch().getMenu().getMenuSize();
 
-        System.out.print("Enter the food number to update (press 0 to exit): ");
+
         while (true) {
             try {
-
+                System.out.print("Enter the food number to update (press 0 to exit): ");
+                getBranch().getMenu().displayMenuNoFilter();
                 IndexOfFoodItemToUpdate = scanner.nextInt() -1; //-1 because display start from 1.
                 if (IndexOfFoodItemToUpdate == -1) {
                     System.out.println("Exiting to previous page..");
