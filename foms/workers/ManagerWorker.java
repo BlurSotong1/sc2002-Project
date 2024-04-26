@@ -8,19 +8,20 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * manager of the branch
+ * The `ManagerWorker` class represents a manager of a branch in the food management system.
+ * It extends the `StaffWorker` class and implements the `Serializable` interface.
  */
 
 public class ManagerWorker extends StaffWorker implements Serializable {
 
     /**
-     * Constructor for manager class.
+     * Constructor for creating a manager worker.
      *
-     * @param name    full name of the worker.
-     * @param age     age of the worker.
-     * @param gender  gender of the worker.
-     * @param loginID loginID of the worker. Duplicate will be checked in previous function.
-     * @param branch  is the branch the manager works at.
+     * @param name    The full name of the manager worker.
+     * @param age     The age of the manager worker.
+     * @param gender  The gender of the manager worker.
+     * @param loginID The login ID of the manager worker. Duplicate will be checked in previous function.
+     * @param branch  The branch at which the manager worker works.
      */
     public ManagerWorker(String name, int age, char gender, String loginID, Branch branch) {
         super(name, age, gender, loginID, branch);
@@ -30,8 +31,8 @@ public class ManagerWorker extends StaffWorker implements Serializable {
 
 
     /**
-     * Food Item Adder Method Specific for managers only, accessed through operations object
-     * Creates food item then passes the food item as argument to add to menu.
+     * Food Item Adder Method Specific for managers only, accessed through operations object.
+     * Creates a food item and adds it to the menu.
      */
 
     public void addFoodItemsToMenu() {
@@ -122,7 +123,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
 
 
     /**
-     * finds for object then removes if it exists in system.
+     * Removes a food item from the menu.
      */
     public void removeFoodItemFromMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -159,7 +160,7 @@ public class ManagerWorker extends StaffWorker implements Serializable {
     }
 
     /**
-     * updates the information of food items in the menu
+     * Updates the information of food items in the menu.
      */
     public void updateFoodItemInformation() {
         Scanner scanner = new Scanner(System.in);
@@ -199,7 +200,9 @@ public class ManagerWorker extends StaffWorker implements Serializable {
     }
 
     /**
-     * @return Stringified details of manager
+     * Returns a stringified representation of the manager worker.
+     *
+     * @return Stringified details of the manager worker.
      */
     @Override
     public String toString() {

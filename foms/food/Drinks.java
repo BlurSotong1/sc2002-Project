@@ -3,32 +3,37 @@ package foms.food;
 import java.io.Serializable;
 import java.util.Scanner;
 
+/**
+ * Represents a drink item in the menu, extending the FoodItem class.
+ */
 public class Drinks extends FoodItem implements Serializable {
     /**
-     * ice levels of a drink that is customisable.
+     * The ice level of the drink, which can be customized.
      */
     private iceLevels iceLevel = iceLevels.DEFAULT_ICE;
 
     /**
-     * constructors to create food item by manager
-     * @param name name of the drink
-     * @param price of the drink
-     * @param description what is the drink
+     * Constructs a Drinks object with the specified name, price, and description.
+     *
+     * @param name        The name of the drink.
+     * @param price       The price of the drink.
+     * @param description The description of the drink.
      */
     public Drinks(String name, double price, String description) {
         super(name, price, description);
     }
 
     /**
-     * used to copy a new object over for customers into the cart
-     * @param drink is the original menu item.
+     * Constructs a Drinks object by copying the details from another FoodItem object.
+     *
+     * @param drink The original menu item to copy from.
      */
     public Drinks(FoodItem drink) {
         super(drink.getName(),drink.getPrice(),drink.getDescription());
     }
 
     /**
-     * overriden method. will change ice levels for drinks too,
+     * Overrides the customiseFoodItem method to allow customization of ice levels for drinks.
      */
     @Override
     public void customiseFoodItem() {
@@ -59,6 +64,9 @@ public class Drinks extends FoodItem implements Serializable {
 
     }
 
+    /**
+     * Allows updating the ice level of the drink.
+     */
     public void updateIceLevel() {
         System.out.println("Enter your choice for ice level.");
 

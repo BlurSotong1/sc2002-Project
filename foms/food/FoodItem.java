@@ -4,18 +4,37 @@ import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Represents a food item in the menu, providing methods to customize and manage its properties.
+ */
 public abstract class FoodItem implements Serializable {
+    /**
+     * Name of the FoodItem.
+     */
     private String name;
+    /**
+     * Price of the FoodItem.
+     */
     private double price;
+    /**
+     * Availability of the FoodItem.
+     */
     private boolean availability = true;
+    /**
+     * Description of the FoodItem.
+     */
     private String description;
+    /**
+     * String of Customer's request.
+     */
     private String customRequest;
 
     /**
-     * constructor for fooditem basis. abstract class, so this is only used for polymorphism in menu/cart
-     * @param name of the food
-     * @param price price of the food
-     * @param description brief description of the food
+     * Constructs a FoodItem object with the specified name, price, and description.
+     *
+     * @param name        The name of the food item.
+     * @param price       The price of the food item.
+     * @param description A brief description of the food item.
      */
     public FoodItem(String name, double price, String description) {
         this.name = name;
@@ -24,7 +43,7 @@ public abstract class FoodItem implements Serializable {
     }
 
     /**
-     * a customise function used by customers to denote any special request.
+     * Allows customization of the food item with special requests.
      */
     public void customiseFoodItem() {
         System.out.printf("Customising food item %s...\n", getName());
@@ -51,29 +70,56 @@ public abstract class FoodItem implements Serializable {
     }
 
 
+    // Getters and Setters omitted for brevity
 
-
-
+    /**
+     * Gets the name of the food item.
+     *
+     * @return A string representing the name of the food item.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the price of the food item.
+     *
+     * @return The price of the food item.
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Gets the availability status of the food item.
+     *
+     * @return True if the food item is available, false otherwise.
+     */
     public boolean getAvailability() {
         return availability;
     }
 
+    /**
+     * Gets the description of the food item.
+     *
+     * @return A string representing the description of the food item.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets the name of the food item.
+     *
+     * @param name The name to set for the food item.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Updates the price of the food item based on user input.
+     */
     public void updatePrice() {
         System.out.print("Enter the new price: ");
         Scanner scanner = new Scanner(System.in);
@@ -90,15 +136,24 @@ public abstract class FoodItem implements Serializable {
         this.price = newPrice;
     }
 
+    /**
+     * Sets the availability of the food item based on user input.
+     */
     public void setAvailability(boolean availability) {
         this.availability = availability;
     }
 
-
+    /**
+     * Sets the description of the food item based on user input.
+     * @param description This is the description of the food.
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Updates the description of the food item based on user input.
+     */
     public void updateDescription() {
         System.out.print("Enter the new Description: ");
         Scanner scanner = new Scanner(System.in);
@@ -117,14 +172,28 @@ public abstract class FoodItem implements Serializable {
         System.out.printf("Updated the description to: %s\n",description);
     }
 
+    /**
+     * Overrides the toString method to provide a string representation of the food item.
+     *
+     * @return A string representation of the food item.
+     */
+    @Override
     public String toString() {
         return name + ": " + description + " | Price: $" + price + (availability ? " (Available)" : " (Unavailable)");
     }
 
+    /**
+     * Sets the custom request for the food item.
+     *
+     * @param customRequest The custom request to set.
+     */
     public void setCustomRequest(String customRequest) {
         this.customRequest = customRequest;
     }
 
+    /**
+     * Sets the availability of the food item based on user input.
+     */
     public void setAvailability() {
         Scanner scanner = new Scanner(System.in);
 
