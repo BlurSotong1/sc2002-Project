@@ -27,7 +27,7 @@ public abstract class FoodItem implements Serializable {
     /**
      * String of Customer's request.
      */
-    private String customRequest;
+    private String customRequest = " ";
 
     /**
      * Constructs a FoodItem object with the specified name, price, and description.
@@ -41,6 +41,8 @@ public abstract class FoodItem implements Serializable {
         this.price = price;
         this.description = description;
     }
+
+
 
     /**
      * Allows customization of the food item with special requests.
@@ -182,14 +184,7 @@ public abstract class FoodItem implements Serializable {
         return name + ": " + description + " | Price: $" + price + (availability ? " (Available)" : " (Unavailable)");
     }
 
-    /**
-     * Sets the custom request for the food item.
-     *
-     * @param customRequest The custom request to set.
-     */
-    public void setCustomRequest(String customRequest) {
-        this.customRequest = customRequest;
-    }
+
 
     /**
      * Sets the availability of the food item based on user input.
@@ -212,5 +207,16 @@ public abstract class FoodItem implements Serializable {
                 }
             }
         }
-    
+    /**
+     * Sets the custom request for the food item.
+     *
+     * @param customRequest The custom request to set.
+     */
+    public void setCustomRequest(String customRequest) {
+        this.customRequest = customRequest;
+    }
+
+    public String  getCustomRequest() {
+        return customRequest;
+    }
 }
